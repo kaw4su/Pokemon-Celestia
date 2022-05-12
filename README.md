@@ -1,3 +1,3 @@
-# Pokemon-Dusk-and-Dawn
-ICS4U Summative Project
+# Pokemon-Celestia
+ICS4U Summative Project \n
 (name is subject to change)
