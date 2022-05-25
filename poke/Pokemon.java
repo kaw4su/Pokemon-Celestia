@@ -4,6 +4,8 @@ public abstract class Pokemon {
     public String name;
     public double manaPoints;
     public double dmg;
+    public int level;
+    public String typeA, typeB;
     public String[][] attack = new String[2][2]; //used for attack moves
 
     public Pokemon(String name){
@@ -13,6 +15,16 @@ public abstract class Pokemon {
     public Pokemon(){
     }
 
+    public abstract Pokemon megaEvo();
+
+    //used to calculate how much damage your pokemon move does towards enemy and vice versa
+    public double getAttackFactor(Pokemon enemy, String attackType){
+        if (attackType.equals(this.attack[0][1])){ //this slot is always a normal attack, which is a *1 multiplier
+            return this.dmg;
+        }
+    }
+    //damn this thing was a waste of time, not needed
+    /*
     @Override //type identification
     public String toString(){
         String type = "";
@@ -55,13 +67,8 @@ public abstract class Pokemon {
         }
 
         return (this.name + " (" + this.getClass().getSimpleName() + " | " + type + " | " + this.manaPoints + " Mana; " + this.dmg + " Damage)");
-    }
+    }*/
 
-    //used to calculate how much damage your pokemon move does towards enemy and vice versa
-    public double getAttackFactor(Pokemon enemy, String attackType){
-        if (attackType.equals(this.attack[0][1])){ //this slot is always a normal attack, which is a *1 multiplier
-            return this.dmg;
-        }
-    }
+    
 
 }
