@@ -4,8 +4,9 @@ public abstract class Pokemon {
     public String name;
     public double manaPoints;
     public double dmg;
-    public int level;
+    //public int level;
     public String typeA, typeB;
+    public int hp;
     public String[][] attack = new String[2][2]; //used for attack moves
 
     public Pokemon(String name){
@@ -15,6 +16,8 @@ public abstract class Pokemon {
     public Pokemon(){
     }
 
+    
+
     public abstract Pokemon megaEvo();
 
     //used to calculate how much damage your pokemon move does towards enemy and vice versa
@@ -23,6 +26,8 @@ public abstract class Pokemon {
             return this.dmg;
         }
     }
+
+    public float typeEffectiveness(Pokemon enemy, )
     //damn this thing was a waste of time, not needed
     /*
     @Override //type identification
