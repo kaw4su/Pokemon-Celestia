@@ -1,31 +1,32 @@
 package poke;
 
-public enum Type {
-    NORMAL  (new String[]{}, //SUPER EFFECTIVE
-            new String[]{"Rock", "Steel"}, //NOT EFFECTIVE
-            new String[]{"Ghost"}), //NO EFFECT
-    FIGHTING (new String[]{"Normal", "Rock", "Steel", "Ice", "Dark"},
-              new String[]{"Flying", "Poison", "Bug", "Psychic"},
-              new String[]{"Ghost"}),
-    FLYING (new String[]{"Fighting", "Grass"},
+public enum Type
+{
+    NORMAL(new String[]{},
+            new String[]{"Rock", "Steel"},
+            new String[]{"Ghost"}),
+    FIGHTING(new String[]{"Normal", "Rock", "Steel", "Ice", "Dark"},
+            new String[]{"Flying", "Poison", "Bug", "Psychic"},
+            new String[]{"Ghost"}),
+    FLYING(new String[]{"Fighting", "Grass"},
             new String[]{"Rock", "Steel", "Electric"},
             new String[]{}),
-    POISON (new String[]{"Grass", "Fairy"},
-            new String[]{"Poison", "Ground", "Rock", "Ghost"},
+    POISON(new String[]{"Grass"},
+            new String[]{"Poison", "Ground", "Rock", "Bug"},
             new String[]{"Steel"}),
-    GROUND (new String[]{"Poison", "Rock", "Steel", "Fire", "Electric"},
+    GROUND(new String[]{"Poison", "Rock", "Steel", "Fire", "Electric"},
             new String[]{"Bug", "Grass"},
             new String[]{"Flying"}),
-    ROCK (new String[]{"Flying", "Bug", "Fire"},
-          new String[]{"Fighting", "Ground", "Steel"},
-          new String[]{}),
-    BUG (new String[]{"Grass", "Psychic", "Dark"},
-         new String[]{"Fighting", "Flying", "Poison", "Ghost", "Steel", "Fire"},
-         new String[]{}),
-    GHOST (new String[]{"Ghost", "Psychic"},
-           new String[]{"Steel", "Dark"},
-           new String[]{"Normal"}),
-    STEEL (new String[]{"Rock", "Ice"},
+    ROCK(new String[]{"Flying", "Bug", "Fire"},
+            new String[]{"Fighting", "Ground", "Steel"},
+            new String[]{}),
+    BUG(new String[]{"Grass", "Psychic", "Dark"},
+            new String[]{"Fighting", "Flying", "Poison", "Ghost", "Steel", "Fire"},
+            new String[]{}),
+    GHOST(new String[]{"Ghost", "Psychic"},
+            new String[]{"Steel", "Dark"},
+            new String[]{"Normal"}),
+    STEEL(new String[]{"Rock", "Ice"},
             new String[]{"Steel", "Fire", "Water", "Electric"},
             new String[]{}),
     FIRE(new String[]{"Grass", "Ice", "Bug"},
@@ -52,64 +53,116 @@ public enum Type {
     DARK(new String[]{"Psychic", "Ghost"},
             new String[]{"Fighting", "Dark", "Steel"},
             new String[]{}),
-    FAIRY(new String[]{"Poison, Steel"},
-          new String[]{"Bug", "Dark", "Fighting"},
-          new String[]{"Dragon"});
+    FAIRY(new String[]{"Fighting", "Dragon", "Dark"},
+          new String[]{"Poison", "Steel", "Fire"},
+          new String[]{});
 
+    private final String[] SUPER_EFFECTIVE, NOT_VERY_EFFECTIVE, NO_EFFECT;
 
-    //specify which array is which 
-    //First array is supereffective
-    //Second array is not effective
-    //third array is no effect
-    private final String[] super_eff, not_very_eff, no_eff; 
-
-    Type(String[] super_eff, not_very_eff, no_eff){
-        super_eff = superEff;
-        not_very_eff = notVeryEff;
-        no_eff = noEff;
+    Type(String[] superEffective, String[] notVeryEffective, String[] noEffect)
+    {
+        SUPER_EFFECTIVE = superEffective;
+        NOT_VERY_EFFECTIVE= notVeryEffective;
+        NO_EFFECT = noEffect;
     }
 
-    //method checks if a type is within one of the specified arrays (super effective, not effective, no effect)
-    private boolean containsType(String[] arrayCheck, Type p){
-        if (arrayCheck.length = 0){
-            return false; //return false if there is nothing inside the array
+    //check if array contains specified type
+    private boolean contains(String[] t, Type p)
+    {
+        if(t.length == 0)
+        {
+            return false;
         }
 
-        for (String type : arrayCheck){
-            if (type.equalsIgnoreCase(p + "")){
-                return true; //return true if value is within array
+        for(String type : t)
+        {
+            if(type.equalsIgnoreCase(p + ""))
+            {
+                return true;
             }
         }
 
         return false;
     }
 
-    //checks whether or not this type is super effective against specified type (parameter)
-    public boolean isSuperEffective(Type type){
-        return contains(super_eff, type);
+    private Type[] convert(String[] types)
+    {
+        Type[] t = new Type[types.length];
+
+        for(int i = 0; i < t.length; i++)
+        {
+            t[i] = valueOf(types[i]);
+        }
+
+        return t;
     }
 
-    //similar to isSuperEffective method
-    public boolean isNotVeryEffective(Type type){
-        return contains(not_very_eff, type);
+    /**
+     * Tells whether or not this Type is Super Effective (x2) against the specified Type
+     * @param t The Type to check
+     * @return True or False
+     */
+    public boolean isSuperEffectiveAgainst(Type t)
+    {
+        return contains(SUPER_EFFECTIVE, t);
     }
 
-    public boolean noEffect(Type type){
-        return contains(no_eff, type);
+    /**
+     * Tells whether or not this Type is Not Very Effective (x.5) against the specified Type
+     * @param t The Type to check
+     * @return True or False
+     */
+    public boolean isNotVeryEffectiveAgainst(Type t)
+    {
+        return contains(NOT_VERY_EFFECTIVE, t);
     }
 
-    //checks if this type does normal damage (x1 multiplier) against specified type
-    public boolean normalDamage(Type type){
-        return !isSuperEffective(type) && !isNotVeryEffective(type) && !noEffect(type);
+    /**
+     * Tells whether or not this Type has no Effect (x0) against the specified Type
+     * @param t The Type to check
+     * @return True or False
+     */
+    public boolean hasNoEffectOn(Type t)
+    {
+        return contains(NO_EFFECT, t);
     }
 
-    public Type[] getSuperEff(){
-        return convert(super_eff);
+    /**
+     * Tells whether or not this Type does normal damage (x1) against the specified Type
+     * @param t The Type to check
+     * @return True or False
+     */
+    public boolean isNormalAgainst(Type t)
+    {
+        return !isSuperEffectiveAgainst(t) &&
+                !isNotVeryEffectiveAgainst(t) &&
+                !hasNoEffectOn(t);
     }
-    public Type[] getNotVeryEff(){
-        return convert(not_very_eff);
+
+    /**
+     * Gets all the types that this Type is Super Effective (x2) Against
+     * @return the types that this Type is Super Effective Against
+     */
+    public Type[] getTypesSuperEffectiveAgainst()
+    {
+        return convert(SUPER_EFFECTIVE);
     }
-    public Type[] getNoEff(){
-        return convert(no_eff);
+
+    /**
+     * Gets all the types that this Type is Not Very Effective (x.5) Against
+     * @return the types that this Type is Not Very Effective Against
+     */
+    public Type[] getTypesNotVeryEffectiveAgainst()
+    {
+        return convert(NOT_VERY_EFFECTIVE);
+    }
+
+    /**
+     * Gets all the types that this Type has no Effect (x0) Against
+     * @return the types that this Type has no Effect (x0) Against
+     */
+    public Type[] getTypesNoEffectAgainst()
+    {
+        return convert(NO_EFFECT);
     }
 }
