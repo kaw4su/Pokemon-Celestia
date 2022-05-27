@@ -21,13 +21,16 @@ public abstract class Pokemon {
     public abstract Pokemon megaEvo();
 
     //used to calculate how much damage your pokemon move does towards enemy and vice versa
-    public double getAttackFactor(Pokemon enemy, String attackType){
-        if (attackType.equals(this.attack[0][1])){ //this slot is always a normal attack, which is a *1 multiplier
-            return this.dmg;
+    public double getAttackFactor(Pokemon attacking, Pokemon defending, String attackMove){
+        for (AttackMove moves : AttackMove.values()){
+            if AttackMove.valueOf(attackMove) == AttackMove.values(){
+                System.out.println(moves);
+                //idk do something here
+            }
         }
     }
 
-    public float typeEffectiveness(Pokemon enemy, )
+    //public float typeEffectiveness(Pokemon enemy, )
     //damn this thing was a waste of time, not needed
     /*
     @Override //type identification
