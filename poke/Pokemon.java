@@ -1,82 +1,58 @@
 package poke;
 
-public abstract class Pokemon {
-    public String name;
-    public double manaPoints;
-    public double dmg;
-    //public int level;
-    public String typeA, typeB;
-    public int hp;
-    public String[][] attack = new String[2][2]; //used for attack moves
+public class Pokemon {
+    private Monsters pokemonName;
+    private Type[] type;
 
-    public Pokemon(String name){
-        this.name = name;
+    private double battleHP, battleATK, battleDEF;
+
+    public Pokemon (Monsters name){
+       this.pokemonName = name;
+       this.battleHP = pokemonName.getHP();
+       this.battleATK = pokemonName.getATK();
+       this.battleDEF = pokemonName.getDEF();
+       this.type = pokemonName.getType();
+        
     }
-    
-    public Pokemon(){
+
+   
+
+    public void calculateAttack(double battleATK, Pokemon defender, AttackMove used){
+        double power = used.getPower();
+        //double atk = attacker.getATK();
+        //double def = defender.getDEF();
+        double armorpen = battleATK / battleDEF;
+        double damageTaken = 0.5 * power * armorpen * typeEffectiveness(defender, used); //https://gamepress.gg/pokemongo/damage-mechanics\
+
+        double finalDMG = Math.floor(damageTaken) + 1;
+        this.battleHP -= finalDMG;
     }
 
-    
+    //calculate the type effectiveness multiplier
+    private double typeEffectiveness(Pokemon defender, AttackMove used){
+        double typeEff = 1;
 
-    public abstract Pokemon megaEvo();
-
-    //used to calculate how much damage your pokemon move does towards enemy and vice versa
-    public double getAttackFactor(Pokemon attacking, Pokemon defending, String attackMove){
-        for (AttackMove moves : AttackMove.values()){
-            if AttackMove.valueOf(attackMove) == AttackMove.values(){
-                System.out.println(moves);
-                //idk do something here
+        for (Type t : type){
+            if(used.getType().isSuperEffectiveAgainst(t)){
+                System.out.println("It was super effective!");
+                typeEff *= 2;
+            } else if (used.getType().isNotVeryEffectiveAgainst(t)){
+                System.out.println("It was not very effective...");
+                typeEff *= 0.5;
+            } else if (used.getType().hasNoEffectOn(t)){
+                System.out.println("It had no effect!");
+                typeEff *= 0;
             }
-        }
+        }   
+
+        return typeEff;
+    } 
+
+    public double getBattleHP(){
+        return battleHP;
     }
 
-    //public float typeEffectiveness(Pokemon enemy, )
-    //damn this thing was a waste of time, not needed
-    /*
-    @Override //type identification
-    public String toString(){
-        String type = "";
-        if (this instanceof Fire){
-            type = "Fire";
-        } else if (this instanceof Water){
-            type = "Water";
-        } else if (this instanceof Grass){
-            type = "Grass";
-        } else if (this instanceof Electric){
-            type = "Electric";
-        } else if (this instanceof Grass){
-            type = "Grass";
-        } else if (this instanceof Ice){
-            type = "Ice";
-        } else if (this instanceof Fighting){
-            type = "Fighting";
-        } else if (this instanceof Poison){
-            type = "Poison";
-        } else if (this instanceof Ground){
-            type = "Ground";
-        } else if (this instanceof Flying){
-            type = "Flying";
-        } else if (this instanceof Psychic){
-            type = "Psychic";
-        } else if (this instanceof Bug){
-            type = "Bug";
-        } else if (this instanceof Rock){
-            type = "Rock"
-        } else if (this instanceof Ghost){
-            type = "Ghost";
-        } else if (this instanceof Dragon){
-            type = "Dragon";
-        } else if (this instanceof Dark){
-            type = "Dark";
-        } else if (this instanceof Steel){
-            type = "Steel";
-        } else if (this instanceof Fairy){
-            type = "Fairy";
-        }
-
-        return (this.name + " (" + this.getClass().getSimpleName() + " | " + type + " | " + this.manaPoints + " Mana; " + this.dmg + " Damage)");
-    }*/
-
-    
-
+    public double getBattleATK(){
+        return battleATK;
+    }
 }

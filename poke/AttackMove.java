@@ -3,6 +3,10 @@ package poke;
 public enum AttackMove {
     //sorry for whoever is looking at this code
     PSYCHIC("Psychic", Type.PSYCHIC, (int)90, (int)15),
+    FLAMETHROWER("Flamethrower", Type.FIRE, (int)90, (int)15),
+    SHOCKWAVE("Shock Wave", Type.ELECTRIC, (int)60, (int)20),
+    THUNDERBOLT("Thunderbolt", Type.ELECTRIC, (int)90, (int)15),
+    SHADOWBALL("Shadow Ball", Type.GHOST, (int)80, (int)15),
     MOONBLAST("Moonblast", Type.FAIRY, (int)95, (int)10);
 
     private final String NAME;
