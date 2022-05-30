@@ -1,8 +1,11 @@
 package poke;
 
+import java.util.*;
+
 public class Pokemon {
     private Monsters pokemonName;
     private Type[] type;
+    private boolean[] status;
 
     private double battleHP, battleATK, battleDEF;
 
@@ -12,6 +15,9 @@ public class Pokemon {
        this.battleATK = pokemonName.getATK();
        this.battleDEF = pokemonName.getDEF();
        this.type = pokemonName.getType();
+
+       //Poison, Paralyze, Burn, Freeze, Sleep, Immune, Seed
+       status = new boolean[]{false, false, false, false, false, false, false};
         
     }
 
@@ -26,6 +32,11 @@ public class Pokemon {
 
         double finalDMG = Math.floor(damageTaken) + 1;
         this.battleHP -= finalDMG;
+
+        if(rollStatusEffect(used)){
+
+        }
+
     }
 
     //calculate the type effectiveness multiplier
@@ -48,11 +59,57 @@ public class Pokemon {
         return typeEff;
     } 
 
+    private void applyStatus(AttackMove used, Pokemon defender){
+        final Status s = used.getStatusEffect();
+        
+        switch(s){
+            case POISON:
+                status[0] = true;
+                break;
+            case PARALYZE:
+                status[1] = true;
+                break;
+            case BURN:
+                status[2] = true;
+                break;
+            case FREEZE:
+                status[3] = true;
+                break;
+            case SLEEP: 
+                status[4] = true;
+                break;
+            case IMMUNE:
+                status[5] = true;
+                break;
+            case SEED:
+                status[6] = true;
+                break;
+            default: //NORMAL status effect
+                break;
+        }
+    }
+
+    //used to check if status effect is applied
+    private boolean rollStatusEffect(AttackMove used){
+        Random r = new Random();
+        int randInt = r.nextInt(100) + 1; //generate number from 1-100
+
+        if(randInt <= used.getStatChance()){ //ex: There is a 30% chance of getting a number within 1-30 inside 100 numbers
+            return true;
+        }
+
+        return false;
+    }
+
     public double getBattleHP(){
         return battleHP;
     }
 
     public double getBattleATK(){
         return battleATK;
+    }
+
+    public boolean[] getStatus(){
+        return status;
     }
 }
