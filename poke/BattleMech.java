@@ -52,6 +52,14 @@ public class BattleMech {
             return str + "\n";
         }
 
+        //only apply status if the attack has effect on the defending pokemon
+        if(d != 0){
+            if(rollStatusEffect(firstMove)){
+                applyStatus(firstMove, second);
+                str += "\n" + firstMove.getStatusEffect() + " is applied on " + second.getName();
+            }
+        }
+
         str += "\n" + second.getName + " used " + secondMove.getName();
 
         str += "\n" + second.getName() + " deals " + secondDamage + " damage to " + first.getName();
@@ -70,6 +78,13 @@ public class BattleMech {
         if(first.fainted()){
             str += "\n" + first.getName() + " fainted";
             return str + "\n";
+        }
+
+        if(f != 0){
+            if(rollStatusEffect(secondMove)){
+                applyStatus(secondMove, first);
+                //TODO
+            }
         }
 
         return str + "\n";
