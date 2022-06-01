@@ -127,25 +127,25 @@ public class BattleMech {
         
         switch(s){
             case POISON:
-                status[0] = true;
+                defender.getStatus()[0] = true;
                 break;
             case PARALYZE:
-                status[1] = true;
+                defender.getStatus()[1] = true;
                 break;
             case BURN:
-                status[2] = true;
+                defender.getStatus()[2] = true;
                 break;
             case FREEZE:
-                status[3] = true;
+                defender.getStatus()[3] = true;
                 break;
             case SLEEP: 
-                status[4] = true;
+                defender.getStatus()[4] = true;
                 break;
             case IMMUNE:
-                status[5] = true;
+                defender.getStatus()[5] = true;
                 break;
             case SEED:
-                status[6] = true;
+                defender.getStatus()[6] = true;
                 break;
             default: //NORMAL status effect
                 break;
