@@ -9,6 +9,8 @@ public enum AttackMove {
     SHADOWBALL("Shadow Ball", Type.GHOST, (int)80, (int)15, Status.NORMAL, (int)100),
     FEATHERSTORM("Featherstorm", Type.FLYING, (int)120, (int)10, Status.IMMUNE, (int)100),
     MOONBLAST("Moonblast", Type.FAIRY, (int)95, (int)10, Status.NORMAL, (int)100),
+    AURASPHERE("Aura Sphere", Type.FIGHTING, (int)80, (int)20, Status.NORMAL, (int)100),
+    DRAGONPULSE("Dragon Pulse", Type.DRAGON, (int)85, (int)10, Status.NORMAL, (int)100),
     EVILCONQUERING("Bane of All Evil", Type.FIGHTING, (int)10000, (int)1, Status.NORMAL, (int)100);
     
 
