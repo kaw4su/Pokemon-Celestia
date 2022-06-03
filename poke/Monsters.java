@@ -4,6 +4,7 @@ import java.util.*;
 
 public enum Monsters {
     DELPHOX("Delphox", (int)354, (int)260, (int)267, (int)337, new AttackMove[]{AttackMove.FLAMETHROWER, AttackMove.SHADOWBALL, AttackMove.SHOCKWAVE, AttackMove.PSYCHIC}, Type.FIRE, Type.PSYCHIC),
+    LUCARIO("Lucario", (int)344, (int)350, (int)262, (int)306, new AttackMove[]{AttackMove.AURASPHERE}, Type.FIGHTING),
     GARDEVOIR("Gardevoir", (int)340, (int)251, (int)251, (int)284, new AttackMove[]{AttackMove.MOONBLAST, AttackMove.PSYCHIC, AttackMove.THUNDERBOLT}, Type.FAIRY, Type.PSYCHIC);
 
     //private final Map<AttackMove, Integer> MOVESET;

@@ -8,7 +8,8 @@ public enum AttackMove {
     THUNDERBOLT("Thunderbolt", Type.ELECTRIC, (int)90, (int)15, Status.PARALYZE, (int)10),
     SHADOWBALL("Shadow Ball", Type.GHOST, (int)80, (int)15, Status.NORMAL, (int)100),
     FEATHERSTORM("Featherstorm", Type.FLYING, (int)120, (int)10, Status.IMMUNE, (int)100),
-    MOONBLAST("Moonblast", Type.FAIRY, (int)95, (int)10, Status.NORMAL, (int)100);
+    MOONBLAST("Moonblast", Type.FAIRY, (int)95, (int)10, Status.NORMAL, (int)100),
+    EVILCONQUERING("Bane of All Evil", Type.FIGHTING, (int)10000, (int)1, Status.NORMAL, (int)100);
     
 
     private final String NAME;
