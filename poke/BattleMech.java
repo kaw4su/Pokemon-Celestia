@@ -106,19 +106,34 @@ public class BattleMech {
     public double typeEffectiveness(Pokemon defender, AttackMove used){
         double typeEff = 1;
 
-        for (Type t : type){
+        for (Type t : defending.getTypeA()){
             if(used.getType().isSuperEffectiveAgainst(t)){
-                System.out.println("It was super effective!");
+                //System.out.println("It was super effective!");
                 typeEff *= 2;
             } else if (used.getType().isNotVeryEffectiveAgainst(t)){
-                System.out.println("It was not very effective...");
+                //System.out.println("It was not very effective...");
                 typeEff *= 0.5;
             } else if (used.getType().hasNoEffectOn(t)){
-                System.out.println("It had no effect!");
+                //System.out.println("It had no effect!");
                 typeEff *= 0;
             }
         }   
 
+        //for pokemon that only have a single type
+        if(defender.getTypeB() == Type.NULLTYPE){
+            return typeEff;
+        }
+
+        //secondary types
+        for (Type t : defending.getTypeB()){
+            if(used.getType().isSuperEffectiveAgainst(t)){
+                typeEff *= 2;
+            } else if (used.getType().isNotVeryEffectiveAgainst(t)){
+                typeEff *= 0.5;
+            } else if (used.getType().hasNoEffectOn(t)){
+                typeEff *= 0;
+            }
+        }
         return typeEff;
     } 
 
