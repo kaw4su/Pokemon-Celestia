@@ -1,6 +1,9 @@
 package poke;
 
 public class BattleMech {
+    public static Pokemon[] myTeam = new Pokemon[5];
+    public static Pokemon[] enemyTeam = new Pokemon[5];
+    
     public static void main(String[] args){
         Pokemon poke1 = new Pokemon(Monsters.GARDEVOIR);
         Pokemon enemy = new Pokemon(Monsters.DELPHOX);

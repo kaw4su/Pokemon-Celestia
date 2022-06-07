@@ -4,7 +4,10 @@ import java.util.*;
 
 public enum Monsters {
     DELPHOX("Delphox", (int)354, (int)260, (int)267, (int)337, new AttackMove[]{AttackMove.FLAMETHROWER, AttackMove.SHADOWBALL, AttackMove.SHOCKWAVE, AttackMove.PSYCHIC}, Type.FIRE, Type.PSYCHIC),
-    LUCARIO("Lucario", (int)344, (int)350, (int)262, (int)306, new AttackMove[]{AttackMove.AURASPHERE}, Type.FIGHTING),
+    LUCARIO("Lucario", (int)344, (int)350, (int)262, (int)306, new AttackMove[]{AttackMove.AURASPHERE, AttackMove.SHADOWBALL, AttackMove.BONERUSH, AttackMove.POISONJAB}, Type.FIGHTING),
+    BLASTOISE("Blastoise", (int)362, (int)291, (int)328, (int)280, new AttackMove[]{AttackMove.HYDROPUMP, AttackMove.SCALD, AttackMove.DARKPULSE, AttackMove.ICEBEAM}, Type.WATER),
+    //TODO FINISH ZAPDOS STUFF
+    ZAPDOS("Zapdos", (int)384, (int)383, (int)306, (int)328, new AttackMove[]{AttackMove.DRILLPECK, AttackMove.DISCHARGE, AttackMove.ZAPCANNON, AttackMove.})
     GARDEVOIR("Gardevoir", (int)340, (int)251, (int)251, (int)284, new AttackMove[]{AttackMove.MOONBLAST, AttackMove.PSYCHIC, AttackMove.THUNDERBOLT}, Type.FAIRY, Type.PSYCHIC);
 
     //private final Map<AttackMove, Integer> MOVESET;

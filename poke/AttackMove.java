@@ -11,7 +11,14 @@ public enum AttackMove {
     MOONBLAST("Moonblast", Type.FAIRY, (int)95, (int)10, Status.NORMAL, (int)100),
     AURASPHERE("Aura Sphere", Type.FIGHTING, (int)80, (int)20, Status.NORMAL, (int)100),
     DRAGONPULSE("Dragon Pulse", Type.DRAGON, (int)85, (int)10, Status.NORMAL, (int)100),
+    BONERUSH("Bone Rush", Type.GROUND, (int)25, (int)10, Status.NORMAL, (int)100),
+    POISONJAB("Poison Jab", Type.POISON, (int)80, (int)20, Status.POISON, (int)30),
+    HYDROPUMP("Hydro Pump", Type.WATER, (int)110, (int)5, Status.NORMAL, (int)100),
+    SCALD("Scald", Type.WATER, (int)80, (int)15, Status.BURN, (int)30),
+    DARKPULSE("Dark Pulse", Type.DARK, (int)80, (int)15, Status.NORMAL, (int)100),
+    ICEBEAM("Ice Beam", Type.ICE, (int)90, (int)10, Status.FREEZE, (int)10),
     EVILCONQUERING("Bane of All Evil", Type.FIGHTING, (int)10000, (int)1, Status.NORMAL, (int)100);
+    
     
 
     private final String NAME;
