@@ -4,34 +4,64 @@ package poke;
 import java.util.*;
 
 public class BattleMech {
-    public static Pokemon[] myTeam = new Pokemon[5];
-    public static Pokemon[] enemyTeam = new Pokemon[5];
+    public static Pokemon[] myTeam = new Pokemon[6];
+    public static Pokemon[] enemyTeam = new Pokemon[6];
     
     public static void main(String[] args){
         Pokemon poke1 = new Pokemon(Monsters.GARDEVOIR);
-        Pokemon enemy = new Pokemon(Monsters.DELPHOX);
+        Pokemon poke2 = new Pokemon(Monsters.DELPHOX);
+        Pokemon poke3 = new Pokemon(Monsters.LUCARIO);
+        Pokemon poke4 = new Pokemon(Monsters.BLASTOISE);
+        Pokemon poke5 = new Pokemon(Monsters.ZAPDOS);
+        Pokemon poke6 = new Pokemon(Monsters.SERPERIOR);
+
+        Pokemon enemy1 = new Pokemon(Monsters.HAWLUCHA);
+        Pokemon enemy2 = new Pokemon(Monsters.TYRANTRUM);
+        Pokemon enemy3 = new Pokemon(Monsters.AURORUS);
+        Pokemon enemy4 = new Pokemon(Monsters.GOURGEIST);
+        Pokemon enemy5 = new Pokemon(Monsters.GOODRA);
+        Pokemon enemy6 = new Pokemon(Monsters.GARDEVOIR);
+
         BattleMech bm = new BattleMech();
 
+        myTeam[0] = poke1;
+        myTeam[1] = poke2;
+        myTeam[2] = poke3;
+        myTeam[3] = poke4;
+        myTeam[4] = poke5;
+        myTeam[5] = poke6;
+
+        enemyTeam[0] = enemy1;
+        enemyTeam[1] = enemy2;
+        enemyTeam[2] = enemy3;
+        enemyTeam[3] = enemy4;
+        enemyTeam[4] = enemy5;
+        enemyTeam[5] = enemy6;
+
+
+
+        
         System.out.println("Starting HP for both Pokemon: ");
         System.out.println("Gardevoir: " + poke1.getBattleHP());
-        System.out.println("Delphox: " + enemy.getBattleHP());
+        System.out.println("Hawlucha: " + enemy1.getBattleHP());
         System.out.println();
 
         //if player's pokemon has equal or faster speed
-        if(poke1.getBattleSPD() >= enemy.getBattleSPD()){
-            System.out.println(bm.battleOrder(poke1, AttackMove.MOONBLAST, enemy, AttackMove.FLAMETHROWER));
+        if(poke1.getBattleSPD() >= enemy1.getBattleSPD()){
+            System.out.println(bm.battleOrder(poke1, AttackMove.MOONBLAST, enemy1, AttackMove.BRAVEBIRD));
         } else {
-            System.out.println(bm.battleOrder(enemy, AttackMove.FLAMETHROWER, poke1, AttackMove.MOONBLAST));
+            System.out.println(bm.battleOrder(enemy1, AttackMove.BRAVEBIRD, poke1, AttackMove.MOONBLAST));
         }
 
         System.out.println("Ending HP for both Pokemon: ");
         System.out.println("Gardevoir " + poke1.getBattleHP());
-        System.out.println("Delphox: " + enemy.getBattleHP());
+        System.out.println("Hawlucha: " + enemy1.getBattleHP());
         System.out.println();
 
         System.out.println("Original HP for both Pokemon: ");
         System.out.println("Gardevoir: " + Monsters.GARDEVOIR.getHP());
-        System.out.println("Delphox: " + Monsters.DELPHOX.getHP());
+        System.out.println("Hawlucha: " + Monsters.HAWLUCHA.getHP());
+        
     }
 
     //method used for move priority
