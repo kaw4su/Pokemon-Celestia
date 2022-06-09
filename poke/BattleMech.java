@@ -23,6 +23,7 @@ public class BattleMech {
         Pokemon enemy6 = new Pokemon(Monsters.GARDEVOIR);
 
         BattleMech bm = new BattleMech();
+        Scanner sc = new Scanner(System.in);
 
         myTeam[0] = poke1;
         myTeam[1] = poke2;
@@ -38,19 +39,39 @@ public class BattleMech {
         enemyTeam[4] = enemy5;
         enemyTeam[5] = enemy6;
 
-
+        AttackMove attackSelected;
 
         
         System.out.println("Starting HP for both Pokemon: ");
-        System.out.println("Gardevoir: " + poke1.getBattleHP());
-        System.out.println("Hawlucha: " + enemy1.getBattleHP());
+        System.out.println(poke1.getName() + " " + poke1.getBattleHP());
+        System.out.println(enemy1.getName() + " " + enemy1.getBattleHP());
         System.out.println();
+
+        System.out.println("Type in the move name you want to use");
+        System.out.println(poke1.AttackMove); //THIS MIGHT NEED SOME CHANGING
+        String moveSelected = sc.nextLine();
+
+        switch(moveSelected){
+            case poke1.getFirstAttackString():
+                attackSelected = poke1.getATK1();
+                break;
+            case poke1.getSecondAttackString():
+                attackSelected = poke1.getATK2();
+                break;
+            case poke1.getThirdAttackString():
+                attackSelected = poke1.getATK3();
+                break;
+            case poke1.getFourthAttackString():
+                attackSelected = poke1.getATK4();
+                break;
+        }
+
 
         //if player's pokemon has equal or faster speed
         if(poke1.getBattleSPD() >= enemy1.getBattleSPD()){
-            System.out.println(bm.battleOrder(poke1, AttackMove.MOONBLAST, enemy1, AttackMove.BRAVEBIRD));
+            System.out.println(bm.battleOrder(poke1, attackSelected, enemy1, AttackMove.BRAVEBIRD));
         } else {
-            System.out.println(bm.battleOrder(enemy1, AttackMove.BRAVEBIRD, poke1, AttackMove.MOONBLAST));
+            System.out.println(bm.battleOrder(enemy1, AttackMove.BRAVEBIRD, poke1, attackSelected));
         }
 
         System.out.println("Ending HP for both Pokemon: ");
@@ -79,7 +100,7 @@ public class BattleMech {
             str += "\nIt has no effect on " + second.getName();
         } else if (d < 1){
             str += "\n It's not very effective";
-        } else {
+        } else if (d > 1){
             str += "\nIt's super effective";
         }
 
@@ -92,7 +113,9 @@ public class BattleMech {
         if(d != 0){
             if(rollStatusEffect(firstMove)){
                 applyStatus(firstMove, second);
-                str += "\n" + firstMove.getStatusEffect() + " is applied on " + second.getName();
+                if (firstMove.getStatusEffect() != Status.NORMAL){
+                    str += "\n" + firstMove.getStatusEffect() + " is applied on " + second.getName();
+                }
             }
         }
 
@@ -107,7 +130,7 @@ public class BattleMech {
             str += "\nIt has no effect on " + first.getName();
         } else if (f < 1){
             str += "\n It's not very effective";
-        } else {
+        } else if (f > 1){
             str += "\nIt's super effective";
         }
 
@@ -119,6 +142,9 @@ public class BattleMech {
         if(f != 0){
             if(rollStatusEffect(secondMove)){
                 applyStatus(secondMove, first);
+                if(secondMove.getStatusEffect != Status.NORMAL){
+                    str += "\n" + secondMove.getStatusEffect() + " is applied on " + first.getName();
+                }
                 //TODO
             }
         }

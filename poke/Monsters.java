@@ -51,6 +51,22 @@ public enum Monsters {
     public Type getTypeB(){
         return TYPE_B;
     }
+
+    public AttackMove getAttack1(){
+        return MOVE[0];
+    }
+
+    public AttackMove getAttack2(){
+        return MOVE[1];
+    }
+
+    public AttackMove getAttack3(){
+        return MOVE[2];
+    }
+
+    public AttackMove getAttack4(){
+        return MOVE[3];
+    }
     
     public String getName(){
         return NAME;

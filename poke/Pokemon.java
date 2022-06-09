@@ -12,7 +12,9 @@ public class Pokemon {
 
     private int battleSPD;
 
-    private String name;
+    private String name, attack1, attack2, attack3, attack4;
+
+    private AttackMove atk1, atk2, atk3, atk4;
 
 
     public Pokemon (Monsters name){
@@ -24,6 +26,17 @@ public class Pokemon {
        this.typeB = pokemonName.getTypeB();
        this.battleSPD = pokemonName.getSPD();
        this.name = pokemonName.getName();
+
+       this.attack1 = pokemonName.getAttack1().toString();
+       this.attack2 = pokemonName.getAttack2().toString();
+       this.attack3 = pokemonName.getAttack3().toString();
+       this.attack4 = pokemonName.getAttack4().toString();
+
+       this.atk1 = pokemonName.getAttack1();
+       this.atk2 = pokemonName.getAttack2();
+       this.atk3 = pokemonName.getAttack3();
+       this.atk4 = pokemonName.getAttack4();
+
 
        //Poison, Paralyze, Burn, Freeze, Sleep, Immune, Seed
        status = new boolean[]{false, false, false, false, false, false, false};
@@ -40,6 +53,22 @@ public class Pokemon {
 
     public Type getTypeB(){
         return typeB;
+    }
+
+    public AttackMove getATK1(){
+        return atk1;
+    }
+
+    public AttackMove getATK2(){
+        return atk2;
+    }
+
+    public AttackMove getATK3(){
+        return atk3;
+    }
+
+    public AttackMove getATK4(){
+        return atk4;
     }
 
     public boolean fainted(){
@@ -70,4 +99,19 @@ public class Pokemon {
         return name;
     }
 
+    public String getFirstAttackString(){
+        return attack1;
+    }
+
+    public String getSecondAttackString(){
+        return attack2;
+    }
+
+    public String getThirdAttackString(){
+        return attack3;
+    }
+
+    public String getFourthAttackString(){
+        return attack4;
+    }
 }
