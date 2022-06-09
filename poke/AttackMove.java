@@ -26,7 +26,7 @@ public enum AttackMove {
     AERIALACE("Aerial Ace", Type.FLYING, (int)60, (int)20, Status.NORMAL, (int)100),
     AQUATAIL("Aqua Tail", Type.WATER, (int)90, (int)10, Status.NORMAL, (int)100),
     FLASHCANNON("Flash Cannon", Type.STEEL, (int)80, (int)10, Status.NORMAL, (int)100),
-    THUNDERWAVE("Thunder Wave", TYPE.ELECTRIC, (int)0, (int)20, Status.PARALYZE, (int)100),
+    THUNDERWAVE("Thunder Wave", Type.ELECTRIC, (int)0, (int)20, Status.PARALYZE, (int)100),
     BRAVEBIRD("Brave Bird", Type.FLYING, (int)120, (int)15, Status.NORMAL, (int)100),
     HIGHJUMPKICK("High Jump Kick", Type.FIGHTING, (int)130, (int)10, Status.NORMAL, (int)100),
     FIREPUNCH("Fire Punch", Type.FIRE, (int)75, (int)15, Status.BURN, (int)10),
@@ -35,12 +35,13 @@ public enum AttackMove {
     DRAGONCLAW("Dragon Claw", Type.DRAGON, (int)80, (int)15, Status.NORMAL, (int)100),
     STONEEDGE("Stone Edge", Type.ROCK, (int)100, (int)5, Status.NORMAL, (int)100),
     BLIZZARD("Blizzard", Type.ICE, (int)110, (int)5, Status.FREEZE, (int)10),
-    ICEBEAM("Ice Beam", Type.ICE, (int)90, (int)10, Status.FREEZE, (int)10),
     ROCKSLIDE("Rock Slide", Type.ROCK, (int)75, (int)10, Status.NORMAL, (int)100),
     MUDSHOT("Mud Shot", Type.GROUND, (int)55, (int)15, Status.NORMAL, (int)100),
     SEEDBOMB("Seed Bomb", Type.GRASS, (int)80, (int)15, Status.NORMAL, (int)100),
     POWERWHIP("Power Whip", Type.GRASS, (int)120, (int)10, Status.NORMAL, (int)100),
     DRAGONBREATH("Dragon Breath", Type.DRAGON, (int)60, (int)20, Status.PARALYZE, (int)30),
+    FLAREBLITZ("Flare Blitz", Type.FIRE, (int)120, (int)15, Status.BURN, (int)10),
+    MUDDYWATER("Muddy Water", Type.WATER, (int)90, (int)10, Status.NORMAL, (int)100),
     EVILCONQUERING("Bane of All Evil", Type.FIGHTING, (int)10000, (int)1, Status.NORMAL, (int)100);
     
     

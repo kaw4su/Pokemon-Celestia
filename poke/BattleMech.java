@@ -1,4 +1,7 @@
+
 package poke;
+
+import java.util.*;
 
 public class BattleMech {
     public static Pokemon[] myTeam = new Pokemon[5];
@@ -15,7 +18,7 @@ public class BattleMech {
         System.out.println();
 
         //if player's pokemon has equal or faster speed
-        if(poke1.getSPD() >= enemy.getSPD()){
+        if(poke1.getBattleSPD() >= enemy.getBattleSPD()){
             System.out.println(bm.battleOrder(poke1, AttackMove.MOONBLAST, enemy, AttackMove.FLAMETHROWER));
         } else {
             System.out.println(bm.battleOrder(enemy, AttackMove.FLAMETHROWER, poke1, AttackMove.MOONBLAST));
@@ -34,7 +37,7 @@ public class BattleMech {
     //method used for move priority
     private String battleOrder(Pokemon first, AttackMove firstMove, Pokemon second, AttackMove secondMove){
         String str = first.getName() + " used " + firstMove.getName();
-        int firstDamage = calculateAttack(first, second, firstMove), secondDamage = calculateAttack(second, first, secondMove);
+        double firstDamage = calculateAttack(first, second, firstMove), secondDamage = calculateAttack(second, first, secondMove);
 
         str += "\n" + first.getName() + " deals " + firstDamage + " damage to " + second.getName();
         second.takeDamage(firstDamage);
@@ -63,7 +66,7 @@ public class BattleMech {
             }
         }
 
-        str += "\n" + second.getName + " used " + secondMove.getName();
+        str += "\n" + second.getName() + " used " + secondMove.getName();
 
         str += "\n" + second.getName() + " deals " + secondDamage + " damage to " + first.getName();
         first.takeDamage(secondDamage);
@@ -103,24 +106,26 @@ public class BattleMech {
 
         double finalDMG = Math.floor(damageTaken) + 1;
 
+        return finalDMG;
+
     }
 
     //calculate the type effectiveness multiplier
     public double typeEffectiveness(Pokemon defender, AttackMove used){
         double typeEff = 1;
 
-        for (Type t : defending.getTypeA()){
-            if(used.getType().isSuperEffectiveAgainst(t)){
+       // for (Type t : defender.getTypeA()){
+            if(used.getType().isSuperEffectiveAgainst(defender.getTypeA())){
                 //System.out.println("It was super effective!");
                 typeEff *= 2;
-            } else if (used.getType().isNotVeryEffectiveAgainst(t)){
+            } else if (used.getType().isNotVeryEffectiveAgainst(defender.getTypeA())){
                 //System.out.println("It was not very effective...");
                 typeEff *= 0.5;
-            } else if (used.getType().hasNoEffectOn(t)){
+            } else if (used.getType().hasNoEffectOn(defender.getTypeA())){
                 //System.out.println("It had no effect!");
                 typeEff *= 0;
             }
-        }   
+        //}   
 
         //for pokemon that only have a single type
         if(defender.getTypeB() == Type.NULLTYPE){
@@ -128,15 +133,15 @@ public class BattleMech {
         }
 
         //secondary types
-        for (Type t : defending.getTypeB()){
-            if(used.getType().isSuperEffectiveAgainst(t)){
+        //for (Type t : defender.getTypeB()){
+            if(used.getType().isSuperEffectiveAgainst(defender.getTypeB())){
                 typeEff *= 2;
-            } else if (used.getType().isNotVeryEffectiveAgainst(t)){
+            } else if (used.getType().isNotVeryEffectiveAgainst(defender.getTypeB())){
                 typeEff *= 0.5;
-            } else if (used.getType().hasNoEffectOn(t)){
+            } else if (used.getType().hasNoEffectOn(defender.getTypeB())){
                 typeEff *= 0;
             }
-        }
+        //}
         return typeEff;
     } 
 
