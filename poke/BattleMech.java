@@ -4,8 +4,10 @@ package poke;
 import java.util.*;
 
 public class BattleMech {
-    public static Pokemon[] myTeam = new Pokemon[6];
-    public static Pokemon[] enemyTeam = new Pokemon[6];
+    public static ArrayList<Pokemon> myTeam = new ArrayList<Pokemon>();
+    public static ArrayList<Pokemon> enemyTeam = new ArrayList<Pokemon>();
+
+    private static int healPotion = 5, enemyHealPotion = 5;
     
     public static void main(String[] args){
         Pokemon poke1 = new Pokemon(Monsters.GARDEVOIR);
@@ -25,30 +27,30 @@ public class BattleMech {
         BattleMech bm = new BattleMech();
         Scanner sc = new Scanner(System.in);
 
-        myTeam[0] = poke1;
-        myTeam[1] = poke2;
-        myTeam[2] = poke3;
-        myTeam[3] = poke4;
-        myTeam[4] = poke5;
-        myTeam[5] = poke6;
+        myTeam.add(poke1);
+        myTeam.add(poke2);
+        myTeam.add(poke3);
+        myTeam.add(poke4);
+        myTeam.add(poke5);
+        myTeam.add(poke6);
 
-        enemyTeam[0] = enemy1;
-        enemyTeam[1] = enemy2;
-        enemyTeam[2] = enemy3;
-        enemyTeam[3] = enemy4;
-        enemyTeam[4] = enemy5;
-        enemyTeam[5] = enemy6;
+        enemyTeam.add(enemy1);
+        enemyTeam.add(enemy2);
+        enemyTeam.add(enemy3);
+        enemyTeam.add(enemy4);
+        enemyTeam.add(enemy5);
+        enemyTeam.add(enemy6);
 
         AttackMove attackSelected;
 
         
         System.out.println("Starting HP for both Pokemon: ");
-        System.out.println(poke1.getName() + " " + poke1.getBattleHP());
-        System.out.println(enemy1.getName() + " " + enemy1.getBattleHP());
+        System.out.println(myTeam.get(0).getName() + " " + myTeam.get(0).getBattleHP());
+        System.out.println(enemyTeam.get(0).getName() + " " + enemyTeam.get(0).getBattleHP());
         System.out.println();
 
         System.out.println("Type in the move name you want to use");
-        System.out.println(poke1.AttackMove); //THIS MIGHT NEED SOME CHANGING
+        System.out.println(myTeam.get(0).AttackMove); //THIS MIGHT NEED SOME CHANGING
         String moveSelected = sc.nextLine();
 
         switch(moveSelected){
@@ -241,6 +243,25 @@ public class BattleMech {
         }
 
         return false;
+    }
+
+    private void healPokemon(Pokemon pokemonHealed){
+        pokemonHealed.gainHP();
+    }
+
+    //https://hackaday.com/wp-content/uploads/2014/05/pokemon-decisiontree.png
+    private void trainerAI(){
+        double threshold = enemyTeam.get(0).getHP() * 40; //find 40% of maximum hp
+        
+        if(enemyTeam.get(0).getBattleHP() <= threshold){ //if fielded pokemon is below 40% health
+            if (enemyHealPotion > 0){ //if enemy still have potions
+                healPokemon(enemyTeam.get(0));
+                enemyHealPotion--;
+            } else {
+                //switch to pokemon that will take the least damage
+                //TODO
+            }
+        }
     }
    
 }

@@ -8,7 +8,7 @@ public class Pokemon {
     private Type typeB;
     private boolean[] status;
 
-    private double battleHP, battleATK, battleDEF;
+    private double battleHP, battleATK, battleDEF, HP;
 
     private int battleSPD;
 
@@ -20,6 +20,7 @@ public class Pokemon {
     public Pokemon (Monsters name){
        this.pokemonName = name;
        this.battleHP = pokemonName.getHP();
+       this.HP = pokemonName.getHP();
        this.battleATK = pokemonName.getATK();
        this.battleDEF = pokemonName.getDEF();
        this.typeA = pokemonName.getTypeA();
@@ -45,6 +46,10 @@ public class Pokemon {
 
     public void takeDamage(double damage){
         battleHP -= damage;
+    }
+
+    public void gainHP(){
+        battleHP += 200;
     }
 
     public Type getTypeA(){
