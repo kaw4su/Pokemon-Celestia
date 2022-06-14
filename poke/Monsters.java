@@ -20,7 +20,7 @@ public enum Monsters {
     GOODRA("Goodra", (int)384, (int)328, (int)262, (int)284, new AttackMove[]{AttackMove.POWERWHIP, AttackMove.DRAGONPULSE, AttackMove.DRAGONBREATH, AttackMove.MUDDYWATER}, Type.DRAGON, Type.NULLTYPE),
     
     //the one and only
-    GARDEVOIR("Gardevoir", (int)340, (int)251, (int)251, (int)284, new AttackMove[]{AttackMove.MOONBLAST, AttackMove.PSYCHIC, AttackMove.THUNDERBOLT}, Type.FAIRY, Type.PSYCHIC);
+    GARDEVOIR("Gardevoir", (int)340, (int)251, (int)251, (int)284, new AttackMove[]{AttackMove.MOONBLAST, AttackMove.PSYCHIC, AttackMove.THUNDERBOLT, AttackMove.ENERGYBALL}, Type.FAIRY, Type.PSYCHIC);
 
     //private final Map<AttackMove, Integer> MOVESET;
     private final AttackMove[] MOVE;
@@ -66,6 +66,10 @@ public enum Monsters {
 
     public AttackMove getAttack4(){
         return MOVE[3];
+    }
+
+    public AttackMove[] getMonsterMoveSet(){
+        return MOVE;
     }
     
     public String getName(){

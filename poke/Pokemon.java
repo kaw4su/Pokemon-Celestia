@@ -7,6 +7,7 @@ public class Pokemon {
     private Type typeA;
     private Type typeB;
     private boolean[] status;
+    private AttackMove[] MOVE_SET;
 
     private double battleHP, battleATK, battleDEF, HP;
 
@@ -38,6 +39,8 @@ public class Pokemon {
        this.atk3 = pokemonName.getAttack3();
        this.atk4 = pokemonName.getAttack4();
 
+       this.MOVE_SET = pokemonName.getMonsterMoveSet();
+
 
        //Poison, Paralyze, Burn, Freeze, Sleep, Immune, Seed
        status = new boolean[]{false, false, false, false, false, false, false};
@@ -58,6 +61,10 @@ public class Pokemon {
 
     public Type getTypeB(){
         return typeB;
+    }
+
+    public AttackMove[] getMoveSet(){
+        return MOVE_SET;
     }
 
     public AttackMove getATK1(){
@@ -82,6 +89,10 @@ public class Pokemon {
 
     public double getBattleHP(){
         return battleHP;
+    }
+
+    public double getTotalHP(){
+        return HP;
     }
 
     public double getBattleDEF(){

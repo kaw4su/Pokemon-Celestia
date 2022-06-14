@@ -9,7 +9,8 @@ public class BattleMech {
 
     private static int healPotion = 5, enemyHealPotion = 5;
     private static AttackMove enemyAttack;
-    private static boolean switch = false;
+    private static boolean pokeSwitch = false;
+    private static AttackMove attackSelected;
     
     public static void main(String[] args){
         Pokemon poke1 = new Pokemon(Monsters.GARDEVOIR);
@@ -43,7 +44,7 @@ public class BattleMech {
         enemyTeam.add(enemy5);
         enemyTeam.add(enemy6);
 
-        AttackMove attackSelected;
+        
 
         
         System.out.println("Starting HP for both Pokemon: ");
@@ -51,33 +52,26 @@ public class BattleMech {
         System.out.println(enemyTeam.get(0).getName() + " " + enemyTeam.get(0).getBattleHP());
         System.out.println();
 
-        System.out.println("Type in the move name you want to use");
-        System.out.println(myTeam.get(0).AttackMove); //THIS MIGHT NEED SOME CHANGING
-        String moveSelected = sc.nextLine();
+        /*System.out.println("Type in the move name you want to use");
+        System.out.println(myTeam.get(0).getATK1().getName()); //THIS MIGHT NEED SOME CHANGING
+        System.out.println(myTeam.get(0).getATK2().getName());
+        System.out.println(myTeam.get(0).getATK3().getName());
+        System.out.println(myTeam.get(0).getATK4().getName()); */
 
-        switch(moveSelected){
-            case poke1.getFirstAttackString():
-                attackSelected = poke1.getATK1();
-                break;
-            case poke1.getSecondAttackString():
-                attackSelected = poke1.getATK2();
-                break;
-            case poke1.getThirdAttackString():
-                attackSelected = poke1.getATK3();
-                break;
-            case poke1.getFourthAttackString():
-                attackSelected = poke1.getATK4();
-                break;
-        }
+        //String moveSelected = sc.nextLine();
+        AttackMove moveSelected = AttackMove.MOONBLAST;
 
-        trainerAI();
+    
 
+       bm.trainerAI();
+        System.out.println(attackSelected);
         //if player's pokemon has equal or faster speed
         if(attackSelected != null){
+            
             if(poke1.getBattleSPD() >= enemy1.getBattleSPD()){
-                System.out.println(bm.battleOrder(poke1, attackSelected, enemy1, attackSelected));
+                System.out.println(bm.battleOrder(poke1, moveSelected, enemy1, attackSelected));
             } else {
-                System.out.println(bm.battleOrder(enemy1, attackSelected, poke1, attackSelected));
+                System.out.println(bm.battleOrder(enemy1, attackSelected, poke1, moveSelected));
             }
         }
 
@@ -149,7 +143,7 @@ public class BattleMech {
         if(f != 0){
             if(rollStatusEffect(secondMove)){
                 applyStatus(secondMove, first);
-                if(secondMove.getStatusEffect != Status.NORMAL){
+                if(secondMove.getStatusEffect() != Status.NORMAL){
                     str += "\n" + secondMove.getStatusEffect() + " is applied on " + first.getName();
                 }
                 //TODO
@@ -257,7 +251,7 @@ public class BattleMech {
 
     //https://hackaday.com/wp-content/uploads/2014/05/pokemon-decisiontree.png
     private void trainerAI(){
-        double threshold = enemyTeam.get(0).getHP() * 0.4; //find 40% of maximum hp
+        double threshold = enemyTeam.get(0).getTotalHP() * 0.4; //find 40% of maximum hp
         boolean moveAvailable = false, healthSwitch = false;
         
         if(enemyTeam.get(0).getBattleHP() <= threshold){ //if fielded pokemon is below 40% health
@@ -304,10 +298,10 @@ public class BattleMech {
             }
         } else {
             //loop through current pokemon's available moveset
-            for(AttackMove mov : enemyTeam.get(0).AttackMove){
+            for(AttackMove mov : enemyTeam.get(0).getMoveSet()){
                 if(typeEffectiveness(myTeam.get(0), mov) >= 1){ //if move is able to do neutral or supereffective damage
                     if(mov.getBattlePP() > 0){
-                        enemyAttack = mov;
+                        attackSelected = mov;
                         mov.lowerPP();
                         moveAvailable = true;
                         break;
@@ -322,7 +316,7 @@ public class BattleMech {
                         || p.getTypeB().isSuperEffectiveAgainst(myTeam.get(0).getTypeA())
                         || p.getTypeA().isSuperEffectiveAgainst(myTeam.get(0).getTypeB())
                         || p.getTypeB().isSuperEffectiveAgainst(myTeam.get(0).getTypeB())){
-                            if(p.getBattleHP() > (p.getHP() * 0.4)){
+                            if(p.getBattleHP() > (p.getTotalHP() * 0.4)){
                                 Collections.swap(enemyTeam, 0, enemyTeam.indexOf(p));
                             }
                         }

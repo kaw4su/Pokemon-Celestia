@@ -42,6 +42,7 @@ public enum AttackMove {
     DRAGONBREATH("Dragon Breath", Type.DRAGON, (int)60, (int)20, Status.PARALYZE, (int)30),
     FLAREBLITZ("Flare Blitz", Type.FIRE, (int)120, (int)15, Status.BURN, (int)10),
     MUDDYWATER("Muddy Water", Type.WATER, (int)90, (int)10, Status.NORMAL, (int)100),
+    ENERGYBALL("Energy Ball", Type.GRASS, (int)90, (int)10, Status.NORMAL, (int)100),
     EVILCONQUERING("Bane of All Evil", Type.FIGHTING, (int)10000, (int)1, Status.NORMAL, (int)100);
     
     
