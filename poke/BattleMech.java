@@ -8,6 +8,7 @@ public class BattleMech {
     public static ArrayList<Pokemon> enemyTeam = new ArrayList<Pokemon>();
 
     private static int healPotion = 5, enemyHealPotion = 5;
+    private static AttackMove enemyAttack;
     
     public static void main(String[] args){
         Pokemon poke1 = new Pokemon(Monsters.GARDEVOIR);
@@ -249,9 +250,11 @@ public class BattleMech {
         pokemonHealed.gainHP();
     }
 
+
     //https://hackaday.com/wp-content/uploads/2014/05/pokemon-decisiontree.png
     private void trainerAI(){
-        double threshold = enemyTeam.get(0).getHP() * 40; //find 40% of maximum hp
+        double threshold = enemyTeam.get(0).getHP() * 0.4; //find 40% of maximum hp
+        boolean moveAvailable = false, healthSwitch = false;
         
         if(enemyTeam.get(0).getBattleHP() <= threshold){ //if fielded pokemon is below 40% health
             if (enemyHealPotion > 0){ //if enemy still have potions
@@ -260,6 +263,67 @@ public class BattleMech {
             } else {
                 //switch to pokemon that will take the least damage
                 //TODO
+
+                //search for pokemon that will take least damage based on pokemon's type
+                for(Pokemon p : enemyTeam){
+                    if (p.getTypeA().isSuperEffectiveAgainst(myTeam.get(0).getTypeA())
+                        || p.getTypeB().isSuperEffectiveAgainst(myTeam.get(0).getTypeA())
+                        || p.getTypeA().isSuperEffectiveAgainst(myTeam.get(0).getTypeB())
+                        || p.getTypeB().isSuperEffectiveAgainst(myTeam.get(0).getTypeB())){
+                        Collections.swap(enemyTeam, 0, enemyTeam.indexOf(p)); //switch current pokemon to pokemon that will take the least damage
+                        healthSwitch = true;
+                        break;
+                    }
+                }
+
+                //desperate times, desperate measures
+                if(!healthSwitch){
+                    double max = enemyTeam.get(0).getBattleHP();
+
+                    if(enemyTeam.get(1).getBattleHP() > max){
+                        max = enemyTeam.get(1).getBattleHP();
+                    } else if (enemyTeam.get(2).getBattleHP() > max){
+                        max = enemyTeam.get(2).getBattleHP();
+                    } else if (enemyTeam.get(3).getBattleHP() > max){
+                        max = enemyTeam.get(3).getBattleHP();
+                    } else if (enemyTeam.get(4).getBattleHP() > max){
+                        max = enemyTeam.get(4).getBattleHP();
+                    } else if (enemyTeam.get(5).getBattleHP() > max){
+                        max = enemyTeam.get(5).getBattleHP();
+                    }
+
+                    for (Pokemon p : enemyTeam){
+                        if (max == p.getBattleHP()){
+                            Collections.swap(enemyTeam, 0, enemyTeam.indexOf(p));
+                        }
+                    }
+                }
+            }
+        } else {
+            //loop through current pokemon's available moveset
+            for(AttackMove mov : enemyTeam.get(0).AttackMove){
+                if(typeEffectiveness(myTeam.get(0), mov) >= 1){ //if move is able to do neutral or supereffective damage
+                    if(mov.getBattlePP() > 0){
+                        enemyAttack = mov;
+                        mov.lowerPP();
+                        moveAvailable = true;
+                        break;
+                    }
+                }
+            }
+
+            //if all moves are not effective against opponent, switch to healthy pokemon that has effective moves
+            if(!moveAvailable){
+                for(Pokemon p : enemyTeam){
+                    if (p.getTypeA().isSuperEffectiveAgainst(myTeam.get(0).getTypeA())
+                        || p.getTypeB().isSuperEffectiveAgainst(myTeam.get(0).getTypeA())
+                        || p.getTypeA().isSuperEffectiveAgainst(myTeam.get(0).getTypeB())
+                        || p.getTypeB().isSuperEffectiveAgainst(myTeam.get(0).getTypeB())){
+                            if(p.getBattleHP() > (p.getHP() * 0.4)){
+                                Collections.swap(enemyTeam, 0, enemyTeam.indexOf(p));
+                            }
+                        }
+                }
             }
         }
     }
