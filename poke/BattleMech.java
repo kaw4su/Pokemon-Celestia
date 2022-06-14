@@ -9,6 +9,7 @@ public class BattleMech {
 
     private static int healPotion = 5, enemyHealPotion = 5;
     private static AttackMove enemyAttack;
+    private static boolean switch = false;
     
     public static void main(String[] args){
         Pokemon poke1 = new Pokemon(Monsters.GARDEVOIR);
@@ -69,12 +70,15 @@ public class BattleMech {
                 break;
         }
 
+        trainerAI();
 
         //if player's pokemon has equal or faster speed
-        if(poke1.getBattleSPD() >= enemy1.getBattleSPD()){
-            System.out.println(bm.battleOrder(poke1, attackSelected, enemy1, AttackMove.BRAVEBIRD));
-        } else {
-            System.out.println(bm.battleOrder(enemy1, AttackMove.BRAVEBIRD, poke1, attackSelected));
+        if(attackSelected != null){
+            if(poke1.getBattleSPD() >= enemy1.getBattleSPD()){
+                System.out.println(bm.battleOrder(poke1, attackSelected, enemy1, attackSelected));
+            } else {
+                System.out.println(bm.battleOrder(enemy1, attackSelected, poke1, attackSelected));
+            }
         }
 
         System.out.println("Ending HP for both Pokemon: ");
@@ -262,7 +266,6 @@ public class BattleMech {
                 enemyHealPotion--;
             } else {
                 //switch to pokemon that will take the least damage
-                //TODO
 
                 //search for pokemon that will take least damage based on pokemon's type
                 for(Pokemon p : enemyTeam){
