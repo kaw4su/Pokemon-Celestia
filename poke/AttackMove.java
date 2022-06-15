@@ -112,6 +112,11 @@ public enum AttackMove {
 
     public void addPP(int pp){
         battlePP += pp;
+
+        //this is to make sure pp doesn't go over the limit
+        if(pp - battlePP < 0){
+            battlePP = pp;
+        }
     }
 
 

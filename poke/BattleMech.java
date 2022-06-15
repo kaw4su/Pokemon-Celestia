@@ -7,7 +7,9 @@ public class BattleMech {
     public static ArrayList<Pokemon> myTeam = new ArrayList<Pokemon>();
     public static ArrayList<Pokemon> enemyTeam = new ArrayList<Pokemon>();
 
-    private static int healPotion = 5, enemyHealPotion = 5;
+    private static int healPotion = 5, enemyHealPotion = 5,
+                        ppRestore = 5, enemyPPRestore = 5,
+                        fullHeal = 5, enemyFullHeal = 5;
     private static AttackMove enemyAttack;
     private static boolean pokeSwitch = false;
     private static AttackMove attackSelected;
@@ -45,20 +47,116 @@ public class BattleMech {
         enemyTeam.add(enemy6);
 
         
-
-        
         System.out.println("Starting HP for both Pokemon: ");
         System.out.println(myTeam.get(0).getName() + " " + myTeam.get(0).getBattleHP());
         System.out.println(enemyTeam.get(0).getName() + " " + enemyTeam.get(0).getBattleHP());
         System.out.println();
 
-        /*System.out.println("Type in the move name you want to use");
+        System.out.println("Type in the move name you want to use");
         System.out.println(myTeam.get(0).getATK1().getName()); //THIS MIGHT NEED SOME CHANGING
         System.out.println(myTeam.get(0).getATK2().getName());
         System.out.println(myTeam.get(0).getATK3().getName());
-        System.out.println(myTeam.get(0).getATK4().getName()); */
+        System.out.println(myTeam.get(0).getATK4().getName()); 
+        System.out.println("Heal");
+        System.out.println("Restore PP");
+        System.out.println("Cure");
 
-        //String moveSelected = sc.nextLine();
+        String playMaker = sc.nextLine();
+
+        switch(playMaker){
+            case "Heal":
+                if(healPotion == 0){
+                    System.out.println("You ran out of heal potions!");
+                } else {
+                    System.out.println("Select Pokemon you want to heal \n");
+                    System.out.println(myTeam.get(0).getName());
+                    System.out.println(myTeam.get(1).getName());
+                    System.out.println(myTeam.get(2).getName());
+                    System.out.println(myTeam.get(3).getName());
+                    System.out.println(myTeam.get(4).getName());
+                    System.out.println(myTeam.get(5).getName());
+
+                    String pokeHealName = sc.nextLine();
+
+                    for(Pokemon poke : myTeam){
+                        if(poke.getName().equals(pokeHealName)){
+                            healPokemon(poke);
+                            healPotion--;
+                        }
+                    }
+                }
+
+                break;
+
+            case "Restore PP":
+                if(ppRestore == 0){
+                    System.out.println("You ran out of PP restores!");
+                } else {
+                    System.out.println("Select Pokemon you want to restore PP for \n");
+                    System.out.println(myTeam.get(0).getName());
+                    System.out.println(myTeam.get(1).getName());
+                    System.out.println(myTeam.get(2).getName());
+                    System.out.println(myTeam.get(3).getName());
+                    System.out.println(myTeam.get(4).getName());
+                    System.out.println(myTeam.get(5).getName());
+
+                    String pokeRestoreName = sc.nextLine();
+                    
+                    for(Pokemon poke : myTeam){
+                        if(poke.getName().equals(pokeRestoreName)){
+                            System.out.println("Select which move you want to restore PP for \n");
+                            System.out.println(poke.getATK1());
+                            System.out.println(poke.getATK2());
+                            System.out.println(poke.getATK3());
+                            System.out.println(poke.getATK4());
+
+                            String moveRestoreName = sc.nextLine();
+
+                            for(AttackMove atk : poke.getMoveSet()){
+                                if(atk.getName().equals(moveRestoreName)){
+                                    atk.addPP(10);
+                                    ppRestore--;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                break;
+            
+            case "Cure":
+                if(fullHeal == 0){
+                    System.out.println("You ran out of full heals!");
+                } else {
+                    System.out.println("Select which pokemon you would like to fully cure \n");
+                    System.out.println(myTeam.get(0).getName());
+                    System.out.println(myTeam.get(1).getName());
+                    System.out.println(myTeam.get(2).getName());
+                    System.out.println(myTeam.get(3).getName());
+                    System.out.println(myTeam.get(4).getName());
+                    System.out.println(myTeam.get(5).getName());
+
+                    String pokeCureName = sc.nextLine();
+
+                    for(Pokemon poke : myTeam){
+                        if(poke.getName().equals(pokeCureName)){
+                            poke.getStatus()[0] = false;
+                            poke.getStatus()[1] = false;
+                            poke.getStatus()[2] = false;
+                            poke.getStatus()[3] = false;
+                            poke.getStatus()[4] = false;
+                            poke.getStatus()[5] = false;
+                            poke.getStatus()[6] = false;
+                            fullHeal--;
+                        }
+                    }
+                }
+
+                break;
+            
+            default:
+                break;
+        }
         AttackMove moveSelected = AttackMove.MOONBLAST;
 
     
