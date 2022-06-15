@@ -1,6 +1,8 @@
 package poke;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class PokeGui extends JComponent implements Runnable {
@@ -24,14 +26,14 @@ public class PokeGui extends JComponent implements Runnable {
         endBtn.setBounds(550, 400, width/4, height/15);
         endBtn.setFont(new Font("inhalt", Font.PLAIN, fontSize+5));
 
-        menuFrame.getContentPane.add(startBtn);
-        menuFrame.getContentPane.add(endBtn);
+        menuFrame.getContentPane().add(startBtn);
+        menuFrame.getContentPane().add(endBtn);
 
         menuFrame.setVisible(true);
 
-        btnStart.addActionListener(new ActionListener(){
+        startBtn.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent click){
-                fightFrame.dispose();
+                menuFrame.dispose();
                 initPokeSelect();
             }
         })
