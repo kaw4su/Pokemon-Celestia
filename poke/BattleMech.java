@@ -196,13 +196,16 @@ public class BattleMech {
             }*/
 
             System.out.println("Ending HP for both Pokemon: ");
-            System.out.println("Gardevoir " + poke1.getBattleHP());
-            System.out.println("Hawlucha: " + enemy1.getBattleHP());
+            System.out.println(myTeam.get(0).getName() + " " + myTeam.get(0).getBattleHP());
+            System.out.println(enemyTeam.get(0).getName() + " " + enemyTeam.get(0).getBattleHP());
             System.out.println();
 
             System.out.println("Original HP for both Pokemon: ");
-            System.out.println("Gardevoir: " + Monsters.GARDEVOIR.getHP());
-            System.out.println("Hawlucha: " + Monsters.HAWLUCHA.getHP());
+            System.out.println(myTeam.get(0).getName() + " " + myTeam.get(0).getTotalHP());
+            System.out.println(enemyTeam.get(0).getName() + " " + enemyTeam.get(0).getTotalHP());
+            System.out.println();
+            System.out.println("----------------------------------------------------------------------------------------------");
+            System.out.println();
         }
     }
 
@@ -377,6 +380,7 @@ public class BattleMech {
         if(enemyTeam.get(0).getBattleHP() <= threshold){ //if fielded pokemon is below 40% health
             if (enemyHealPotion > 0){ //if enemy still have potions
                 healPokemon(enemyTeam.get(0));
+                System.out.println("Enemy healed " + enemyTeam.get(0).getName());
                 enemyHealPotion--;
             } else {
                 //switch to pokemon that will take the least damage
@@ -388,6 +392,7 @@ public class BattleMech {
                         || p.getTypeA().isSuperEffectiveAgainst(myTeam.get(0).getTypeB())
                         || p.getTypeB().isSuperEffectiveAgainst(myTeam.get(0).getTypeB())){
                         Collections.swap(enemyTeam, 0, enemyTeam.indexOf(p)); //switch current pokemon to pokemon that will take the least damage
+                        System.out.println(enemyTeam.get(0).getName() + " switch with " + p.getName());
                         healthSwitch = true;
                         break;
                     }
@@ -412,6 +417,7 @@ public class BattleMech {
                     for (Pokemon p : enemyTeam){
                         if (max == p.getBattleHP()){
                             Collections.swap(enemyTeam, 0, enemyTeam.indexOf(p));
+                            System.out.println(enemyTeam.get(0).getName() + " switch with " + p.getName());
                         }
                     }
                 }
@@ -438,6 +444,7 @@ public class BattleMech {
                         || p.getTypeB().isSuperEffectiveAgainst(myTeam.get(0).getTypeB())){
                             if(p.getBattleHP() > (p.getTotalHP() * 0.4)){
                                 Collections.swap(enemyTeam, 0, enemyTeam.indexOf(p));
+                                System.out.println(enemyTeam.get(0).getName() + " switch with " + p.getName());
                             }
                         }
                 }
