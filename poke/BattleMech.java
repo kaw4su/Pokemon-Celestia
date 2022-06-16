@@ -10,8 +10,10 @@ public class BattleMech {
     private static int healPotion = 5, enemyHealPotion = 5,
                         ppRestore = 5, enemyPPRestore = 5,
                         fullHeal = 5, enemyFullHeal = 5;
-    private static boolean pokeSwitch = false;
+    private static boolean pokeSwitch = false, skipTurn = false;
     private static AttackMove attackSelected, enemyAttack;
+
+    Random r = new Random();
     
     public static void main(String[] args){
         Pokemon poke1 = new Pokemon(Monsters.GARDEVOIR);
@@ -243,6 +245,8 @@ public class BattleMech {
         String str = first.getName() + " used " + firstMove.getName();
         double firstDamage = calculateAttack(first, second, firstMove), secondDamage = calculateAttack(second, first, secondMove);
 
+        
+
         str += "\n" + first.getName() + " deals " + firstDamage + " damage to " + second.getName();
         second.takeDamage(firstDamage);
 
@@ -332,6 +336,39 @@ public class BattleMech {
         }
     }
 
+    private final String battleStatusPrint(Pokemon user){
+        //paralyze
+        if(user.getStatus()[1]){
+            if(r.nextInt(4) + 1 == 3){ //25% chance of paralysis
+                str += "\n" + user.getName() + " is paralyzed!";
+                skipTurn = true;
+            }
+        //frozen
+        } else if(user.getStatus()[3]){
+            if(r.nextInt(100) + 1 <= 20){ //10% chance to break out of frozen
+                str += "\n" + user.getName() + " is no longer frozen!";
+                skipTurn = false;
+                user.getStatus()[3] = false;
+            } else {
+                str += "\n" + user.getName() + " is frozen!";
+                skipTurn = true;
+            }
+        //sleep
+        } else if(user.getStatus()[4]){
+            if(user.getSleepCounter > 0){ //if sleep timer hasnt gone down yet
+                str += "\n" + user.getName() + " is asleep!";
+                user.lowerSleepCounter;
+                skipTurn = true;
+            } else {
+                str += "\n" + user.getName() + " awakened from its slumber!";
+                user.getStatus()[4] = false;
+                skipTurn = false;
+            }
+        //immune
+        } //TODO 
+        //work on other status effects
+    }
+
     public double calculateAttack(Pokemon attacker, Pokemon defender, AttackMove used){
         double power = used.getPower();
         double battleATK = attacker.getBattleATK();
@@ -413,7 +450,7 @@ public class BattleMech {
 
     //used to check if status effect is applied
     private boolean rollStatusEffect(AttackMove used){
-        Random r = new Random();
+        
         int randInt = r.nextInt(100) + 1; //generate number from 1-100
 
         if(randInt <= used.getStatChance()){ //ex: There is a 30% chance of getting a number within 1-30 inside 100 numbers

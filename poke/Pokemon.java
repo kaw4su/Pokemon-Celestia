@@ -11,7 +11,7 @@ public class Pokemon {
 
     private double battleHP, battleATK, battleDEF, HP;
 
-    private int battleSPD;
+    private int battleSPD, sleepCounter;
 
     private String name, attack1, attack2, attack3, attack4;
 
@@ -41,6 +41,8 @@ public class Pokemon {
 
        this.MOVE_SET = pokemonName.getMonsterMoveSet();
 
+       this.sleepCounter = 3;
+
 
        //Poison, Paralyze, Burn, Freeze, Sleep, Immune, Seed
        status = new boolean[]{false, false, false, false, false, false, false};
@@ -53,6 +55,14 @@ public class Pokemon {
 
     public void gainHP(){
         battleHP += 200;
+    }
+
+    public void lowerSleepCounter(){
+        sleepCounter--;
+    }
+
+    public void resetSleepCounter(){
+        sleepCounter = 3;
     }
 
     public Type getTypeA(){
@@ -109,6 +119,10 @@ public class Pokemon {
 
     public int getBattleSPD(){
         return battleSPD;
+    }
+
+    public int getSleepCounter(){
+        return sleepCounter;
     }
 
     public String getName(){
