@@ -57,6 +57,7 @@ public class BattleMech {
             System.out.println("Heal");
             System.out.println("Restore PP");
             System.out.println("Cure");
+            System.out.println("Switch");
 
             String playMaker = sc.nextLine();
 
@@ -151,6 +152,26 @@ public class BattleMech {
 
                     break;
                 
+                case "Switch":
+                    System.out.println("Select which pokemon you would like to switch to ");
+                    System.out.println(myTeam.get(1).getName());
+                    System.out.println(myTeam.get(2).getName());
+                    System.out.println(myTeam.get(3).getName());
+                    System.out.println(myTeam.get(4).getName());
+                    System.out.printlN(myTeam.get(5).getName());
+
+                    String pokeSwitchName = sc.nextLine();
+
+                    for(Pokemon poke : myTeam){
+                        if(poke.getName().equals(pokeSwitchName)){
+                            System.out.println("You switched " + myTeam.get(0).getName() + " with " + poke.getName());
+                            Collections.swap(myTeam, 0, myTeam.indexOf(poke));
+                            
+                        }
+                    }
+
+                    break;
+                
                 default:
                     System.out.println("Select move for your pokemon to use \n");
                     System.out.println(myTeam.get(0).getATK1().getName());
@@ -169,12 +190,20 @@ public class BattleMech {
                     bm.trainerAI();
                     System.out.println("\n" + enemyAttack);
 
-                    if(attackSelected != null){
+                    if(enemyAttack != null && attackSelected != null){
                         if(poke1.getBattleSPD() >= enemy1.getBattleSPD()){
                             System.out.println(bm.battleOrder(myTeam.get(0), attackSelected, enemyTeam.get(0), enemyAttack));
                         } else {
                             System.out.println(bm.battleOrder(enemyTeam.get(0), enemyAttack, myTeam.get(0), attackSelected));
                         }
+
+                        enemyAttack = null; //reset the move selected for both sides
+                        attackSelected = null;
+
+                    } else if (enemyAttack == null && attackSelected != null){
+                        System.out.println(bm.oneSidedFight(myTeam.get(0), enemyTeam.get(0), attackSelected));
+                    } else if (enemyAttack != null && attackSelected == null){
+                        System.out.println(bm.oneSidedFight(enemyTeam.get(0), myTeam.get(0), enemyAttack));
                     }
 
                     break;
@@ -274,6 +303,33 @@ public class BattleMech {
         }
 
         return str + "\n";
+    }
+
+    private final String oneSidedFight(Pokemon attacker, Pokemon defender, AttackMove used){
+        String str = attacker.getName() + " used " + used.getName();
+        double damage = calculateAttack(attacker, defender, used);
+
+        str += "\n" + attacker.getName() + " deals " + damage + " to " + defender.getName();
+        defender.takeDamage(damage);
+
+        double e = typeEffectiveness(defender, used);
+
+        if(e == 0){
+            str += "\nIt has no effect on " + defender.getName();
+        } else if(e < 1){
+            str += "\nIt's not very effective";
+        } else if(e > 1){
+            str += "\nIt's super effective";
+        }
+
+        if(e != 0){
+            if(rollStatusEffect(used)){
+                applyStatus(used, defender);
+                if(used.getStatusEffect() != Status.NORMAL){
+                    str += "\n" + used.getStatusEffect() + " is applied on " + defender.getName();
+                }
+            }
+        }
     }
 
     public double calculateAttack(Pokemon attacker, Pokemon defender, AttackMove used){
