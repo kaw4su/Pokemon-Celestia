@@ -67,6 +67,7 @@ public class BattleMech {
                 case "Heal":
                     if(healPotion == 0){
                         System.out.println("You ran out of heal potions!");
+                        continue;
                     } else {
                         System.out.println("Select Pokemon you want to heal \n");
                         System.out.println(myTeam.get(0).getName());
@@ -91,6 +92,7 @@ public class BattleMech {
                 case "Restore PP":
                     if(ppRestore == 0){
                         System.out.println("You ran out of PP restores!");
+                        continue;
                     } else {
                         System.out.println("Select Pokemon you want to restore PP for \n");
                         System.out.println(myTeam.get(0).getName());
@@ -127,6 +129,7 @@ public class BattleMech {
                 case "Cure":
                     if(fullHeal == 0){
                         System.out.println("You ran out of full heals!");
+                        continue;
                     } else {
                         System.out.println("Select which pokemon you would like to fully cure \n");
                         System.out.println(myTeam.get(0).getName());
@@ -150,6 +153,8 @@ public class BattleMech {
                                 fullHeal--;
                             }
                         }
+
+                        System.out.println(bm.oneSidedFight(enemyTeam.get(0), myTeam.get(0), enemyAttack));
                     }
 
                     break;
@@ -160,7 +165,7 @@ public class BattleMech {
                     System.out.println(myTeam.get(2).getName());
                     System.out.println(myTeam.get(3).getName());
                     System.out.println(myTeam.get(4).getName());
-                    System.out.printlN(myTeam.get(5).getName());
+                    System.out.println(myTeam.get(5).getName());
 
                     String pokeSwitchName = sc.nextLine();
 
@@ -171,6 +176,8 @@ public class BattleMech {
                             
                         }
                     }
+
+                    System.out.println(bm.oneSidedFight(enemyTeam.get(0), myTeam.get(0), enemyAttack));
 
                     break;
                 
@@ -245,7 +252,7 @@ public class BattleMech {
         String str = first.getName() + " used " + firstMove.getName();
         double firstDamage = calculateAttack(first, second, firstMove), secondDamage = calculateAttack(second, first, secondMove);
 
-        
+        str += "\n" + battleStatusPrint(first);
 
         str += "\n" + first.getName() + " deals " + firstDamage + " damage to " + second.getName();
         second.takeDamage(firstDamage);
@@ -275,6 +282,8 @@ public class BattleMech {
                 }
             }
         }
+
+        str += "\n" + battleStatusPrint(second);
 
         str += "\n" + second.getName() + " used " + secondMove.getName();
 
@@ -334,9 +343,12 @@ public class BattleMech {
                 }
             }
         }
+
+        return str;
     }
 
     private final String battleStatusPrint(Pokemon user){
+        String str ="";
         //paralyze
         if(user.getStatus()[1]){
             if(r.nextInt(4) + 1 == 3){ //25% chance of paralysis
@@ -355,9 +367,9 @@ public class BattleMech {
             }
         //sleep
         } else if(user.getStatus()[4]){
-            if(user.getSleepCounter > 0){ //if sleep timer hasnt gone down yet
+            if(user.getSleepCounter() > 0){ //if sleep timer hasnt gone down yet
                 str += "\n" + user.getName() + " is asleep!";
-                user.lowerSleepCounter;
+                user.lowerSleepCounter();
                 skipTurn = true;
             } else {
                 str += "\n" + user.getName() + " awakened from its slumber!";
@@ -365,8 +377,10 @@ public class BattleMech {
                 skipTurn = false;
             }
         //immune
-        } //TODO 
+        } 
         //work on other status effects
+
+        return str;
     }
 
     public double calculateAttack(Pokemon attacker, Pokemon defender, AttackMove used){
@@ -473,7 +487,7 @@ public class BattleMech {
         if(enemyTeam.get(0).getBattleHP() <= threshold){ //if fielded pokemon is below 40% health
             if (enemyHealPotion > 0){ //if enemy still have potions
                 healPokemon(enemyTeam.get(0));
-                System.out.println("Enemy healed " + enemyTeam.get(0).getName());
+                System.out.println("\nEnemy healed " + enemyTeam.get(0).getName());
                 enemyHealPotion--;
             } else {
                 //switch to pokemon that will take the least damage
