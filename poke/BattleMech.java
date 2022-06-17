@@ -171,8 +171,12 @@ public class BattleMech {
 
                     for(Pokemon poke : myTeam){
                         if(poke.getName().equals(pokeSwitchName)){
-                            System.out.println("You switched " + myTeam.get(0).getName() + " with " + poke.getName());
-                            Collections.swap(myTeam, 0, myTeam.indexOf(poke));
+                            if(poke.fainted()){
+                                System.out.println("You can't switch to this pokemon!");
+                            } else {
+                                System.out.println("You switched " + myTeam.get(0).getName() + " with " + poke.getName());
+                                Collections.swap(myTeam, 0, myTeam.indexOf(poke));
+                            }
                             
                         }
                     }
@@ -233,17 +237,44 @@ public class BattleMech {
                 }
             }*/
 
-            System.out.println("Ending HP for both Pokemon: ");
-            System.out.println(myTeam.get(0).getName() + " " + myTeam.get(0).getBattleHP());
-            System.out.println(enemyTeam.get(0).getName() + " " + enemyTeam.get(0).getBattleHP());
-            System.out.println();
+            if(myTeam.get(0).fainted()){
+                System.out.println("\nSelect which pokemon you would like to switch to");
+                System.out.println(myTeam.get(1).getName());
+                System.out.println(myTeam.get(2).getName());
+                System.out.println(myTeam.get(3).getName());
+                System.out.println(myTeam.get(4).getName());
+                System.out.println(myTeam.get(5).getName());
 
-            System.out.println("Original HP for both Pokemon: ");
-            System.out.println(myTeam.get(0).getName() + " " + myTeam.get(0).getTotalHP());
-            System.out.println(enemyTeam.get(0).getName() + " " + enemyTeam.get(0).getTotalHP());
-            System.out.println();
-            System.out.println("----------------------------------------------------------------------------------------------");
-            System.out.println();
+                String deadSwitchName = sc.nextLine();
+
+                for(Pokemon poke : myTeam){
+                    if(poke.getName().equals(deadSwitchName)){
+                        System.out.println("You swapped " + myTeam.get(0).getName() + " to " + poke.getName());
+                        Collections.swap(myTeam, 0, myTeam.indexOf(poke));
+                    }
+                }
+            } else if(enemyTeam.get(0).fainted()){
+                Collections.swap(enemyTeam, 0, 1); //swap current pokemon to next pokemon
+            
+            } else if(myTeam.get(0).fainted() && myTeam.get(1).fainted() && myTeam.get(2).fainted() && myTeam.get(3).fainted() && myTeam.get(4).fainted() && myTeam.get(5).fainted()) {
+                System.out.println("You have been defeated!");
+                break;                
+            } else if(enemyTeam.get(0).fainted() && enemyTeam.get(1).fainted() && enemyTeam.get(2).fainted() && enemyTeam.get(3).fainted() && enemyTeam.get(4).fainted(0 && enemyTeam.get(5).fainted())) {
+                System.out.println("You have defeated the enemy trainer!");
+                break;
+            } else {
+                System.out.println("Ending HP for both Pokemon: ");
+                System.out.println(myTeam.get(0).getName() + " " + myTeam.get(0).getBattleHP());
+                System.out.println(enemyTeam.get(0).getName() + " " + enemyTeam.get(0).getBattleHP());
+                System.out.println();
+
+                System.out.println("Original HP for both Pokemon: ");
+                System.out.println(myTeam.get(0).getName() + " " + myTeam.get(0).getTotalHP());
+                System.out.println(enemyTeam.get(0).getName() + " " + enemyTeam.get(0).getTotalHP());
+                System.out.println();
+                System.out.println("----------------------------------------------------------------------------------------------");
+                System.out.println();
+            }
         }
     }
 
@@ -254,66 +285,81 @@ public class BattleMech {
 
         str += "\n" + battleStatusPrint(first);
 
-        str += "\n" + first.getName() + " deals " + firstDamage + " damage to " + second.getName();
-        second.takeDamage(firstDamage);
+        if(!skipTurn){
+            str += "\n" + first.getName() + " deals " + firstDamage + " damage to " + second.getName();
+            second.takeDamage(firstDamage);
 
-        //check type effectiveness to print messages
-        double d = typeEffectiveness(second, firstMove);
+            //check type effectiveness to print messages
+            double d = typeEffectiveness(second, firstMove);
 
-        if(d == 0){
-            str += "\nIt has no effect on " + second.getName();
-        } else if (d < 1){
-            str += "\n It's not very effective";
-        } else if (d > 1){
-            str += "\nIt's super effective";
-        }
+            if(d == 0){
+                str += "\nIt has no effect on " + second.getName();
+            } else if (d < 1){
+                str += "\n It's not very effective";
+            } else if (d > 1){
+                str += "\nIt's super effective";
+            }
 
-        if(second.fainted()){
-            str += "\n" + second.getName() + " fainted";
-            return str + "\n";
-        }
+            if(second.fainted()){
+                str += "\n" + second.getName() + " fainted";
+                damageStatusPrint(first);
+                return str + "\n";
+            }
 
-        //only apply status if the attack has effect on the defending pokemon
-        if(d != 0){
-            if(rollStatusEffect(firstMove)){
-                applyStatus(firstMove, second);
-                if (firstMove.getStatusEffect() != Status.NORMAL){
-                    str += "\n" + firstMove.getStatusEffect() + " is applied on " + second.getName();
+            //only apply status if the attack has effect on the defending pokemon
+            if(d != 0){
+                if(rollStatusEffect(firstMove)){
+                    applyStatus(firstMove, second, first);
+                    if (firstMove.getStatusEffect() != Status.NORMAL && firstMove.getStatusEffect() != Status.IMMUNE){
+                        str += "\n" + firstMove.getStatusEffect() + " is applied on " + second.getName();
+                    }
                 }
             }
+
+        } else {
+            skipTurn = false;
         }
 
         str += "\n" + battleStatusPrint(second);
 
-        str += "\n" + second.getName() + " used " + secondMove.getName();
+        if(!skipTurn){
 
-        str += "\n" + second.getName() + " deals " + secondDamage + " damage to " + first.getName();
-        first.takeDamage(secondDamage);
+            str += "\n" + second.getName() + " used " + secondMove.getName();
 
-        double f = typeEffectiveness(first, secondMove);
+            str += "\n" + second.getName() + " deals " + secondDamage + " damage to " + first.getName();
+            first.takeDamage(secondDamage);
 
-        if(f == 0){
-            str += "\nIt has no effect on " + first.getName();
-        } else if (f < 1){
-            str += "\n It's not very effective";
-        } else if (f > 1){
-            str += "\nIt's super effective";
-        }
+            double f = typeEffectiveness(first, secondMove);
 
-        if(first.fainted()){
-            str += "\n" + first.getName() + " fainted";
-            return str + "\n";
-        }
-
-        if(f != 0){
-            if(rollStatusEffect(secondMove)){
-                applyStatus(secondMove, first);
-                if(secondMove.getStatusEffect() != Status.NORMAL){
-                    str += "\n" + secondMove.getStatusEffect() + " is applied on " + first.getName();
-                }
-                //TODO
+            if(f == 0){
+                str += "\nIt has no effect on " + first.getName();
+            } else if (f < 1){
+                str += "\n It's not very effective";
+            } else if (f > 1){
+                str += "\nIt's super effective";
             }
+
+            if(first.fainted()){
+                str += "\n" + first.getName() + " fainted";
+                damageStatusPrint(second); //second pokemon takes damage regardless if it kills another pokemon
+                return str + "\n";
+            }
+
+            if(f != 0){
+                if(rollStatusEffect(secondMove)){
+                    applyStatus(secondMove, first, second);
+                    if(secondMove.getStatusEffect() != Status.NORMAL && secondMove.getStatusEffect() != Status.IMMUNE){
+                        str += "\n" + secondMove.getStatusEffect() + " is applied on " + first.getName();
+                    }
+                    //TODO
+                }
+            }
+        } else {
+            skipTurn = false;
         }
+
+        damageStatusPrint(first);
+        damageStatusPrint(second);
 
         return str + "\n";
     }
@@ -321,28 +367,34 @@ public class BattleMech {
     private final String oneSidedFight(Pokemon attacker, Pokemon defender, AttackMove used){
         String str = attacker.getName() + " used " + used.getName();
         double damage = calculateAttack(attacker, defender, used);
+        battleStatusPrint(attacker);
 
-        str += "\n" + attacker.getName() + " deals " + damage + " to " + defender.getName();
-        defender.takeDamage(damage);
+        if(!skipTurn){
+            str += "\n" + attacker.getName() + " deals " + damage + " to " + defender.getName();
+            defender.takeDamage(damage);
 
-        double e = typeEffectiveness(defender, used);
+            double e = typeEffectiveness(defender, used);
 
-        if(e == 0){
-            str += "\nIt has no effect on " + defender.getName();
-        } else if(e < 1){
-            str += "\nIt's not very effective";
-        } else if(e > 1){
-            str += "\nIt's super effective";
-        }
+            if(e == 0){
+                str += "\nIt has no effect on " + defender.getName();
+            } else if(e < 1){
+                str += "\nIt's not very effective";
+            } else if(e > 1){
+                str += "\nIt's super effective";
+            }
 
-        if(e != 0){
-            if(rollStatusEffect(used)){
-                applyStatus(used, defender);
-                if(used.getStatusEffect() != Status.NORMAL){
-                    str += "\n" + used.getStatusEffect() + " is applied on " + defender.getName();
+            if(e != 0){
+                if(rollStatusEffect(used)){
+                    applyStatus(used, defender, attacker);
+                    if(used.getStatusEffect() != Status.NORMAL){
+                        str += "\n" + used.getStatusEffect() + " is applied on " + defender.getName();
+                    }
                 }
             }
         }
+
+        damageStatusPrint(attacker);
+        damageStatusPrint(defender);
 
         return str;
     }
@@ -381,6 +433,24 @@ public class BattleMech {
         //work on other status effects
 
         return str;
+    }
+
+    private final String damageStatusPrint(Pokemon user){
+        String str = "";
+        //multiple if statements because the effects can stack
+        if(user.getStatus()[0]){
+            double poisonDamage = Math.floor(user.getTotalHP() / 16);
+            str += user.getName() + " is poisoned!";
+            user.takeDamage(poisonDamage);
+        } 
+
+        if(user.getStatus()[2]){
+            double burnDamage = Math.floor(user.getTotalHP() / 8);
+            str += user.getName() + " is burnt!";
+            user.takeDamage(burnDamage);
+        }
+
+
     }
 
     public double calculateAttack(Pokemon attacker, Pokemon defender, AttackMove used){
@@ -432,7 +502,7 @@ public class BattleMech {
         return typeEff;
     } 
 
-    private void applyStatus(AttackMove used, Pokemon defender){
+    private void applyStatus(AttackMove used, Pokemon defender, Pokemon attacker){
         final Status s = used.getStatusEffect();
         
         switch(s){
@@ -452,7 +522,7 @@ public class BattleMech {
                 defender.getStatus()[4] = true;
                 break;
             case IMMUNE:
-                defender.getStatus()[5] = true;
+                attacker.getStatus()[5] = true;
                 break;
             case SEED:
                 defender.getStatus()[6] = true;
@@ -494,14 +564,16 @@ public class BattleMech {
 
                 //search for pokemon that will take least damage based on pokemon's type
                 for(Pokemon p : enemyTeam){
-                    if (p.getTypeA().isSuperEffectiveAgainst(myTeam.get(0).getTypeA())
-                        || p.getTypeB().isSuperEffectiveAgainst(myTeam.get(0).getTypeA())
-                        || p.getTypeA().isSuperEffectiveAgainst(myTeam.get(0).getTypeB())
-                        || p.getTypeB().isSuperEffectiveAgainst(myTeam.get(0).getTypeB())){
-                        Collections.swap(enemyTeam, 0, enemyTeam.indexOf(p)); //switch current pokemon to pokemon that will take the least damage
-                        System.out.println(enemyTeam.get(0).getName() + " switch with " + p.getName());
-                        healthSwitch = true;
-                        break;
+                    if(!p.fainted()){
+                        if (p.getTypeA().isSuperEffectiveAgainst(myTeam.get(0).getTypeA())
+                            || p.getTypeB().isSuperEffectiveAgainst(myTeam.get(0).getTypeA())
+                            || p.getTypeA().isSuperEffectiveAgainst(myTeam.get(0).getTypeB())
+                            || p.getTypeB().isSuperEffectiveAgainst(myTeam.get(0).getTypeB())){
+                            Collections.swap(enemyTeam, 0, enemyTeam.indexOf(p)); //switch current pokemon to pokemon that will take the least damage
+                            System.out.println(enemyTeam.get(0).getName() + " switch with " + p.getName());
+                            healthSwitch = true;
+                            break;
+                        }
                     }
                 }
 
@@ -557,6 +629,10 @@ public class BattleMech {
                 }
             }
         }
+
+        //reset conditions
+        healthSwitch = false;
+        moveAvailable = false;
     }
    
 }
