@@ -122,7 +122,14 @@ public class BattleMech {
                                 }
                             }
                         }
+
+                        bm.trainerAI();
+
+                        System.out.println(bm.oneSidedFight(enemyTeam.get(0), myTeam.get(0), enemyAttack));
+
                     }
+
+                    enemyAttack = null;
 
                     break;
                 
@@ -154,7 +161,11 @@ public class BattleMech {
                             }
                         }
 
+                        bm.trainerAI();
+
                         System.out.println(bm.oneSidedFight(enemyTeam.get(0), myTeam.get(0), enemyAttack));
+                        //enemyAttack.lowerPP();
+                        enemyAttack = null;
                     }
 
                     break;
@@ -180,17 +191,21 @@ public class BattleMech {
                             
                         }
                     }
+                    bm.trainerAI();
 
                     System.out.println(bm.oneSidedFight(enemyTeam.get(0), myTeam.get(0), enemyAttack));
+                    
+                    //enemyAttack.lowerPP();
+                    enemyAttack = null;
 
                     break;
                 
                 default:
                     System.out.println("Select move for your pokemon to use \n");
-                    System.out.println(myTeam.get(0).getATK1().getName());
-                    System.out.println(myTeam.get(0).getATK2().getName());
-                    System.out.println(myTeam.get(0).getATK3().getName());
-                    System.out.println(myTeam.get(0).getATK4().getName());
+                    System.out.println(myTeam.get(0).getATK1().getName() + " " + myTeam.get(0).getATK1().getBattlePP() + "/" + myTeam.get(0).getATK1().getTotalPP());
+                    System.out.println(myTeam.get(0).getATK2().getName() + " " + myTeam.get(0).getATK2().getBattlePP() + "/" + myTeam.get(0).getATK1().getTotalPP());
+                    System.out.println(myTeam.get(0).getATK3().getName() + " " + myTeam.get(0).getATK3().getBattlePP() + "/" + myTeam.get(0).getATK1().getTotalPP());
+                    System.out.println(myTeam.get(0).getATK4().getName() + " " + myTeam.get(0).getATK4().getBattlePP() + "/" + myTeam.get(0).getATK1().getTotalPP());
 
                     String pokeAttackSelected = sc.nextLine();
 
@@ -209,15 +224,17 @@ public class BattleMech {
                         } else {
                             System.out.println(bm.battleOrder(enemyTeam.get(0), enemyAttack, myTeam.get(0), attackSelected));
                         }
-
-                        enemyAttack = null; //reset the move selected for both sides
-                        attackSelected = null;
+                        
+                        
 
                     } else if (enemyAttack == null && attackSelected != null){
                         System.out.println(bm.oneSidedFight(myTeam.get(0), enemyTeam.get(0), attackSelected));
                     } else if (enemyAttack != null && attackSelected == null){
                         System.out.println(bm.oneSidedFight(enemyTeam.get(0), myTeam.get(0), enemyAttack));
                     }
+
+                    enemyAttack = null; //reset the move selected for both sides
+                    attackSelected = null;
 
                     break;
             }
@@ -259,7 +276,7 @@ public class BattleMech {
             } else if(myTeam.get(0).fainted() && myTeam.get(1).fainted() && myTeam.get(2).fainted() && myTeam.get(3).fainted() && myTeam.get(4).fainted() && myTeam.get(5).fainted()) {
                 System.out.println("You have been defeated!");
                 break;                
-            } else if(enemyTeam.get(0).fainted() && enemyTeam.get(1).fainted() && enemyTeam.get(2).fainted() && enemyTeam.get(3).fainted() && enemyTeam.get(4).fainted(0 && enemyTeam.get(5).fainted())) {
+            } else if(enemyTeam.get(0).fainted() && enemyTeam.get(1).fainted() && enemyTeam.get(2).fainted() && enemyTeam.get(3).fainted() && enemyTeam.get(4).fainted() && enemyTeam.get(5).fainted()) {
                 System.out.println("You have defeated the enemy trainer!");
                 break;
             } else {
@@ -358,6 +375,9 @@ public class BattleMech {
             skipTurn = false;
         }
 
+        firstMove.lowerPP();
+        secondMove.lowerPP();
+
         damageStatusPrint(first);
         damageStatusPrint(second);
 
@@ -391,6 +411,10 @@ public class BattleMech {
                     }
                 }
             }
+
+            used.lowerPP();
+        } else {
+            skipTurn = false;
         }
 
         damageStatusPrint(attacker);
@@ -449,6 +473,8 @@ public class BattleMech {
             str += user.getName() + " is burnt!";
             user.takeDamage(burnDamage);
         }
+
+        return str;
 
 
     }
