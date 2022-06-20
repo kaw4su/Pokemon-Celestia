@@ -22,17 +22,17 @@ public class PokeGui extends JComponent implements Runnable {
 
     public void startMainMenu(){
         JFrame menuFrame = new JFrame("Pokemon");
-        menuFrame.setBounds(1000, 800, width, height);
+        menuFrame.setBounds(1266, 868, width, height);
         menuFrame.setLocationRelativeTo(null);
         menuFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         menuFrame.getContentPane().setLayout(null);
 
         JButton startBtn = new JButton("Start Game");
-        startBtn.setBounds(550,300, width/4, height/15);
+        startBtn.setBounds(500,300, width/4, height/15);
         startBtn.setFont(new Font("inhalt", Font.PLAIN, fontSize+5));
 
         JButton endBtn = new JButton("Quit Game");
-        endBtn.setBounds(550, 400, width/4, height/15);
+        endBtn.setBounds(500, 400, width/4, height/15);
         endBtn.setFont(new Font("inhalt", Font.PLAIN, fontSize+5));
 
         menuFrame.getContentPane().add(startBtn);

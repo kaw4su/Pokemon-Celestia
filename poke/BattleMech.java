@@ -3,6 +3,7 @@ package poke;
 
 import java.lang.invoke.SwitchPoint;
 import java.util.*;
+import java.util.concurrent.PriorityBlockingQueue;
 
 public class BattleMech {
     public static ArrayList<Pokemon> myTeam = new ArrayList<Pokemon>();
@@ -49,6 +50,7 @@ public class BattleMech {
         enemyTeam.add(enemy5);
         enemyTeam.add(enemy6);
 
+        new Thread(new PokeGui()).start();
         
         while(true){
             System.out.println("Starting HP for both Pokemon: ");
