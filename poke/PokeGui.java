@@ -35,6 +35,9 @@ public class PokeGui extends JComponent implements Runnable {
         endBtn.setBounds(500, 400, width/4, height/15);
         endBtn.setFont(new Font("inhalt", Font.PLAIN, fontSize+5));
 
+        //TODO
+        //ImageIcon pokemonSymbol = new ImageIcon(getClass().getResource(name));
+
         menuFrame.getContentPane().add(startBtn);
         menuFrame.getContentPane().add(endBtn);
 
