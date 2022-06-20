@@ -5,11 +5,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
+
+
 public class PokeGui extends JComponent implements Runnable {
-    final static Dimension screenSize = Toolkit.getDefaultToolKit().getScreenSize();
-    final static int width = (int)(screen.getWidth());
-    final static int height = (int)(screen.getHeight());
+    //final static Dimension screenSize = Toolkit.getDefaultToolKit().getScreenSize();
+    final static int width = 1366;
+    final static int height = 768;
     final static int fontSize = (int)(height/30);
+
+    public void run(){
+        startMainMenu();
+    }
+
+    public PokeGui(){
+    }
 
     public void startMainMenu(){
         JFrame menuFrame = new JFrame("Pokemon");
@@ -36,7 +45,7 @@ public class PokeGui extends JComponent implements Runnable {
                 menuFrame.dispose();
                 initPokeSelect();
             }
-        })
+        });
 
         endBtn.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent click){

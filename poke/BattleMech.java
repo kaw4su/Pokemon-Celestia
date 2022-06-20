@@ -1,6 +1,7 @@
 
 package poke;
 
+import java.lang.invoke.SwitchPoint;
 import java.util.*;
 
 public class BattleMech {
@@ -9,7 +10,8 @@ public class BattleMech {
 
     private static int healPotion = 5, enemyHealPotion = 5,
                         ppRestore = 5, enemyPPRestore = 5,
-                        fullHeal = 5, enemyFullHeal = 5;
+                        fullHeal = 5, enemyFullHeal = 5,
+                        switchCooldown = 1;
     private static boolean pokeSwitch = false, skipTurn = false;
     private static AttackMove attackSelected, enemyAttack;
 
@@ -85,6 +87,14 @@ public class BattleMech {
                                 healPotion--;
                             }
                         }
+
+                        bm.trainerAI();
+
+                        if(enemyAttack != null){
+                            System.out.println(bm.oneSidedFight(enemyTeam.get(0), myTeam.get(0), enemyAttack, "enemy"));
+                        }
+
+                        enemyAttack = null;
                     }
 
                     break;
@@ -116,7 +126,8 @@ public class BattleMech {
 
                                 for(AttackMove atk : poke.getMoveSet()){
                                     if(atk.getName().equals(moveRestoreName)){
-                                        atk.addPP(10);
+                                        //atk.addPP(10);
+                                        poke.addPP(atk, 10);
                                         ppRestore--;
                                     }
                                 }
@@ -125,7 +136,9 @@ public class BattleMech {
 
                         bm.trainerAI();
 
-                        System.out.println(bm.oneSidedFight(enemyTeam.get(0), myTeam.get(0), enemyAttack));
+                        if(enemyAttack != null){
+                            System.out.println(bm.oneSidedFight(enemyTeam.get(0), myTeam.get(0), enemyAttack, "enemy"));
+                        }
 
                     }
 
@@ -163,7 +176,9 @@ public class BattleMech {
 
                         bm.trainerAI();
 
-                        System.out.println(bm.oneSidedFight(enemyTeam.get(0), myTeam.get(0), enemyAttack));
+                        if(enemyAttack != null){
+                            System.out.println(bm.oneSidedFight(enemyTeam.get(0), myTeam.get(0), enemyAttack, "enemy"));
+                        }
                         //enemyAttack.lowerPP();
                         enemyAttack = null;
                     }
@@ -193,8 +208,9 @@ public class BattleMech {
                     }
                     bm.trainerAI();
 
-                    System.out.println(bm.oneSidedFight(enemyTeam.get(0), myTeam.get(0), enemyAttack));
-                    
+                    if(enemyAttack != null){
+                        System.out.println(bm.oneSidedFight(enemyTeam.get(0), myTeam.get(0), enemyAttack, "enemy"));
+                    }
                     //enemyAttack.lowerPP();
                     enemyAttack = null;
 
@@ -202,10 +218,10 @@ public class BattleMech {
                 
                 default:
                     System.out.println("Select move for your pokemon to use \n");
-                    System.out.println(myTeam.get(0).getATK1().getName() + " " + myTeam.get(0).getATK1().getBattlePP() + "/" + myTeam.get(0).getATK1().getTotalPP());
-                    System.out.println(myTeam.get(0).getATK2().getName() + " " + myTeam.get(0).getATK2().getBattlePP() + "/" + myTeam.get(0).getATK1().getTotalPP());
-                    System.out.println(myTeam.get(0).getATK3().getName() + " " + myTeam.get(0).getATK3().getBattlePP() + "/" + myTeam.get(0).getATK1().getTotalPP());
-                    System.out.println(myTeam.get(0).getATK4().getName() + " " + myTeam.get(0).getATK4().getBattlePP() + "/" + myTeam.get(0).getATK1().getTotalPP());
+                    System.out.println(myTeam.get(0).getATK1().getName() + " " + "(" + myTeam.get(0).getATK1().getType() + ") " + myTeam.get(0).checkPP(myTeam.get(0).getATK1()) + "/" + myTeam.get(0).getATK1().getTotalPP());
+                    System.out.println(myTeam.get(0).getATK2().getName() + " " + "(" + myTeam.get(0).getATK2().getType() + ") " + myTeam.get(0).checkPP(myTeam.get(0).getATK2()) + "/" + myTeam.get(0).getATK2().getTotalPP());
+                    System.out.println(myTeam.get(0).getATK3().getName() + " " + "(" + myTeam.get(0).getATK3().getType() + ") " + myTeam.get(0).checkPP(myTeam.get(0).getATK3()) + "/" + myTeam.get(0).getATK3().getTotalPP());
+                    System.out.println(myTeam.get(0).getATK4().getName() + " " + "(" + myTeam.get(0).getATK4().getType() + ") " + myTeam.get(0).checkPP(myTeam.get(0).getATK4()) + "/" + myTeam.get(0).getATK4().getTotalPP());
 
                     String pokeAttackSelected = sc.nextLine();
 
@@ -219,7 +235,7 @@ public class BattleMech {
                     System.out.println("\n" + enemyAttack);
 
                     if(enemyAttack != null && attackSelected != null){
-                        if(poke1.getBattleSPD() >= enemy1.getBattleSPD()){
+                        if(myTeam.get(0).getBattleSPD() >= enemyTeam.get(0).getBattleSPD()){
                             System.out.println(bm.battleOrder(myTeam.get(0), attackSelected, enemyTeam.get(0), enemyAttack));
                         } else {
                             System.out.println(bm.battleOrder(enemyTeam.get(0), enemyAttack, myTeam.get(0), attackSelected));
@@ -228,9 +244,9 @@ public class BattleMech {
                         
 
                     } else if (enemyAttack == null && attackSelected != null){
-                        System.out.println(bm.oneSidedFight(myTeam.get(0), enemyTeam.get(0), attackSelected));
+                        System.out.println(bm.oneSidedFight(myTeam.get(0), enemyTeam.get(0), attackSelected, "notEnemy"));
                     } else if (enemyAttack != null && attackSelected == null){
-                        System.out.println(bm.oneSidedFight(enemyTeam.get(0), myTeam.get(0), enemyAttack));
+                        System.out.println(bm.oneSidedFight(enemyTeam.get(0), myTeam.get(0), enemyAttack, "enemy"));
                     }
 
                     enemyAttack = null; //reset the move selected for both sides
@@ -254,7 +270,15 @@ public class BattleMech {
                 }
             }*/
 
-            if(myTeam.get(0).fainted()){
+            if(enemyTeam.get(0).fainted() && enemyTeam.get(1).fainted() && enemyTeam.get(2).fainted() && enemyTeam.get(3).fainted() && enemyTeam.get(4).fainted() && enemyTeam.get(5).fainted()) {
+                System.out.println("You have defeated the enemy trainer!");
+                break;
+
+            } else if(myTeam.get(0).fainted() && myTeam.get(1).fainted() && myTeam.get(2).fainted() && myTeam.get(3).fainted() && myTeam.get(4).fainted() && myTeam.get(5).fainted()) {
+                System.out.println("You have been defeated!");
+                break;  
+
+            } else if(myTeam.get(0).fainted()){
                 System.out.println("\nSelect which pokemon you would like to switch to");
                 System.out.println(myTeam.get(1).getName());
                 System.out.println(myTeam.get(2).getName());
@@ -271,14 +295,13 @@ public class BattleMech {
                     }
                 }
             } else if(enemyTeam.get(0).fainted()){
-                Collections.swap(enemyTeam, 0, 1); //swap current pokemon to next pokemon
-            
-            } else if(myTeam.get(0).fainted() && myTeam.get(1).fainted() && myTeam.get(2).fainted() && myTeam.get(3).fainted() && myTeam.get(4).fainted() && myTeam.get(5).fainted()) {
-                System.out.println("You have been defeated!");
-                break;                
-            } else if(enemyTeam.get(0).fainted() && enemyTeam.get(1).fainted() && enemyTeam.get(2).fainted() && enemyTeam.get(3).fainted() && enemyTeam.get(4).fainted() && enemyTeam.get(5).fainted()) {
-                System.out.println("You have defeated the enemy trainer!");
-                break;
+                for(Pokemon poke : enemyTeam){
+                    if(!poke.fainted()){
+                        Collections.swap(enemyTeam, 0, enemyTeam.indexOf(poke)); //swap current pokemon to next pokemon
+                        break;
+                    }
+                }
+    
             } else {
                 System.out.println("Ending HP for both Pokemon: ");
                 System.out.println(myTeam.get(0).getName() + " " + myTeam.get(0).getBattleHP());
@@ -319,7 +342,8 @@ public class BattleMech {
 
             if(second.fainted()){
                 str += "\n" + second.getName() + " fainted";
-                damageStatusPrint(first);
+                str+=damageStatusPrint(first);
+                first.lowerPP(firstMove);
                 return str + "\n";
             }
 
@@ -357,8 +381,18 @@ public class BattleMech {
             }
 
             if(first.fainted()){
-                str += "\n" + first.getName() + " fainted";
-                damageStatusPrint(second); //second pokemon takes damage regardless if it kills another pokemon
+                str += "\n" + first.getName() + " fainted \n";
+                str += damageStatusPrint(second); //second pokemon takes damage regardless if it kills another pokemon
+
+                first.lowerPP(firstMove);
+                second.lowerPP(secondMove);
+                /*if(myTeam.get(0).getBattleSPD() >= enemyTeam.get(0).getBattleSPD()){
+                    firstMove.lowerPP();
+                } else {
+                    secondMove.lowerPP();
+                }
+
+                enemyAttack.lowerEnemyPP();*/
                 return str + "\n";
             }
 
@@ -375,17 +409,24 @@ public class BattleMech {
             skipTurn = false;
         }
 
-        firstMove.lowerPP();
-        secondMove.lowerPP();
+        first.lowerPP(firstMove);
+        second.lowerPP(secondMove);
+        /*if(myTeam.get(0).getBattleSPD() >= enemyTeam.get(0).getBattleSPD()){
+            firstMove.lowerPP();
+        } else {
+            secondMove.lowerPP();
+        }*/
 
-        damageStatusPrint(first);
-        damageStatusPrint(second);
+        //enemyAttack.lowerEnemyPP();
+
+        System.out.println(damageStatusPrint(first));
+        System.out.println(damageStatusPrint(second));
 
         return str + "\n";
     }
 
-    private final String oneSidedFight(Pokemon attacker, Pokemon defender, AttackMove used){
-        String str = attacker.getName() + " used " + used.getName();
+    private final String oneSidedFight(Pokemon attacker, Pokemon defender, AttackMove used, String attackerSide){
+        String str = attacker.getName() + " used (one-side) " + used.getName();
         double damage = calculateAttack(attacker, defender, used);
         battleStatusPrint(attacker);
 
@@ -412,13 +453,28 @@ public class BattleMech {
                 }
             }
 
-            used.lowerPP();
+            if(attackerSide.equals("enemy")){
+                //used.lowerEnemyPP();
+                attacker.lowerPP(used);
+                System.out.println("Lowered enemy pp");
+            } else {
+                //used.lowerPP();
+                attacker.lowerPP(used);
+            }
+            
         } else {
             skipTurn = false;
         }
 
-        damageStatusPrint(attacker);
-        damageStatusPrint(defender);
+        System.out.println(damageStatusPrint(attacker));
+
+        if(defender.fainted()){
+            str += "\n" + defender.getName() + " fainted";
+            return str;
+        }
+
+        
+        System.out.println(damageStatusPrint(defender));
 
         return str;
     }
@@ -580,24 +636,35 @@ public class BattleMech {
         double threshold = enemyTeam.get(0).getTotalHP() * 0.4; //find 40% of maximum hp
         boolean moveAvailable = false, healthSwitch = false;
         
+        
         if(enemyTeam.get(0).getBattleHP() <= threshold){ //if fielded pokemon is below 40% health
-            if (enemyHealPotion > 0){ //if enemy still have potions
+            System.out.println("Below Threshold!");
+            if (enemyHealPotion > 0 && !enemyTeam.get(0).healedOnce()){ //if enemy still have potions
                 healPokemon(enemyTeam.get(0));
                 System.out.println("\nEnemy healed " + enemyTeam.get(0).getName());
                 enemyHealPotion--;
-            } else {
+                enemyTeam.get(0).setHealedOnce();
+
+                if (switchCooldown > 0){
+                    switchCooldown--;
+                }
+
+            } else if (switchCooldown == 0){
                 //switch to pokemon that will take the least damage
 
                 //search for pokemon that will take least damage based on pokemon's type
                 for(Pokemon p : enemyTeam){
-                    if(!p.fainted()){
+                    if(!p.fainted() && !p.getName().equals(enemyTeam.get(0).getName()) && p.getBattleHP() > threshold){
                         if (p.getTypeA().isSuperEffectiveAgainst(myTeam.get(0).getTypeA())
                             || p.getTypeB().isSuperEffectiveAgainst(myTeam.get(0).getTypeA())
                             || p.getTypeA().isSuperEffectiveAgainst(myTeam.get(0).getTypeB())
                             || p.getTypeB().isSuperEffectiveAgainst(myTeam.get(0).getTypeB())){
+                            System.out.println(enemyTeam.get(0).getName() + " switch with " + p.getName() + " healthSwitch!");
                             Collections.swap(enemyTeam, 0, enemyTeam.indexOf(p)); //switch current pokemon to pokemon that will take the least damage
-                            System.out.println(enemyTeam.get(0).getName() + " switch with " + p.getName());
+                            
                             healthSwitch = true;
+
+                            switchCooldown++;
                             break;
                         }
                     }
@@ -609,56 +676,114 @@ public class BattleMech {
 
                     if(enemyTeam.get(1).getBattleHP() > max){
                         max = enemyTeam.get(1).getBattleHP();
-                    } else if (enemyTeam.get(2).getBattleHP() > max){
+                    } 
+                    if (enemyTeam.get(2).getBattleHP() > max){
                         max = enemyTeam.get(2).getBattleHP();
-                    } else if (enemyTeam.get(3).getBattleHP() > max){
+                    } 
+                    if (enemyTeam.get(3).getBattleHP() > max){
                         max = enemyTeam.get(3).getBattleHP();
-                    } else if (enemyTeam.get(4).getBattleHP() > max){
+                    } 
+                    if (enemyTeam.get(4).getBattleHP() > max){
                         max = enemyTeam.get(4).getBattleHP();
-                    } else if (enemyTeam.get(5).getBattleHP() > max){
+                    } 
+                    if (enemyTeam.get(5).getBattleHP() > max){
                         max = enemyTeam.get(5).getBattleHP();
                     }
 
                     for (Pokemon p : enemyTeam){
-                        if (max == p.getBattleHP()){
-                            Collections.swap(enemyTeam, 0, enemyTeam.indexOf(p));
+                        if (max == p.getBattleHP() && !p.getName().equals(enemyTeam.get(0).getName())){
                             System.out.println(enemyTeam.get(0).getName() + " switch with " + p.getName());
+                            Collections.swap(enemyTeam, 0, enemyTeam.indexOf(p));
+                            switchCooldown++;
                         }
                     }
-                }
+
+                    healthSwitch = false;
+                } 
+            //if can't switch due to cooldown, find most damage move and full send
+            } else {
+
+                switchCooldown--;
+                enemyAttack = maxDamageAttack();
             }
         } else {
             //loop through current pokemon's available moveset
             for(AttackMove mov : enemyTeam.get(0).getMoveSet()){
                 if(typeEffectiveness(myTeam.get(0), mov) >= 1){ //if move is able to do neutral or supereffective damage
-                    if(mov.getBattlePP() > 0){
+                    if(enemyTeam.get(0).checkPP(mov) > 0){
                         enemyAttack = mov;
-                        mov.lowerPP();
+                        //mov.lowerPP();
+                        enemyTeam.get(0).lowerPP(mov);
                         moveAvailable = true;
+
+                        if(switchCooldown > 0){
+                            switchCooldown--;
+                        }
                         break;
                     }
                 }
             }
 
             //if all moves are not effective against opponent, switch to healthy pokemon that has effective moves
-            if(!moveAvailable){
+            if(!moveAvailable && switchCooldown == 0){
                 for(Pokemon p : enemyTeam){
                     if (p.getTypeA().isSuperEffectiveAgainst(myTeam.get(0).getTypeA())
                         || p.getTypeB().isSuperEffectiveAgainst(myTeam.get(0).getTypeA())
                         || p.getTypeA().isSuperEffectiveAgainst(myTeam.get(0).getTypeB())
                         || p.getTypeB().isSuperEffectiveAgainst(myTeam.get(0).getTypeB())){
                             if(p.getBattleHP() > (p.getTotalHP() * 0.4)){
+                                System.out.println(enemyTeam.get(0).getName() + " switch with " + p.getName() + " moveSwitch");
                                 Collections.swap(enemyTeam, 0, enemyTeam.indexOf(p));
-                                System.out.println(enemyTeam.get(0).getName() + " switch with " + p.getName());
+
+                                if(switchCooldown < 1){
+                                    switchCooldown++;
+                                }
+                            } else {
+                                enemyAttack = maxDamageAttack();
+
+                                if(switchCooldown > 0){
+                                    switchCooldown--;
+                                }
                             }
                         }
                 }
+            //find move that does most damage and full send
+            } else if (!moveAvailable && switchCooldown > 0){
+                enemyAttack = maxDamageAttack();
+
+                switchCooldown--;
+
             }
         }
 
         //reset conditions
         healthSwitch = false;
         moveAvailable = false;
+    }
+
+    private AttackMove maxDamageAttack(){
+        System.out.println("Calculating Max Attack");
+        double maxDamage = calculateAttack(enemyTeam.get(0), myTeam.get(0), enemyTeam.get(0).getATK1());
+        AttackMove maxMove = null;
+
+        if(enemyTeam.get(0).checkPP(enemyTeam.get(0).getATK1()) > 0){
+            maxMove = enemyTeam.get(0).getATK1();
+        }
+
+        if(calculateAttack(enemyTeam.get(0), myTeam.get(0), enemyTeam.get(0).getATK2()) > maxDamage && enemyTeam.get(0).checkPP(enemyTeam.get(0).getATK2()) > 0){
+            maxDamage = calculateAttack(enemyTeam.get(0), myTeam.get(0), enemyTeam.get(0).getATK2());
+            maxMove = enemyTeam.get(0).getATK2();
+        }
+        if(calculateAttack(enemyTeam.get(0), myTeam.get(0), enemyTeam.get(0).getATK3()) > maxDamage && enemyTeam.get(0).checkPP(enemyTeam.get(0).getATK3()) > 0){
+            maxDamage = calculateAttack(enemyTeam.get(0), myTeam.get(0), enemyTeam.get(0).getATK3());
+            maxMove = enemyTeam.get(0).getATK3();
+        }
+        if(calculateAttack(enemyTeam.get(0), myTeam.get(0), enemyTeam.get(0).getATK4()) > maxDamage && enemyTeam.get(0).checkPP(enemyTeam.get(0).getATK4()) > 0){
+            maxDamage = calculateAttack(enemyTeam.get(0), myTeam.get(0), enemyTeam.get(0).getATK4());
+            maxMove = enemyTeam.get(0).getATK4();
+        }   
+        
+        return maxMove;
     }
    
 }
