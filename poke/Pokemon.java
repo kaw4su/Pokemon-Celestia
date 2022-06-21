@@ -15,7 +15,7 @@ public class Pokemon {
 
     private boolean healed;
 
-    private String name, attack1, attack2, attack3, attack4;
+    private String name, attack1, attack2, attack3, attack4, picName;
 
     private AttackMove atk1, atk2, atk3, atk4;
 
@@ -52,6 +52,8 @@ public class Pokemon {
 
        this.healed = false;
 
+       this.picName = pokemonName.getPicName();
+
 
        //Poison, Paralyze, Burn, Freeze, Sleep, Immune, Seed
        status = new boolean[]{false, false, false, false, false, false, false};
@@ -72,6 +74,10 @@ public class Pokemon {
 
     public void resetSleepCounter(){
         sleepCounter = 3;
+    }
+
+    public String getPokePictureName(){
+        return picName;
     }
 
     public void lowerPP(AttackMove atk){

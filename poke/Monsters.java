@@ -6,12 +6,12 @@ public enum Monsters {
     //player pokemon
     DELPHOX("Delphox", "Delphox.png", (int)354, (int)260, (int)267, (int)337, new AttackMove[]{AttackMove.FLAMETHROWER, AttackMove.SHADOWBALL, AttackMove.SHOCKWAVE, AttackMove.PSYCHIC}, Type.FIRE, Type.PSYCHIC),
     LUCARIO("Lucario", "Lucario.png", (int)344, (int)350, (int)262, (int)306, new AttackMove[]{AttackMove.AURASPHERE, AttackMove.SHADOWBALL, AttackMove.BONERUSH, AttackMove.POISONJAB}, Type.FIGHTING, Type.NULLTYPE),
-    BLASTOISE("Blastoise", "Blastoise.png" (int)362, (int)291, (int)328, (int)280, new AttackMove[]{AttackMove.HYDROPUMP, AttackMove.SCALD, AttackMove.DARKPULSE, AttackMove.ICEBEAM}, Type.WATER, Type.NULLTYPE),
+    BLASTOISE("Blastoise", "Blastoise.png", (int)362, (int)291, (int)328, (int)280, new AttackMove[]{AttackMove.HYDROPUMP, AttackMove.SCALD, AttackMove.DARKPULSE, AttackMove.ICEBEAM}, Type.WATER, Type.NULLTYPE),
     ZAPDOS("Zapdos", "Zapdos.png", (int)384, (int)383, (int)306, (int)328, new AttackMove[]{AttackMove.DRILLPECK, AttackMove.DISCHARGE, AttackMove.ZAPCANNON, AttackMove.HEATWAVE}, Type.ELECTRIC, Type.FLYING),
     SERPERIOR("Serperior", "Serperior.png", (int)354, (int)273, (int)317, (int)357, new AttackMove[]{AttackMove.LEAFSTORM, AttackMove.LEAFBLADE, AttackMove.AERIALACE, AttackMove.AQUATAIL}, Type.GRASS, Type.NULLTYPE),
     MAGNEZONE("Magnezone", "Magnezone.png", (int)344, (int)262, (int)361, (int)240, new AttackMove[]{AttackMove.ZAPCANNON, AttackMove.FLASHCANNON, AttackMove.THUNDERWAVE, AttackMove.THUNDERBOLT}, Type.ELECTRIC, Type.STEEL),
     BLAZIKEN("Blaziken", "Blaziken.png", (int)364, (int)372, (int)262, (int)284, new AttackMove[]{AttackMove.FLAREBLITZ, AttackMove.BRAVEBIRD, AttackMove.AURASPHERE, AttackMove.STONEEDGE}, Type.FIRE, Type.FIGHTING),
-    ABSOL("Absol", "Absol.png", (int)334, (int)394, (int)240, (int)273, new AttackMove[]{AttackMove.SHADOWCLAW, AttackMove.NIGHTSLASH, AttackMove.PERISHSONG, AttackMove.AIRSLASH}, Type.DARK),
+    ABSOL("Absol", "Absol.png", (int)334, (int)394, (int)240, (int)273, new AttackMove[]{AttackMove.SHADOWCLAW, AttackMove.NIGHTSLASH, AttackMove.PERISHSONG, AttackMove.AIRSLASH}, Type.DARK, Type.NULLTYPE),
     
     //enemy pokemon
     HAWLUCHA("Hawlucha", "Hawlucha.png", (int)360, (int)311, (int)273, (int)368, new AttackMove[]{AttackMove.BRAVEBIRD, AttackMove.HIGHJUMPKICK, AttackMove.FIREPUNCH, AttackMove.POISONJAB}, Type.FIGHTING, Type.FLYING),

@@ -46,7 +46,7 @@ public enum AttackMove {
     SHADOWCLAW("Shadow Claw", Type.GHOST, (int)70, (int)15, (int)15, Status.NORMAL, (int)100),
     NIGHTSLASH("Night Slash", Type.DARK, (int)70, (int)15, (int)15, Status.NORMAL, (int)100),
     PERISHSONG("Perish Song", Type.NORMAL, (int)300, (int)5, (int)5, Status.NORMAL, (int)100),
-    AIRSLASH("Air Slash", Type.AIR, (int)75, (int)15, (int)15, Status.NORMAL, (int)100),
+    AIRSLASH("Air Slash", Type.FLYING, (int)75, (int)15, (int)15, Status.NORMAL, (int)100),
     EVILCONQUERING("Bane of All Evil", Type.FIGHTING, (int)10000, (int)1, (int)1, Status.NORMAL, (int)100);
     
     
