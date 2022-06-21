@@ -5,13 +5,19 @@ import java.util.*;
 public enum Monsters {
     //player pokemon
     DELPHOX("Delphox", "Delphox.png", (int)354, (int)260, (int)267, (int)337, new AttackMove[]{AttackMove.FLAMETHROWER, AttackMove.SHADOWBALL, AttackMove.SHOCKWAVE, AttackMove.PSYCHIC}, Type.FIRE, Type.PSYCHIC),
-    LUCARIO("Lucario", "Lucario.png", (int)344, (int)350, (int)262, (int)306, new AttackMove[]{AttackMove.AURASPHERE, AttackMove.SHADOWBALL, AttackMove.BONERUSH, AttackMove.POISONJAB}, Type.FIGHTING, Type.NULLTYPE),
+    LUCARIO("Lucario", "Lucario.png", (int)344, (int)350, (int)262, (int)306, new AttackMove[]{AttackMove.AURASPHERE, AttackMove.SHADOWBALL, AttackMove.BONERUSH, AttackMove.POISONJAB}, Type.FIGHTING, Type.STEEL),
     BLASTOISE("Blastoise", "Blastoise.png", (int)362, (int)291, (int)328, (int)280, new AttackMove[]{AttackMove.HYDROPUMP, AttackMove.SCALD, AttackMove.DARKPULSE, AttackMove.ICEBEAM}, Type.WATER, Type.NULLTYPE),
     ZAPDOS("Zapdos", "Zapdos.png", (int)384, (int)383, (int)306, (int)328, new AttackMove[]{AttackMove.DRILLPECK, AttackMove.DISCHARGE, AttackMove.ZAPCANNON, AttackMove.HEATWAVE}, Type.ELECTRIC, Type.FLYING),
     SERPERIOR("Serperior", "Serperior.png", (int)354, (int)273, (int)317, (int)357, new AttackMove[]{AttackMove.LEAFSTORM, AttackMove.LEAFBLADE, AttackMove.AERIALACE, AttackMove.AQUATAIL}, Type.GRASS, Type.NULLTYPE),
     MAGNEZONE("Magnezone", "Magnezone.png", (int)344, (int)262, (int)361, (int)240, new AttackMove[]{AttackMove.ZAPCANNON, AttackMove.FLASHCANNON, AttackMove.THUNDERWAVE, AttackMove.THUNDERBOLT}, Type.ELECTRIC, Type.STEEL),
     BLAZIKEN("Blaziken", "Blaziken.png", (int)364, (int)372, (int)262, (int)284, new AttackMove[]{AttackMove.FLAREBLITZ, AttackMove.BRAVEBIRD, AttackMove.AURASPHERE, AttackMove.STONEEDGE}, Type.FIRE, Type.FIGHTING),
     ABSOL("Absol", "Absol.png", (int)334, (int)394, (int)240, (int)273, new AttackMove[]{AttackMove.SHADOWCLAW, AttackMove.NIGHTSLASH, AttackMove.PERISHSONG, AttackMove.AIRSLASH}, Type.DARK, Type.NULLTYPE),
+    GRENINJA("Greninja", "Greninja.png", (int)348, (int)427, (int)256,(int)377, new AttackMove[]{AttackMove.EXTRASENSORY, AttackMove.HYDROPUMP, AttackMove.ICEBEAM, AttackMove.DARKPULSE}, Type.WATER, Type.DARK),
+    XERNEAS("Xerneas", "Xerneas.png", (int)456, (int)397, (int)317, (int)326, new AttackMove[]{AttackMove.GIGAIMPACT, AttackMove.MOONBLAST, AttackMove.MEGAHORN, AttackMove.OUTRAGE}, Type.FAIRY, Type.NULLTYPE),
+    PRIMARINA("Primarina", "Primarina.png", (int)364, (int)271, (int)271, (int)240, new AttackMove[]{AttackMove.HYDROPUMP, AttackMove.MOONBLAST, AttackMove.SPARKLINGARIA, AttackMove.ICEBEAM}, Type.FAIRY, Type.WATER),
+    ALOLANNINETALES("Alolan Ninetales", "Alolan Ninetales,png", (int)350, (int)256, (int)273, (int)348, new AttackMove[]{AttackMove.BLIZZARD, AttackMove.ICEBEAM, AttackMove.DAZZLINGGLEAM, AttackMove.EXTRASENSORY}, Type.ICE, Type.FAIRY),
+    CHARIZARD("Charizard", "Charizard.png", (int)360, (int)293, (int)280, (int)328, new AttackMove[]{AttackMove.FLAREBLITZ, AttackMove.INFERNO, AttackMove.DRAGONBREATH, AttackMove.AIRSLASH}, Type.FIRE, Type.FLYING),
+    ZAMAZENTA("Zamazenta", "Zamazenta.png", (int)388, (int)394, (int)427, (int)390, new AttackMove[]{AttackMove.GIGAIMPACT, AttackMove.CLOSECOMBAT, AttackMove.IRONHEAD, AttackMove.CRUNCH}, Type.FIGHTING, Type.NULLTYPE), 
     
     //enemy pokemon
     HAWLUCHA("Hawlucha", "Hawlucha.png", (int)360, (int)311, (int)273, (int)368, new AttackMove[]{AttackMove.BRAVEBIRD, AttackMove.HIGHJUMPKICK, AttackMove.FIREPUNCH, AttackMove.POISONJAB}, Type.FIGHTING, Type.FLYING),

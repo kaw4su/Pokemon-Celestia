@@ -132,6 +132,38 @@ public class PokeGui extends JComponent implements Runnable {
         rBlaziken.setBounds(50, 375, 180, 50);
         rBlaziken.setFont(new Font("inhalt", Font.PLAIN, fontSize+3));
 
+        JRadioButton rSerperior = new JRadioButton(Monsters.SERPERIOR.getName());
+        rSerperior.setBounds(230, 375, 180, 50);
+        rSerperior.setFont(new Font("inhalt", Font.PLAIN, fontSize+3));
+
+        JRadioButton rMagnezone = new JRadioButton(Monsters.MAGNEZONE.getName());
+        rMagnezone.setBounds(410, 375, 180, 50);
+        rMagnezone.setFont(new Font("inhalt", Font.PLAIN, fontSize+3));
+
+        JRadioButton rGreninja = new JRadioButton(Monsters.GRENINJA.getName());
+        rGreninja.setBounds(590, 375, 180, 50);
+        rGreninja.setFont(new Font("inhalt", Font.PLAIN, fontSize+3));
+
+        JRadioButton rXerneas = new JRadioButton(Monsters.XERNEAS.getName());
+        rXerneas.setBounds(770, 375, 180, 50);
+        rXerneas.setFont(new Font("inhalt", Font.PLAIN, fontSize+3));
+
+        JRadioButton rPrimarina = new JRadioButton(Monsters.PRIMARINA.getName());
+        rPrimarina.setBounds(950, 375, 180, 50);
+        rPrimarina.setFont(new Font("inhalt", Font.PLAIN, fontSize+3));
+
+        JRadioButton rNinetales = new JRadioButton(Monsters.ALOLANNINETALES.getName());
+        rNinetales.setBounds(50, 450, 180, 50);
+        rNinetales.setFont(new Font("inhalt", Font.PLAIN, fontSize+3));
+
+        JRadioButton rCharizard = new JRadioButton(Monsters.CHARIZARD.getName());
+        rCharizard.setBounds(230, 450, 180, 50);
+        rCharizard.setFont(new Font("inhalt", Font.PLAIN, fontSize+3));
+
+        JRadioButton rZamazenta = new JRadioButton(Monsters.ZAMAZENTA.getName());
+        rZamazenta.setBounds(410, 450, 180, 50);
+        rZamazenta.setFont(new Font("inhalt", Font.PLAIN, fontSize+3));
+
         dexFrame.setVisible(true);
 
         JRadioButton[] buttons = {rDelphox, rGardevoir, rLucario, rZapdos, rBlastoise, rAbsol, rBlaziken};
@@ -240,7 +272,7 @@ public class PokeGui extends JComponent implements Runnable {
                     teamList.append("Blaziken \n");
                     teamList.updateUI();
                 } else if (!tempTeam.contains(Monsters.BLAZIKEN) && tempTeam.size() == 6){
-                    teamSizeWarning.setVisible(true);
+                    JOptionPane.showMessageDialog(dexFrame, "Your team can only have 6 Pokemon!", "Team Limit", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
@@ -249,7 +281,7 @@ public class PokeGui extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent click){
                 info.setBackground(Color.white);
-                info.setText(Monsters.GARDEVOIR.getName());
+                info.setText(Monsters.GARDEVOIR.getName() + "\nHP: " + Monsters.GARDEVOIR.getHP() + "\nATK: " + Monsters.GARDEVOIR.getATK() + "\nDEF: " + Monsters.GARDEVOIR.getDEF() + "\nSPD: " + Monsters.GARDEVOIR.getSPD());
                 info.setVisible(true);
 
                 pokePic.setIcon(new ImageIcon(getClass().getResource("/poke/images/Gardevoir.png")));
@@ -261,7 +293,7 @@ public class PokeGui extends JComponent implements Runnable {
                     teamList.append("Gardevoir \n");
                     teamList.updateUI();
                 } else if (!tempTeam.contains(Monsters.GARDEVOIR) && tempTeam.size() == 6){
-                    teamSizeWarning.setVisible(true);
+                    JOptionPane.showMessageDialog(dexFrame, "Your team can only have 6 Pokemon!", "Team Limit", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
@@ -270,7 +302,7 @@ public class PokeGui extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent click){
                 info.setBackground(Color.white);
-                info.setText(Monsters.LUCARIO.getName());
+                info.setText(Monsters.LUCARIO.getName() + "\nHP: " + Monsters.LUCARIO.getHP() + "\nATK: " + Monsters.LUCARIO.getATK() + "\nDEF: " + Monsters.LUCARIO.getDEF() + "\nSPD: " + Monsters.LUCARIO.getSPD());
                 info.setVisible(true);
 
                 pokePic.setIcon(new ImageIcon(getClass().getResource("/poke/images/Lucario.png")));
@@ -282,7 +314,7 @@ public class PokeGui extends JComponent implements Runnable {
                     teamList.append("Lucario \n");
                     teamList.updateUI();
                 } else if(!tempTeam.contains(Monsters.LUCARIO) && tempTeam.size() == 6){
-                    teamSizeWarning.setVisible(true);
+                    JOptionPane.showMessageDialog(dexFrame, "Your team can only have 6 Pokemon!", "Team Limit", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
@@ -291,7 +323,7 @@ public class PokeGui extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent click){
                 info.setBackground(Color.white);
-                info.setText(Monsters.ZAPDOS.getName());
+                info.setText(Monsters.ZAPDOS.getName() + "\nHP: " + Monsters.ZAPDOS.getHP() + "\nATK: " + Monsters.ZAPDOS.getATK() + "\nDEF: " + Monsters.ZAPDOS.getDEF() + "\nSPD: " + Monsters.ZAPDOS.getSPD());
                 info.setVisible(true);
 
                 pokePic.setIcon(new ImageIcon(getClass().getResource("/poke/images/Zapdos.png")));
@@ -303,7 +335,7 @@ public class PokeGui extends JComponent implements Runnable {
                     teamList.append("Zapdos \n");
                     teamList.updateUI();
                 } else if(!tempTeam.contains(Monsters.ZAPDOS) && tempTeam.size() == 6){
-                    teamSizeWarning.setVisible(true);
+                    JOptionPane.showMessageDialog(dexFrame, "Your team can only have 6 Pokemon!", "Team Limit", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
@@ -312,7 +344,7 @@ public class PokeGui extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent click){
                 info.setBackground(Color.white);
-                info.setText(Monsters.BLASTOISE.getName());
+                info.setText(Monsters.BLASTOISE.getName() + "\nHP: " + Monsters.BLASTOISE.getHP() + "\nATK: " + Monsters.BLASTOISE.getATK() + "\nDEF: " + Monsters.BLASTOISE.getDEF() + "\nSPD: " + Monsters.BLASTOISE.getSPD());
                 info.setVisible(true);
 
                 pokePic.setIcon(new ImageIcon(getClass().getResource("/poke/images/Blastoise.png")));
@@ -324,7 +356,7 @@ public class PokeGui extends JComponent implements Runnable {
                     teamList.append("Blastoise \n");
                     teamList.updateUI();
                 } else if(!tempTeam.contains(Monsters.BLASTOISE) && tempTeam.size() == 6){
-                    teamSizeWarning.setVisible(true);
+                    JOptionPane.showMessageDialog(dexFrame, "Your team can only have 6 Pokemon!", "Team Limit", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
@@ -333,7 +365,7 @@ public class PokeGui extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent click){
                 info.setBackground(Color.white);
-                info.setText(Monsters.ABSOL.getName());
+                info.setText(Monsters.ABSOL.getName() + "\nHP: " + Monsters.ABSOL.getHP() + "\nATK: " + Monsters.ABSOL.getATK() + "\nDEF: " + Monsters.ABSOL.getDEF() + "\nSPD: " + Monsters.ABSOL.getSPD());
                 info.setVisible(true);
 
                 pokePic.setIcon(new ImageIcon(getClass().getResource("/poke/images/Absol.png")));
@@ -345,7 +377,7 @@ public class PokeGui extends JComponent implements Runnable {
                     teamList.append("Absol \n");
                     teamList.updateUI();
                 } else if(!tempTeam.contains(Monsters.ABSOL) && tempTeam.size() == 6){
-                    teamSizeWarning.setVisible(true);
+                    JOptionPane.showMessageDialog(dexFrame, "Your team can only have 6 Pokemon!", "Team Limit", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
@@ -376,7 +408,7 @@ public class PokeGui extends JComponent implements Runnable {
         enemyTeam.add(enemy5);
         enemyTeam.add(enemy6);
 
-        JFrame fightFrame = new JFrame("Battle against Elite Four Champion Diantha!");
+        JFrame fightFrame = new JFrame("Battle against Enemy Trainer");
         fightFrame.setBounds(1266, 868, width, height);
         fightFrame.setLocationRelativeTo(null);
         fightFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
