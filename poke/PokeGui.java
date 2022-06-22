@@ -603,6 +603,13 @@ public class PokeGui extends JComponent implements Runnable {
             }
         });
 
+        bagButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                showBagScreen();
+            }
+        })
+
         switchButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent click){
@@ -768,6 +775,21 @@ public class PokeGui extends JComponent implements Runnable {
         loseFrame.getContentPane().add(defeatlbl);
 
         loseFrame.setVisible(true);
+    }
+
+    private void showBagScreen(){
+        JFrame bagFrame = new bagFrame("You have been defeated!");
+        bagFrame.setBounds(1266, 868, 800, 800);
+        bagFrame.setLocationRelativeTo(null);
+        bagframe.getContentPane().setLayout(null);
+        bagFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        bagFrame.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+
+        JButton healPotionButton = new JButton();
+        ImageIcon healPotionIcon = new ImageIcon(getClass.getResource("/poke/images/heal.png"));
+        healPotionButton.setIcon(healPotionIcon);
+        healPotionButton.setBounds(100, 100, 250, 250);
+        healPotionButton.setVisible(true);
     }
 
     private String displayBattle(AttackMove atk){
