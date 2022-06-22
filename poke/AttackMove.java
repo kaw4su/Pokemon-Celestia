@@ -52,6 +52,11 @@ public enum AttackMove {
     MEGAHORN("Megahorn", Type.BUG, (int)120, (int)10, (int)10, Status.NORMAL, (int)100),
     OUTRAGE("Outrage", Type.DRAGON, (int)120, (int)10, (int)10, Status.NORMAL, (int)100),
     SPARKLINGARIA("Sparkling Aria", Type.WATER, (int)90, (int)10, (int)10, Status.NORMAL, (int)100),
+    DAZZLINGGLEAM("Dazzling Gleam", Type.FAIRY, (int)80, (int)10, (int)10, Status.NORMAL, (int)100),
+    INFERNO("Inferno", Type.FIRE, (int)100, (int)5, (int)5, Status.NORMAL, (int)100),
+    CLOSECOMBAT("Close Combat", Type.FIGHTING, (int)120, (int)5, (int)5, Status.NORMAL, (int)100),
+    IRONHEAD("Iron Head", Type.STEEL, (int)80, (int)15, (int)15, Status.NORMAL, (int)100),
+    CRUNCH("Crunch", Type.DARK, (int)80, (int)15, (int)15, Status.NORMAL, (int)100),
     EVILCONQUERING("Bane of All Evil", Type.FIGHTING, (int)10000, (int)1, (int)1, Status.NORMAL, (int)100);
     
     

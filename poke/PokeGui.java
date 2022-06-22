@@ -17,7 +17,15 @@ public class PokeGui extends JComponent implements Runnable {
     final static int fontSize = 26;
     private static ArrayList<Monsters> tempTeam = new ArrayList<Monsters>();
     private static ArrayList<Pokemon> myTeam = new ArrayList<Pokemon>();
-    private static ArrayList<Pokemon> enemyTeam = new ArrayList<Pokemon>();
+    public static ArrayList<Pokemon> enemyTeam = new ArrayList<Pokemon>();
+
+    private static boolean attack = false, switchPoke = false, item = false, attack2 = false;
+
+    BattleMech bm = new BattleMech();
+
+    JTextArea battleNarrationArea;
+    //ImageIcon myTeamPokemon;
+    JLabel myTeamPokelbl, enemyTeamPokelbl;
 
     Pokemon enemy1 = new Pokemon(Monsters.HAWLUCHA);
     Pokemon enemy2 = new Pokemon(Monsters.TYRANTRUM);
@@ -103,6 +111,7 @@ public class PokeGui extends JComponent implements Runnable {
         info.setBounds(63, 43, 600, 230);
         info.setFont(new Font("inhalt", Font.PLAIN, fontSize));
         dexFrame.getContentPane().add(info);
+        info.setEditable(false);
 
         JRadioButton rDelphox = new JRadioButton(Monsters.DELPHOX.getName());
         rDelphox.setBounds(50, 300,180,50);
@@ -166,7 +175,10 @@ public class PokeGui extends JComponent implements Runnable {
 
         dexFrame.setVisible(true);
 
-        JRadioButton[] buttons = {rDelphox, rGardevoir, rLucario, rZapdos, rBlastoise, rAbsol, rBlaziken};
+        JRadioButton[] buttons = {rDelphox, rGardevoir, rLucario, rZapdos, rBlastoise, rAbsol,
+                                  rBlaziken, rSerperior, rMagnezone, rGreninja, rXerneas, rPrimarina,
+                                  rNinetales, rCharizard, rZamazenta};
+
         ButtonGroup group = new ButtonGroup();
 
 
@@ -185,6 +197,7 @@ public class PokeGui extends JComponent implements Runnable {
         teamList.setFont(new Font("inhalt", Font.PLAIN, fontSize));
         dexFrame.getContentPane().add(teamList);
         teamList.setVisible(true);
+        teamList.setEditable(false);
 
         JTextArea teamSizeWarning = new JTextArea("Your team can only have 6 pokemon!");
         teamSizeWarning.setBounds(1130, 270, 200, 30);
@@ -192,6 +205,7 @@ public class PokeGui extends JComponent implements Runnable {
         teamSizeWarning.setForeground(Color.RED);
         dexFrame.getContentPane().add(teamSizeWarning);
         teamSizeWarning.setVisible(false);
+        teamSizeWarning.setEditable(false);
 
         backButton.addActionListener(new ActionListener(){
             @Override
@@ -416,15 +430,332 @@ public class PokeGui extends JComponent implements Runnable {
         fightFrame.setFont(new Font("inhalt", Font.PLAIN, fontSize));
 
         ImageIcon myTeamPokemon = new ImageIcon(getClass().getResource("/poke/images/" + myTeam.get(0).getPokePictureName()));
-        //ImageIcon enemyTeamPokemon = new ImageIcon(getClass().getResource("/poke/images/" + enemyTeam.get(0).getPokePictureName()));
+        ImageIcon enemyTeamPokemon = new ImageIcon(getClass().getResource("/poke/images/" + enemyTeam.get(0).getPokePictureName()));
 
-        JLabel myTeamPokelbl = new JLabel(myTeamPokemon);
+        JTextArea myTeamInfo = new JTextArea(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
+        myTeamInfo.setBounds(100, 60, 400, 70);
+        myTeamInfo.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        fightFrame.getContentPane().add(myTeamInfo);
+        myTeamInfo.setVisible(true);
+        myTeamInfo.setEditable(false);
+
+        JTextArea enemyTeamInfo = new JTextArea(enemyTeam.get(0).getName() + "\nHP: " + enemyTeam.get(0).getBattleHP() + "/" + enemyTeam.get(0).getTotalHP());
+        enemyTeamInfo.setBounds(800, 60, 400, 70);
+        enemyTeamInfo.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        fightFrame.getContentPane().add(enemyTeamInfo);
+        enemyTeamInfo.setVisible(true);
+        enemyTeamInfo.setEditable(false);
+
+        battleNarrationArea = new JTextArea("What will " + myTeam.get(0).getName() + " do?");
+        
+        battleNarrationArea.setLineWrap(true);
+        battleNarrationArea.setEditable(false);
+        //battleNarrationArea.setVisible(true);
+
+        JScrollPane battleNarration = new JScrollPane(battleNarrationArea);
+        battleNarration.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        battleNarration.setBounds(0, 500, 683, 150);
+        battleNarration.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        
+        fightFrame.add(battleNarration);
+        battleNarration.setVisible(true);
+        //fightFrame.setVisible(true);
+        
+
+        JButton fightButton = new JButton("Fight");
+        fightButton.setBounds(684, 500, 340, 100);
+        fightButton.setHorizontalAlignment(SwingConstants.CENTER);
+        fightButton.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        fightFrame.getContentPane().add(fightButton);
+        fightButton.setVisible(true);
+
+        JButton bagButton = new JButton("Bag");
+        bagButton.setBounds(1024, 500, 340, 100);
+        bagButton.setHorizontalAlignment(SwingConstants.CENTER);
+        bagButton.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        fightFrame.getContentPane().add(bagButton);
+        bagButton.setVisible(true);
+
+        JButton switchButton = new JButton("Switch");
+        switchButton.setBounds(684, 600, 340, 100);
+        switchButton.setHorizontalAlignment(SwingConstants.CENTER);
+        switchButton.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        fightFrame.getContentPane().add(switchButton);
+        switchButton.setVisible(true);
+
+        JButton ffButton = new JButton("ff15 go next");
+        ffButton.setBounds(1024, 600, 340, 100);
+        ffButton.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        ffButton.setHorizontalAlignment(SwingConstants.CENTER);
+        fightFrame.getContentPane().add(ffButton);
+        ffButton.setVisible(true);
+
+        JButton cancelButton = new JButton("Back");
+        cancelButton.setBounds(50, 650, 100, 50);
+        cancelButton.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        cancelButton.setHorizontalAlignment(SwingConstants.CENTER);
+        fightFrame.getContentPane().add(cancelButton);
+        cancelButton.setVisible(false);
+
+        JButton continueButton = new JButton("Continue");
+        continueButton.setBounds(434, 650, 200, 50);
+        continueButton.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        continueButton.setHorizontalAlignment(SwingConstants.CENTER);
+        fightFrame.getContentPane().add(continueButton);
+        continueButton.setVisible(false);
+
+        JButton atk1Button = new JButton();
+        atk1Button.setBounds(684, 500, 340, 100);
+        atk1Button.setHorizontalAlignment(SwingConstants.CENTER);
+        atk1Button.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        fightFrame.getContentPane().add(atk1Button);
+        atk1Button.setVisible(false);
+
+        JButton atk2Button = new JButton();
+        atk2Button.setBounds(1024, 500, 340, 100);
+        atk2Button.setHorizontalAlignment(SwingConstants.CENTER);
+        atk2Button.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        fightFrame.getContentPane().add(atk2Button);
+        atk2Button.setVisible(false);
+
+        JButton atk3Button = new JButton();
+        atk3Button.setBounds(684, 600, 340, 100);
+        atk3Button.setHorizontalAlignment(SwingConstants.CENTER);
+        atk3Button.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        fightFrame.getContentPane().add(atk3Button);
+        atk3Button.setVisible(false);
+
+        JButton atk4Button = new JButton();
+        atk4Button.setBounds(1024, 600, 340, 100);
+        atk4Button.setHorizontalAlignment(SwingConstants.CENTER);
+        atk4Button.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        fightFrame.getContentPane().add(atk4Button);
+        atk4Button.setVisible(false);
+
+        myTeamPokelbl = new JLabel(myTeamPokemon);
         myTeamPokelbl.setBounds(100, 100, 400, 400);
         myTeamPokemon.setImage(myTeamPokemon.getImage().getScaledInstance(325, 325, Image.SCALE_DEFAULT));
         fightFrame.getContentPane().add(myTeamPokelbl);
 
+        enemyTeamPokelbl = new JLabel(enemyTeamPokemon);
+        enemyTeamPokelbl.setBounds(800, 100, 400, 400);
+        enemyTeamPokemon.setImage(enemyTeamPokemon.getImage().getScaledInstance(325, 325, Image.SCALE_DEFAULT));
+        fightFrame.getContentPane().add(enemyTeamPokelbl);
+
         fightFrame.setVisible(true);
 
+        //BUTTON COMMANDS
+        ffButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                fightFrame.dispose();
+                showDefeatScreen();
+            }
+        });
+
+        cancelButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                battleNarrationArea.setText("What will " + myTeam.get(0).getName() + " do?");
+
+                atk1Button.setVisible(false);
+                atk2Button.setVisible(false);
+                atk3Button.setVisible(false);
+                atk4Button.setVisible(false);
+
+                fightButton.setVisible(true);
+                ffButton.setVisible(true);
+                bagButton.setVisible(true);
+                switchButton.setVisible(true);
+
+                cancelButton.setVisible(false);
+                continueButton.setVisible(false);
+            }
+        });
+
+        fightButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                battleNarrationArea.setText("What move will " + myTeam.get(0).getName() + " use?");
+                battleNarration.updateUI();
+
+                fightButton.setVisible(false);
+                ffButton.setVisible(false);
+                bagButton.setVisible(false);
+                switchButton.setVisible(false);
+
+                cancelButton.setVisible(true);
+                continueButton.setVisible(true);
+
+                atk1Button.setText(myTeam.get(0).getATK1().getName());
+                atk1Button.setVisible(true);
+
+                atk2Button.setText(myTeam.get(0).getATK2().getName());
+                atk2Button.setVisible(true);
+
+                atk3Button.setText(myTeam.get(0).getATK3().getName());
+                atk3Button.setVisible(true);
+
+                atk4Button.setText(myTeam.get(0).getATK4().getName());
+                atk4Button.setVisible(true);
+
+
+            }
+        });
+
+        switchButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                showSwitchScreen();
+            }
+        });
+
+        atk1Button.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                bm.setAttackSelected(myTeam.get(0).getATK1());
+                attack = true;
+
+                battleNarrationArea.setText(myTeam.get(0).getName() + " used " + myTeam.get(0).getATK1().getName());
+
+            }
+        });
+
+        continueButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                if(attack){
+                    battleNarrationArea.setText(bm.trainerAI(myTeam.get(0), enemyTeam.get(0), enemyTeam));
+                    //battleNarration.setText("Test");
+                    battleNarration.updateUI();
+                }
+            }
+        });
+
+    }
+
+    private void showDefeatScreen(){
+        JFrame loseFrame = new JFrame("You have been defeated!");
+        loseFrame.setBounds(1266, 868, width, height);
+        loseFrame.setLocationRelativeTo(null);
+        loseFrame.getContentPane().setLayout(null);
+        loseFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        loseFrame.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+
+        ImageIcon defeatScreen = new ImageIcon(getClass().getResource("/poke/images/defeat.png"));
+
+        JLabel defeatlbl = new JLabel(defeatScreen);
+        defeatlbl.setBounds(0,0,width, height);
+        defeatScreen.setImage(defeatScreen.getImage().getScaledInstance(1366, 768, Image.SCALE_DEFAULT));
+        loseFrame.getContentPane().add(defeatlbl);
+
+        loseFrame.setVisible(true);
+    }
+
+    private String displayBattle(AttackMove atk){
+        String result = "";
+        String enemyAction = bm.trainerAI(myTeam.get(0), enemyTeam.get(0), enemyTeam);
+        
+        switch (enemyAction.substring(0, 4)){
+            case "heal":
+                result += "\nEnemy trainer healed " + enemyTeam.get(0);
+                result += bm.oneSidedFight(myTeam.get(0), enemyTeam.get(0), atk);
+
+                break;
+            case "swap":
+                String pokeSwap = enemyAction.substring(4);
+
+                for(Pokemon poke : enemyTeam){
+                    if(poke.getName().equals(pokeSwap)){
+                        result += "\nEnemy trainer swapped " + enemyTeam.get(0).getName() + " to " + poke.getName();
+                        Collections.swap(enemyTeam, 0, enemyTeam.indexOf(poke));
+
+                        ImageIcon image = new ImageIcon(getClass().getResource("/poke/images/" + poke.getPokePictureName()));
+                        enemyTeamPokelbl.setIcon(image);
+
+                        result += bm.oneSidedFight(myTeam.get(0), enemyTeam.get(0), atk);
+                    }
+                }
+
+                break;
+            default:
+                AttackMove enemyAttack = null;
+
+                for(AttackMove mov : enemyTeam.get(0).getMoveSet()){
+                    if(mov.getName().equals(enemyAction)){
+                        enemyAttack = mov;
+                        break;
+                    }
+                }
+
+                if(myTeam.get(0).getBattleSPD() >= enemyTeam.get(0).getBattleSPD()){
+                    result += bm.battleOrder(myTeam.get(0), atk, enemyTeam.get(0), enemyAttack);
+                } else if (myTeam.get(0).getBattleSPD() < enemyTeam.get(0).getBattleSPD()
+                break;
+        }
+
+        return result;
+    }
+
+    private void showSwitchScreen(){
+        JFrame switchFrame = new JFrame("Switch out a pokemon");
+        switchFrame.setBounds(1266, 868, 800, 800);
+        switchFrame.setLocationRelativeTo(null);
+        switchFrame.getContentPane().setLayout(null);
+        switchFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        switchFrame.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+
+        JButton firstPokemon = new JButton(myTeam.get(1).getName());
+        firstPokemon.setBounds(100, 100, 300, 100);
+        firstPokemon.setHorizontalAlignment(SwingConstants.CENTER);
+        firstPokemon.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        switchFrame.getContentPane().add(firstPokemon);
+        firstPokemon.setVisible(true);
+
+        JButton secondPokemon = new JButton(myTeam.get(2).getName());
+        secondPokemon.setBounds(400, 200, 300, 100);
+        secondPokemon.setHorizontalAlignment(SwingConstants.CENTER);
+        secondPokemon.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        switchFrame.getContentPane().add(secondPokemon);
+        secondPokemon.setVisible(true);
+
+        JButton thirdPokemon = new JButton(myTeam.get(3).getName());
+        thirdPokemon.setBounds(100, 300, 300, 100);
+        thirdPokemon.setHorizontalAlignment(SwingConstants.CENTER);
+        thirdPokemon.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        switchFrame.getContentPane().add(thirdPokemon);
+        thirdPokemon.setVisible(true);
+
+        JButton fourthPokemon = new JButton(myTeam.get(4).getName());
+        fourthPokemon.setBounds(400, 400, 300, 100);
+        fourthPokemon.setHorizontalAlignment(SwingConstants.CENTER);
+        fourthPokemon.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        switchFrame.getContentPane().add(fourthPokemon);
+        fourthPokemon.setVisible(true);
+
+        JButton fifthPokemon = new JButton(myTeam.get(5).getName());
+        fifthPokemon.setBounds(100, 500, 300, 100);
+        fifthPokemon.setHorizontalAlignment(SwingConstants.CENTER);
+        fifthPokemon.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        switchFrame.getContentPane().add(fifthPokemon);
+        fifthPokemon.setVisible(true);
+
+        switchFrame.setVisible(true);
+
+        //COPY THIS FOR OTHER BUTTONS AS WELL
+        firstPokemon.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                battleNarrationArea.setText("You swapped " + myTeam.get(0).getName() + " for " + myTeam.get(1).getName());
+                Collections.swap(myTeam, 0, 1);
+
+                ImageIcon image = new ImageIcon(getClass().getResource("/poke/images/" + myTeam.get(0).getPokePictureName()));
+                myTeamPokelbl.setIcon(image);
+
+                switchFrame.dispose();
+                
+            }
+        });
     }
 
     

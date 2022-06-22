@@ -12,14 +12,14 @@ public class BattleMech {
     private static int healPotion = 5, enemyHealPotion = 5,
                         ppRestore = 5, enemyPPRestore = 5,
                         fullHeal = 5, enemyFullHeal = 5,
-                        switchCooldown = 1;
+                        switchCooldown = 2;
     private static boolean pokeSwitch = false, skipTurn = false;
     private static AttackMove attackSelected, enemyAttack;
 
     Random r = new Random();
     
     public static void main(String[] args){
-        Pokemon poke1 = new Pokemon(Monsters.GARDEVOIR);
+        /*Pokemon poke1 = new Pokemon(Monsters.GARDEVOIR);
         Pokemon poke2 = new Pokemon(Monsters.DELPHOX);
         Pokemon poke3 = new Pokemon(Monsters.LUCARIO);
         Pokemon poke4 = new Pokemon(Monsters.BLASTOISE);
@@ -31,12 +31,12 @@ public class BattleMech {
         Pokemon enemy3 = new Pokemon(Monsters.AURORUS);
         Pokemon enemy4 = new Pokemon(Monsters.GOURGEIST);
         Pokemon enemy5 = new Pokemon(Monsters.GOODRA);
-        Pokemon enemy6 = new Pokemon(Monsters.GARDEVOIR);
+        Pokemon enemy6 = new Pokemon(Monsters.GARDEVOIR);*/
 
         BattleMech bm = new BattleMech();
         Scanner sc = new Scanner(System.in);
 
-        myTeam.add(poke1);
+        /*myTeam.add(poke1);
         myTeam.add(poke2);
         myTeam.add(poke3);
         myTeam.add(poke4);
@@ -48,11 +48,11 @@ public class BattleMech {
         enemyTeam.add(enemy3);
         enemyTeam.add(enemy4);
         enemyTeam.add(enemy5);
-        enemyTeam.add(enemy6);
+        enemyTeam.add(enemy6);*/
 
         new Thread(new PokeGui()).start();
         
-        while(true){
+        /*while(true){
             System.out.println("Starting HP for both Pokemon: ");
             System.out.println(myTeam.get(0).getName() + " " + myTeam.get(0).getBattleHP());
             System.out.println(enemyTeam.get(0).getName() + " " + enemyTeam.get(0).getBattleHP());
@@ -270,7 +270,7 @@ public class BattleMech {
                 } else {
                     System.out.println(bm.battleOrder(enemy1, attackSelected, poke1, moveSelected));
                 }
-            }*/
+            }
 
             if(enemyTeam.get(0).fainted() && enemyTeam.get(1).fainted() && enemyTeam.get(2).fainted() && enemyTeam.get(3).fainted() && enemyTeam.get(4).fainted() && enemyTeam.get(5).fainted()) {
                 System.out.println("You have defeated the enemy trainer!");
@@ -317,11 +317,11 @@ public class BattleMech {
                 System.out.println("----------------------------------------------------------------------------------------------");
                 System.out.println();
             }
-        }
+        }*/
     }
 
     //method used for move priority
-    private String battleOrder(Pokemon first, AttackMove firstMove, Pokemon second, AttackMove secondMove){
+    public String battleOrder(Pokemon first, AttackMove firstMove, Pokemon second, AttackMove secondMove){
         String str = first.getName() + " used " + firstMove.getName();
         double firstDamage = calculateAttack(first, second, firstMove), secondDamage = calculateAttack(second, first, secondMove);
 
@@ -427,12 +427,12 @@ public class BattleMech {
         return str + "\n";
     }
 
-    private final String oneSidedFight(Pokemon attacker, Pokemon defender, AttackMove used, String attackerSide){
+    public final String oneSidedFight(Pokemon attacker, Pokemon defender, AttackMove used){
         String str = attacker.getName() + " used (one-side) " + used.getName();
         double damage = calculateAttack(attacker, defender, used);
         battleStatusPrint(attacker);
 
-        if(!skipTurn){
+        //if(!skipTurn){
             str += "\n" + attacker.getName() + " deals " + damage + " to " + defender.getName();
             defender.takeDamage(damage);
 
@@ -455,20 +455,21 @@ public class BattleMech {
                 }
             }
 
-            if(attackerSide.equals("enemy")){
+            attacker.lowerPP(used);
+            /*if(attackerSide.equals("enemy")){
                 //used.lowerEnemyPP();
                 attacker.lowerPP(used);
                 System.out.println("Lowered enemy pp");
             } else {
                 //used.lowerPP();
                 attacker.lowerPP(used);
-            }
+            }*/
             
-        } else {
+       /*  } else {
             skipTurn = false;
-        }
+        }*/
 
-        System.out.println(damageStatusPrint(attacker));
+       str += "\n" + damageStatusPrint(attacker);
 
         if(defender.fainted()){
             str += "\n" + defender.getName() + " fainted";
@@ -476,7 +477,7 @@ public class BattleMech {
         }
 
         
-        System.out.println(damageStatusPrint(defender));
+        str += "\n" + (damageStatusPrint(defender));
 
         return str;
     }
@@ -634,18 +635,20 @@ public class BattleMech {
 
 
     //https://hackaday.com/wp-content/uploads/2014/05/pokemon-decisiontree.png
-    private void trainerAI(){
-        double threshold = enemyTeam.get(0).getTotalHP() * 0.4; //find 40% of maximum hp
+    public String trainerAI(Pokemon myPoke, Pokemon enemyPoke, ArrayList<Pokemon> enemyTeam){
+        double threshold = enemyPoke.getTotalHP() * 0.4; //find 40% of maximum hp
         boolean moveAvailable = false, healthSwitch = false;
+        String action = "";
         
         
-        if(enemyTeam.get(0).getBattleHP() <= threshold){ //if fielded pokemon is below 40% health
+        if(enemyPoke.getBattleHP() <= threshold){ //if fielded pokemon is below 40% health
             System.out.println("Below Threshold!");
-            if (enemyHealPotion > 0 && !enemyTeam.get(0).healedOnce()){ //if enemy still have potions
-                healPokemon(enemyTeam.get(0));
-                System.out.println("\nEnemy healed " + enemyTeam.get(0).getName());
+            if (enemyHealPotion > 0 && !enemyPoke.healedOnce()){ //if enemy still have potions
+                //healPokemon(enemyTeam.get(0));
+                action = "heal";
+                //System.out.println("\nEnemy healed " + enemyTeam.get(0).getName());
                 enemyHealPotion--;
-                enemyTeam.get(0).setHealedOnce();
+                enemyPoke.setHealedOnce();
 
                 if (switchCooldown > 0){
                     switchCooldown--;
@@ -656,14 +659,14 @@ public class BattleMech {
 
                 //search for pokemon that will take least damage based on pokemon's type
                 for(Pokemon p : enemyTeam){
-                    if(!p.fainted() && !p.getName().equals(enemyTeam.get(0).getName()) && p.getBattleHP() > threshold){
-                        if (p.getTypeA().isSuperEffectiveAgainst(myTeam.get(0).getTypeA())
-                            || p.getTypeB().isSuperEffectiveAgainst(myTeam.get(0).getTypeA())
-                            || p.getTypeA().isSuperEffectiveAgainst(myTeam.get(0).getTypeB())
-                            || p.getTypeB().isSuperEffectiveAgainst(myTeam.get(0).getTypeB())){
-                            System.out.println(enemyTeam.get(0).getName() + " switch with " + p.getName() + " healthSwitch!");
-                            Collections.swap(enemyTeam, 0, enemyTeam.indexOf(p)); //switch current pokemon to pokemon that will take the least damage
-                            
+                    if(!p.fainted() && !p.getName().equals(enemyPoke.getName()) && p.getBattleHP() > threshold){
+                        if (p.getTypeA().isSuperEffectiveAgainst(myPoke.getTypeA())
+                            || p.getTypeB().isSuperEffectiveAgainst(myPoke.getTypeA())
+                            || p.getTypeA().isSuperEffectiveAgainst(myPoke.getTypeB())
+                            || p.getTypeB().isSuperEffectiveAgainst(myPoke.getTypeB())){
+                            //System.out.println(enemyTeam.get(0).getName() + " switch with " + p.getName() + " healthSwitch!");
+                            //Collections.swap(enemyTeam, 0, enemyTeam.indexOf(p)); //switch current pokemon to pokemon that will take the least damage
+                            action = "swap" + p.getName();
                             healthSwitch = true;
 
                             switchCooldown++;
@@ -674,7 +677,7 @@ public class BattleMech {
 
                 //desperate times, desperate measures
                 if(!healthSwitch){
-                    double max = enemyTeam.get(0).getBattleHP();
+                    double max = enemyPoke.getBattleHP();
 
                     if(enemyTeam.get(1).getBattleHP() > max){
                         max = enemyTeam.get(1).getBattleHP();
@@ -693,28 +696,33 @@ public class BattleMech {
                     }
 
                     for (Pokemon p : enemyTeam){
-                        if (max == p.getBattleHP() && !p.getName().equals(enemyTeam.get(0).getName())){
-                            System.out.println(enemyTeam.get(0).getName() + " switch with " + p.getName());
-                            Collections.swap(enemyTeam, 0, enemyTeam.indexOf(p));
+                        if (max == p.getBattleHP() && !p.getName().equals(enemyPoke.getName())){
+                            //System.out.println(enemyTeam.get(0).getName() + " switch with " + p.getName());
+                            //Collections.swap(enemyTeam, 0, enemyTeam.indexOf(p));
+                            action = "swap" + p.getName();
                             switchCooldown++;
                         }
                     }
 
                     healthSwitch = false;
                 } 
+
+                //switchCooldown--;
             //if can't switch due to cooldown, find most damage move and full send
             } else {
 
                 switchCooldown--;
-                enemyAttack = maxDamageAttack();
+                action = maxDamageAttack(myPoke, enemyPoke);
             }
         } else {
             //loop through current pokemon's available moveset
-            for(AttackMove mov : enemyTeam.get(0).getMoveSet()){
-                if(typeEffectiveness(myTeam.get(0), mov) >= 1){ //if move is able to do neutral or supereffective damage
+            for(AttackMove mov : enemyPoke.getMoveSet()){
+                if(typeEffectiveness(myPoke, mov) >= 1){ //if move is able to do neutral or supereffective damage
                     if(enemyTeam.get(0).checkPP(mov) > 0){
-                        enemyAttack = mov;
+                        //enemyAttack = mov;
                         //mov.lowerPP();
+                        action = mov.getName();
+
                         enemyTeam.get(0).lowerPP(mov);
                         moveAvailable = true;
 
@@ -729,19 +737,20 @@ public class BattleMech {
             //if all moves are not effective against opponent, switch to healthy pokemon that has effective moves
             if(!moveAvailable && switchCooldown == 0){
                 for(Pokemon p : enemyTeam){
-                    if (p.getTypeA().isSuperEffectiveAgainst(myTeam.get(0).getTypeA())
-                        || p.getTypeB().isSuperEffectiveAgainst(myTeam.get(0).getTypeA())
-                        || p.getTypeA().isSuperEffectiveAgainst(myTeam.get(0).getTypeB())
-                        || p.getTypeB().isSuperEffectiveAgainst(myTeam.get(0).getTypeB())){
+                    if (p.getTypeA().isSuperEffectiveAgainst(myPoke.getTypeA())
+                        || p.getTypeB().isSuperEffectiveAgainst(myPoke.getTypeA())
+                        || p.getTypeA().isSuperEffectiveAgainst(myPoke.getTypeB())
+                        || p.getTypeB().isSuperEffectiveAgainst(myPoke.getTypeB())){
                             if(p.getBattleHP() > (p.getTotalHP() * 0.4)){
-                                System.out.println(enemyTeam.get(0).getName() + " switch with " + p.getName() + " moveSwitch");
-                                Collections.swap(enemyTeam, 0, enemyTeam.indexOf(p));
+                                //System.out.println(enemyTeam.get(0).getName() + " switch with " + p.getName() + " moveSwitch");
+                                //Collections.swap(enemyTeam, 0, enemyTeam.indexOf(p));
+                                action = "swap" + p.getName();
 
-                                if(switchCooldown < 1){
+                                if(switchCooldown < 2){
                                     switchCooldown++;
                                 }
                             } else {
-                                enemyAttack = maxDamageAttack();
+                                action = maxDamageAttack(myPoke, enemyPoke);
 
                                 if(switchCooldown > 0){
                                     switchCooldown--;
@@ -751,41 +760,49 @@ public class BattleMech {
                 }
             //find move that does most damage and full send
             } else if (!moveAvailable && switchCooldown > 0){
-                enemyAttack = maxDamageAttack();
+                action = maxDamageAttack(myPoke, enemyPoke);
 
-                switchCooldown--;
-
+                if(switchCooldown > 0){
+                    switchCooldown--;
+                }
             }
         }
 
         //reset conditions
         healthSwitch = false;
         moveAvailable = false;
+
+        return action;
     }
 
-    private AttackMove maxDamageAttack(){
+    private String maxDamageAttack(Pokemon myPoke, Pokemon enemyPoke){
         System.out.println("Calculating Max Attack");
-        double maxDamage = calculateAttack(enemyTeam.get(0), myTeam.get(0), enemyTeam.get(0).getATK1());
+        double maxDamage = calculateAttack(enemyPoke, myPoke, enemyPoke.getATK1());
         AttackMove maxMove = null;
 
-        if(enemyTeam.get(0).checkPP(enemyTeam.get(0).getATK1()) > 0){
-            maxMove = enemyTeam.get(0).getATK1();
+        if(enemyPoke.checkPP(enemyPoke.getATK1()) > 0){
+            maxMove = enemyPoke.getATK1();
         }
 
-        if(calculateAttack(enemyTeam.get(0), myTeam.get(0), enemyTeam.get(0).getATK2()) > maxDamage && enemyTeam.get(0).checkPP(enemyTeam.get(0).getATK2()) > 0){
-            maxDamage = calculateAttack(enemyTeam.get(0), myTeam.get(0), enemyTeam.get(0).getATK2());
-            maxMove = enemyTeam.get(0).getATK2();
+        if(calculateAttack(enemyPoke, myPoke, enemyPoke.getATK2()) > maxDamage && enemyPoke.checkPP(enemyPoke.getATK2()) > 0){
+            maxDamage = calculateAttack(enemyPoke, myPoke, enemyPoke.getATK2());
+            maxMove = enemyPoke.getATK2();
         }
-        if(calculateAttack(enemyTeam.get(0), myTeam.get(0), enemyTeam.get(0).getATK3()) > maxDamage && enemyTeam.get(0).checkPP(enemyTeam.get(0).getATK3()) > 0){
-            maxDamage = calculateAttack(enemyTeam.get(0), myTeam.get(0), enemyTeam.get(0).getATK3());
-            maxMove = enemyTeam.get(0).getATK3();
+        if(calculateAttack(enemyPoke, myPoke, enemyPoke.getATK3()) > maxDamage && enemyPoke.checkPP(enemyPoke.getATK3()) > 0){
+            maxDamage = calculateAttack(enemyPoke, myPoke, enemyPoke.getATK3());
+            maxMove = enemyPoke.getATK3();
         }
-        if(calculateAttack(enemyTeam.get(0), myTeam.get(0), enemyTeam.get(0).getATK4()) > maxDamage && enemyTeam.get(0).checkPP(enemyTeam.get(0).getATK4()) > 0){
-            maxDamage = calculateAttack(enemyTeam.get(0), myTeam.get(0), enemyTeam.get(0).getATK4());
-            maxMove = enemyTeam.get(0).getATK4();
+        if(calculateAttack(enemyPoke, myPoke, enemyPoke.getATK4()) > maxDamage && enemyPoke.checkPP(enemyPoke.getATK4()) > 0){
+            maxDamage = calculateAttack(enemyPoke, myPoke, enemyPoke.getATK4());
+            maxMove = enemyPoke.getATK4();
         }   
         
-        return maxMove;
+        return maxMove.getName();
+    }
+
+    public void setAttackSelected(AttackMove atk){
+        attackSelected = atk;
+
     }
    
 }

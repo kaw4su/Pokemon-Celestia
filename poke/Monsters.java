@@ -18,7 +18,8 @@ public enum Monsters {
     ALOLANNINETALES("Alolan Ninetales", "Alolan Ninetales,png", (int)350, (int)256, (int)273, (int)348, new AttackMove[]{AttackMove.BLIZZARD, AttackMove.ICEBEAM, AttackMove.DAZZLINGGLEAM, AttackMove.EXTRASENSORY}, Type.ICE, Type.FAIRY),
     CHARIZARD("Charizard", "Charizard.png", (int)360, (int)293, (int)280, (int)328, new AttackMove[]{AttackMove.FLAREBLITZ, AttackMove.INFERNO, AttackMove.DRAGONBREATH, AttackMove.AIRSLASH}, Type.FIRE, Type.FLYING),
     ZAMAZENTA("Zamazenta", "Zamazenta.png", (int)388, (int)394, (int)427, (int)390, new AttackMove[]{AttackMove.GIGAIMPACT, AttackMove.CLOSECOMBAT, AttackMove.IRONHEAD, AttackMove.CRUNCH}, Type.FIGHTING, Type.NULLTYPE), 
-    
+    //ADD: MEWTWO, TURTWIG, EXCADRILL, EMOLGA, zekrom, raikou
+
     //enemy pokemon
     HAWLUCHA("Hawlucha", "Hawlucha.png", (int)360, (int)311, (int)273, (int)368, new AttackMove[]{AttackMove.BRAVEBIRD, AttackMove.HIGHJUMPKICK, AttackMove.FIREPUNCH, AttackMove.POISONJAB}, Type.FIGHTING, Type.FLYING),
     TYRANTRUM("Tyrantrum", "Tyrantrum.png", (int)368, (int)375, (int)370, (int)265, new AttackMove[]{AttackMove.HEADSMASH, AttackMove.EARTHQUAKE, AttackMove.DRAGONCLAW, AttackMove.STONEEDGE}, Type.ROCK, Type.DRAGON),
