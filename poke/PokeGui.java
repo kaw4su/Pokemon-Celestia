@@ -23,7 +23,7 @@ public class PokeGui extends JComponent implements Runnable {
 
     BattleMech bm = new BattleMech();
 
-    JTextArea battleNarrationArea;
+    JTextArea battleNarrationArea, myTeamInfo;
     //ImageIcon myTeamPokemon;
     JLabel myTeamPokelbl, enemyTeamPokelbl;
 
@@ -432,7 +432,7 @@ public class PokeGui extends JComponent implements Runnable {
         ImageIcon myTeamPokemon = new ImageIcon(getClass().getResource("/poke/images/" + myTeam.get(0).getPokePictureName()));
         ImageIcon enemyTeamPokemon = new ImageIcon(getClass().getResource("/poke/images/" + enemyTeam.get(0).getPokePictureName()));
 
-        JTextArea myTeamInfo = new JTextArea(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
+        myTeamInfo = new JTextArea(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
         myTeamInfo.setBounds(100, 60, 400, 70);
         myTeamInfo.setFont(new Font("inhalt", Font.PLAIN, fontSize));
         fightFrame.getContentPane().add(myTeamInfo);
@@ -585,7 +585,7 @@ public class PokeGui extends JComponent implements Runnable {
                 switchButton.setVisible(false);
 
                 cancelButton.setVisible(true);
-                continueButton.setVisible(true);
+                //continueButton.setVisible(true);
 
                 atk1Button.setText(myTeam.get(0).getATK1().getName());
                 atk1Button.setVisible(true);
@@ -616,7 +616,96 @@ public class PokeGui extends JComponent implements Runnable {
                 bm.setAttackSelected(myTeam.get(0).getATK1());
                 attack = true;
 
-                battleNarrationArea.setText(myTeam.get(0).getName() + " used " + myTeam.get(0).getATK1().getName());
+                continueButton.setVisible(true);
+
+                //battleNarrationArea.setText(myTeam.get(0).getName() + " used " + myTeam.get(0).getATK1().getName());
+                battleNarrationArea.setText(displayBattle(myTeam.get(0).getATK1()));
+                battleNarrationArea.updateUI();
+
+                myTeamInfo.setText(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
+                myTeamInfo.updateUI();
+
+                //switchButton.setEnabled(false);
+                cancelButton.setEnabled(false);
+                atk1Button.setEnabled(false);
+                atk2Button.setEnabled(false);
+                atk3Button.setEnabled(false);
+                atk4Button.setEnabled(false);
+
+            }
+        });
+
+        atk2Button.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                bm.setAttackSelected(myTeam.get(0).getATK2());
+                attack = true;
+
+                continueButton.setVisible(true);
+
+                //battleNarrationArea.setText(myTeam.get(0).getName() + " used " + myTeam.get(0).getATK1().getName());
+                battleNarrationArea.setText(displayBattle(myTeam.get(0).getATK2()));
+                battleNarrationArea.updateUI();
+
+                myTeamInfo.setText(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
+                myTeamInfo.updateUI();
+
+                //switchButton.setEnabled(false);
+                cancelButton.setEnabled(false);
+                atk1Button.setEnabled(false);
+                atk2Button.setEnabled(false);
+                atk3Button.setEnabled(false);
+                atk4Button.setEnabled(false);
+
+            }
+        });
+
+        atk3Button.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                bm.setAttackSelected(myTeam.get(0).getATK3());
+                attack = true;
+
+                continueButton.setVisible(true);
+
+                //battleNarrationArea.setText(myTeam.get(0).getName() + " used " + myTeam.get(0).getATK1().getName());
+                battleNarrationArea.setText(displayBattle(myTeam.get(0).getATK3()));
+                battleNarrationArea.updateUI();
+
+                myTeamInfo.setText(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
+                myTeamInfo.updateUI();
+
+                //switchButton.setEnabled(false);
+                cancelButton.setEnabled(false);
+                atk1Button.setEnabled(false);
+                atk2Button.setEnabled(false);
+                atk3Button.setEnabled(false);
+                atk4Button.setEnabled(false);
+
+            }
+        });
+
+        atk4Button.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                bm.setAttackSelected(myTeam.get(0).getATK4());
+                attack = true;
+
+                continueButton.setVisible(true);
+
+                //battleNarrationArea.setText(myTeam.get(0).getName() + " used " + myTeam.get(0).getATK1().getName());
+                battleNarrationArea.setText(displayBattle(myTeam.get(0).getATK4()));
+                battleNarrationArea.updateUI();
+
+                myTeamInfo.setText(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
+                myTeamInfo.updateUI();
+
+                //switchButton.setEnabled(false);
+                cancelButton.setEnabled(false);
+                atk1Button.setEnabled(false);
+                atk2Button.setEnabled(false);
+                atk3Button.setEnabled(false);
+                atk4Button.setEnabled(false);
 
             }
         });
@@ -625,10 +714,39 @@ public class PokeGui extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent click){
                 if(attack){
-                    battleNarrationArea.setText(bm.trainerAI(myTeam.get(0), enemyTeam.get(0), enemyTeam));
+                    //battleNarrationArea.setText(bm.trainerAI(myTeam.get(0), enemyTeam.get(0), enemyTeam));
                     //battleNarration.setText("Test");
-                    battleNarration.updateUI();
+                    //battleNarration.updateUI();
+                    if(myTeam.get(0).fainted() && myTeam.get(1).fainted() && myTeam.get(2).fainted() && myTeam.get(3).fainted() && myTeam.get(4).fainted() && myTeam.get(5).fainted()){
+                        fightFrame.dispose();
+                        showDefeatScreen();
+                    } else if (myTeam.get(0).fainted()){
+                        showSwitchScreen();
+                    }
+
+                    attack = false;
+                } else {
+                    battleNarrationArea.setText("What will " + myTeam.get(0).getName() + " do?");
+                    battleNarrationArea.updateUI();
                 }
+
+                cancelButton.setEnabled(true);
+                atk1Button.setEnabled(true);
+                atk2Button.setEnabled(true);
+                atk3Button.setEnabled(true);
+                atk4Button.setEnabled(true);
+
+                cancelButton.setVisible(false);
+                atk1Button.setVisible(false);
+                atk2Button.setVisible(false);
+                atk3Button.setVisible(false);
+                atk4Button.setVisible(false);
+                continueButton.setVisible(false);
+
+                switchButton.setVisible(true);
+                fightButton.setVisible(true);
+                ffButton.setVisible(true);
+                bagButton.setVisible(true);
             }
         });
 
@@ -690,7 +808,10 @@ public class PokeGui extends JComponent implements Runnable {
 
                 if(myTeam.get(0).getBattleSPD() >= enemyTeam.get(0).getBattleSPD()){
                     result += bm.battleOrder(myTeam.get(0), atk, enemyTeam.get(0), enemyAttack);
-                } else if (myTeam.get(0).getBattleSPD() < enemyTeam.get(0).getBattleSPD()
+                } else if (myTeam.get(0).getBattleSPD() < enemyTeam.get(0).getBattleSPD()){
+                    result += bm.battleOrder(enemyTeam.get(0), enemyAttack, myTeam.get(0), atk);
+                }
+
                 break;
         }
 
@@ -746,14 +867,100 @@ public class PokeGui extends JComponent implements Runnable {
         firstPokemon.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent click){
-                battleNarrationArea.setText("You swapped " + myTeam.get(0).getName() + " for " + myTeam.get(1).getName());
-                Collections.swap(myTeam, 0, 1);
+                if(myTeam.get(1).fainted()){
+                    JOptionPane.showMessageDialog(dexFrame, "You can't switch to this Pokemon!", "Pokemon Fainted!", JOptionPane.WARNING_MESSAGE); 
+                } else {
+                    battleNarrationArea.setText("You swapped " + myTeam.get(0).getName() + " for " + myTeam.get(1).getName());
+                    Collections.swap(myTeam, 0, 1);
 
-                ImageIcon image = new ImageIcon(getClass().getResource("/poke/images/" + myTeam.get(0).getPokePictureName()));
-                myTeamPokelbl.setIcon(image);
+                    ImageIcon image = new ImageIcon(getClass().getResource("/poke/images/" + myTeam.get(0).getPokePictureName()));
+                    myTeamPokelbl.setIcon(image);
 
-                switchFrame.dispose();
-                
+                    myTeamInfo.setText(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
+                    myTeamInfo.updateUI();
+
+                    switchFrame.dispose();
+                } 
+            }
+        });
+
+        secondPokemon.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                if(myTeam.get(2).fainted()){
+                    JOptionPane.showMessageDialog(dexFrame, "You can't switch to this Pokemon!", "Pokemon Fainted!", JOptionPane.WARNING_MESSAGE); 
+                } else {
+                    battleNarrationArea.setText("You swapped " + myTeam.get(0).getName() + " for " + myTeam.get(2).getName());
+                    Collections.swap(myTeam, 0, 2);
+
+                    ImageIcon image = new ImageIcon(getClass().getResource("/poke/images/" + myTeam.get(0).getPokePictureName()));
+                    myTeamPokelbl.setIcon(image);
+
+                    myTeamInfo.setText(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
+                    myTeamInfo.updateUI();
+
+                    switchFrame.dispose();
+                } 
+            }
+        });
+
+        thirdPokemon.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                if(myTeam.get(3).fainted()){
+                    JOptionPane.showMessageDialog(dexFrame, "You can't switch to this Pokemon!", "Pokemon Fainted!", JOptionPane.WARNING_MESSAGE); 
+                } else {
+                    battleNarrationArea.setText("You swapped " + myTeam.get(0).getName() + " for " + myTeam.get(3).getName());
+                    Collections.swap(myTeam, 0, 3);
+
+                    ImageIcon image = new ImageIcon(getClass().getResource("/poke/images/" + myTeam.get(0).getPokePictureName()));
+                    myTeamPokelbl.setIcon(image);
+
+                    myTeamInfo.setText(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
+                    myTeamInfo.updateUI();
+
+                    switchFrame.dispose();
+                } 
+            }
+        });
+
+        fourthPokemon.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                if(myTeam.get(4).fainted()){
+                    JOptionPane.showMessageDialog(dexFrame, "You can't switch to this Pokemon!", "Pokemon Fainted!", JOptionPane.WARNING_MESSAGE); 
+                } else {
+                    battleNarrationArea.setText("You swapped " + myTeam.get(0).getName() + " for " + myTeam.get(4).getName());
+                    Collections.swap(myTeam, 0, 4);
+
+                    ImageIcon image = new ImageIcon(getClass().getResource("/poke/images/" + myTeam.get(0).getPokePictureName()));
+                    myTeamPokelbl.setIcon(image);
+
+                    myTeamInfo.setText(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
+                    myTeamInfo.updateUI();
+
+                    switchFrame.dispose();
+                } 
+            }
+        });
+
+        fifthPokemon.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                if(myTeam.get(5).fainted()){
+                    JOptionPane.showMessageDialog(dexFrame, "You can't switch to this Pokemon!", "Pokemon Fainted!", JOptionPane.WARNING_MESSAGE); 
+                } else {
+                    battleNarrationArea.setText("You swapped " + myTeam.get(0).getName() + " for " + myTeam.get(5).getName());
+                    Collections.swap(myTeam, 0, 5);
+
+                    ImageIcon image = new ImageIcon(getClass().getResource("/poke/images/" + myTeam.get(0).getPokePictureName()));
+                    myTeamPokelbl.setIcon(image);
+
+                    myTeamInfo.setText(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
+                    myTeamInfo.updateUI();
+
+                    switchFrame.dispose();
+                } 
             }
         });
     }
