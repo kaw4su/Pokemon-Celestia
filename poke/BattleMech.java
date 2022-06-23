@@ -320,6 +320,22 @@ public class BattleMech {
         }*/
     }
 
+    public String getHealPotionCount(){
+        return String.valueOf(healPotion);
+    }
+
+    public void lowerHealPotion(){
+        healPotion--;
+    }
+
+    public String getPPRestoreCount(){
+        return String.valueOf(ppRestore);
+    }
+
+    public void lowerPPRestore(){
+        ppRestore--;
+    }
+
     //method used for move priority
     public String battleOrder(Pokemon first, AttackMove firstMove, Pokemon second, AttackMove secondMove){
         String str = first.getName() + " used " + firstMove.getName();
@@ -428,7 +444,7 @@ public class BattleMech {
     }
 
     public final String oneSidedFight(Pokemon attacker, Pokemon defender, AttackMove used){
-        String str = attacker.getName() + " used (one-side) " + used.getName();
+        String str = "\n" + attacker.getName() + " used " + used.getName();
         double damage = calculateAttack(attacker, defender, used);
         battleStatusPrint(attacker);
 
@@ -649,6 +665,7 @@ public class BattleMech {
                 //System.out.println("\nEnemy healed " + enemyTeam.get(0).getName());
                 enemyHealPotion--;
                 enemyPoke.setHealedOnce();
+                enemyPoke.gainHP();
 
                 if (switchCooldown > 0){
                     switchCooldown--;
@@ -679,6 +696,8 @@ public class BattleMech {
                 if(!healthSwitch){
                     double max = enemyPoke.getBattleHP();
 
+                    System.out.println("healthswitch");
+
                     if(enemyTeam.get(1).getBattleHP() > max){
                         max = enemyTeam.get(1).getBattleHP();
                     } 
@@ -701,6 +720,8 @@ public class BattleMech {
                             //Collections.swap(enemyTeam, 0, enemyTeam.indexOf(p));
                             action = "swap" + p.getName();
                             switchCooldown++;
+                        } else {
+                            action = maxDamageAttack(myPoke, enemyPoke);
                         }
                     }
 
@@ -782,17 +803,19 @@ public class BattleMech {
 
         if(enemyPoke.checkPP(enemyPoke.getATK1()) > 0){
             maxMove = enemyPoke.getATK1();
+        } else {
+            maxDamage = 0;
         }
 
-        if(calculateAttack(enemyPoke, myPoke, enemyPoke.getATK2()) > maxDamage && enemyPoke.checkPP(enemyPoke.getATK2()) > 0){
+        if(calculateAttack(enemyPoke, myPoke, enemyPoke.getATK2()) >= maxDamage && enemyPoke.checkPP(enemyPoke.getATK2()) > 0){
             maxDamage = calculateAttack(enemyPoke, myPoke, enemyPoke.getATK2());
             maxMove = enemyPoke.getATK2();
         }
-        if(calculateAttack(enemyPoke, myPoke, enemyPoke.getATK3()) > maxDamage && enemyPoke.checkPP(enemyPoke.getATK3()) > 0){
+        if(calculateAttack(enemyPoke, myPoke, enemyPoke.getATK3()) >= maxDamage && enemyPoke.checkPP(enemyPoke.getATK3()) > 0){
             maxDamage = calculateAttack(enemyPoke, myPoke, enemyPoke.getATK3());
             maxMove = enemyPoke.getATK3();
         }
-        if(calculateAttack(enemyPoke, myPoke, enemyPoke.getATK4()) > maxDamage && enemyPoke.checkPP(enemyPoke.getATK4()) > 0){
+        if(calculateAttack(enemyPoke, myPoke, enemyPoke.getATK4()) >= maxDamage && enemyPoke.checkPP(enemyPoke.getATK4()) > 0){
             maxDamage = calculateAttack(enemyPoke, myPoke, enemyPoke.getATK4());
             maxMove = enemyPoke.getATK4();
         }   

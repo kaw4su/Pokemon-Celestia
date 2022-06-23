@@ -23,7 +23,7 @@ public class PokeGui extends JComponent implements Runnable {
 
     BattleMech bm = new BattleMech();
 
-    JTextArea battleNarrationArea, myTeamInfo;
+    JTextArea battleNarrationArea, myTeamInfo, enemyTeamInfo;
     //ImageIcon myTeamPokemon;
     JLabel myTeamPokelbl, enemyTeamPokelbl;
 
@@ -395,6 +395,174 @@ public class PokeGui extends JComponent implements Runnable {
                 }
             }
         });
+
+        rSerperior.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent click){
+                info.setBackground(Color.white);
+                info.setText(Monsters.SERPERIOR.getName() + "\nHP: " + Monsters.SERPERIOR.getHP() + "\nATK: " + Monsters.SERPERIOR.getATK() + "\nDEF: " + Monsters.SERPERIOR.getDEF() + "\nSPD: " + Monsters.SERPERIOR.getSPD());
+                info.setVisible(true);
+
+                pokePic.setIcon(new ImageIcon(getClass().getResource("/poke/images/Serperior.png")));
+                pokePic.setVisible(true);
+                pokePic.updateUI();
+
+                if(!tempTeam.contains(Monsters.SERPERIOR) && tempTeam.size() < 6){
+                    tempTeam.add(Monsters.SERPERIOR);
+                    teamList.append("Serperior \n");
+                    teamList.updateUI();
+                } else if(!tempTeam.contains(Monsters.SERPERIOR) && tempTeam.size() == 6){
+                    JOptionPane.showMessageDialog(dexFrame, "Your team can only have 6 Pokemon!", "Team Limit", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+
+        rMagnezone.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent click){
+                info.setBackground(Color.white);
+                info.setText(Monsters.MAGNEZONE.getName() + "\nHP: " + Monsters.MAGNEZONE.getHP() + "\nATK: " + Monsters.MAGNEZONE.getATK() + "\nDEF: " + Monsters.MAGNEZONE.getDEF() + "\nSPD: " + Monsters.MAGNEZONE.getSPD());
+                info.setVisible(true);
+
+                pokePic.setIcon(new ImageIcon(getClass().getResource("/poke/images/Magnezone.png")));
+                pokePic.setVisible(true);
+                pokePic.updateUI();
+
+                if(!tempTeam.contains(Monsters.MAGNEZONE) && tempTeam.size() < 6){
+                    tempTeam.add(Monsters.MAGNEZONE);
+                    teamList.append("Magnezone \n");
+                    teamList.updateUI();
+                } else if(!tempTeam.contains(Monsters.MAGNEZONE) && tempTeam.size() == 6){
+                    JOptionPane.showMessageDialog(dexFrame, "Your team can only have 6 Pokemon!", "Team Limit", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+
+        rGreninja.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent click){
+                info.setBackground(Color.white);
+                info.setText(Monsters.GRENINJA.getName() + "\nHP: " + Monsters.GRENINJA.getHP() + "\nATK: " + Monsters.GRENINJA.getATK() + "\nDEF: " + Monsters.GRENINJA.getDEF() + "\nSPD: " + Monsters.GRENINJA.getSPD());
+                info.setVisible(true);
+
+                pokePic.setIcon(new ImageIcon(getClass().getResource("/poke/images/Greninja.png")));
+                pokePic.setVisible(true);
+                pokePic.updateUI();
+
+                if(!tempTeam.contains(Monsters.GRENINJA) && tempTeam.size() < 6){
+                    tempTeam.add(Monsters.GRENINJA);
+                    teamList.append("Greninja \n");
+                    teamList.updateUI();
+                } else if(!tempTeam.contains(Monsters.GRENINJA) && tempTeam.size() == 6){
+                    JOptionPane.showMessageDialog(dexFrame, "Your team can only have 6 Pokemon!", "Team Limit", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+
+        rXerneas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent click){
+                info.setBackground(Color.white);
+                info.setText(Monsters.XERNEAS.getName() + "\nHP: " + Monsters.XERNEAS.getHP() + "\nATK: " + Monsters.XERNEAS.getATK() + "\nDEF: " + Monsters.XERNEAS.getDEF() + "\nSPD: " + Monsters.XERNEAS.getSPD());
+                info.setVisible(true);
+
+                pokePic.setIcon(new ImageIcon(getClass().getResource("/poke/images/Xerneas.png")));
+                pokePic.setVisible(true);
+                pokePic.updateUI();
+
+                if(!tempTeam.contains(Monsters.XERNEAS) && tempTeam.size() < 6){
+                    tempTeam.add(Monsters.XERNEAS);
+                    teamList.append("Xerneas \n");
+                    teamList.updateUI();
+                } else if(!tempTeam.contains(Monsters.XERNEAS) && tempTeam.size() == 6){
+                    JOptionPane.showMessageDialog(dexFrame, "Your team can only have 6 Pokemon!", "Team Limit", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+
+        rPrimarina.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent click){
+                info.setBackground(Color.white);
+                info.setText(Monsters.PRIMARINA.getName() + "\nHP: " + Monsters.PRIMARINA.getHP() + "\nATK: " + Monsters.PRIMARINA.getATK() + "\nDEF: " + Monsters.PRIMARINA.getDEF() + "\nSPD: " + Monsters.PRIMARINA.getSPD());
+                info.setVisible(true);
+
+                pokePic.setIcon(new ImageIcon(getClass().getResource("/poke/images/Primarina.png")));
+                pokePic.setVisible(true);
+                pokePic.updateUI();
+
+                if(!tempTeam.contains(Monsters.PRIMARINA) && tempTeam.size() < 6){
+                    tempTeam.add(Monsters.PRIMARINA);
+                    teamList.append("Primarina \n");
+                    teamList.updateUI();
+                } else if(!tempTeam.contains(Monsters.PRIMARINA) && tempTeam.size() == 6){
+                    JOptionPane.showMessageDialog(dexFrame, "Your team can only have 6 Pokemon!", "Team Limit", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+
+        rNinetales.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent click){
+                info.setBackground(Color.white);
+                info.setText(Monsters.ALOLANNINETALES.getName() + "\nHP: " + Monsters.ALOLANNINETALES.getHP() + "\nATK: " + Monsters.ALOLANNINETALES.getATK() + "\nDEF: " + Monsters.ALOLANNINETALES.getDEF() + "\nSPD: " + Monsters.ALOLANNINETALES.getSPD());
+                info.setVisible(true);
+
+                pokePic.setIcon(new ImageIcon(getClass().getResource("/poke/images/Ninetales.png")));
+                pokePic.setVisible(true);
+                pokePic.updateUI();
+
+                if(!tempTeam.contains(Monsters.ALOLANNINETALES) && tempTeam.size() < 6){
+                    tempTeam.add(Monsters.ALOLANNINETALES);
+                    teamList.append("Alolan Ninetales \n");
+                    teamList.updateUI();
+                } else if(!tempTeam.contains(Monsters.ALOLANNINETALES) && tempTeam.size() == 6){
+                    JOptionPane.showMessageDialog(dexFrame, "Your team can only have 6 Pokemon!", "Team Limit", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+
+        rCharizard.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent click){
+                info.setBackground(Color.white);
+                info.setText(Monsters.CHARIZARD.getName() + "\nHP: " + Monsters.CHARIZARD.getHP() + "\nATK: " + Monsters.CHARIZARD.getATK() + "\nDEF: " + Monsters.CHARIZARD.getDEF() + "\nSPD: " + Monsters.CHARIZARD.getSPD());
+                info.setVisible(true);
+
+                pokePic.setIcon(new ImageIcon(getClass().getResource("/poke/images/Charizard.png")));
+                pokePic.setVisible(true);
+                pokePic.updateUI();
+
+                if(!tempTeam.contains(Monsters.CHARIZARD) && tempTeam.size() < 6){
+                    tempTeam.add(Monsters.CHARIZARD);
+                    teamList.append("Charizard \n");
+                    teamList.updateUI();
+                } else if(!tempTeam.contains(Monsters.CHARIZARD) && tempTeam.size() == 6){
+                    JOptionPane.showMessageDialog(dexFrame, "Your team can only have 6 Pokemon!", "Team Limit", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+
+        rZamazenta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent click){
+                info.setBackground(Color.white);
+                info.setText(Monsters.ZAMAZENTA.getName() + "\nHP: " + Monsters.ZAMAZENTA.getHP() + "\nATK: " + Monsters.ZAMAZENTA.getATK() + "\nDEF: " + Monsters.ZAMAZENTA.getDEF() + "\nSPD: " + Monsters.ZAMAZENTA.getSPD());
+                info.setVisible(true);
+
+                pokePic.setIcon(new ImageIcon(getClass().getResource("/poke/images/Zamazenta.png")));
+                pokePic.setVisible(true);
+                pokePic.updateUI();
+
+                if(!tempTeam.contains(Monsters.ZAMAZENTA) && tempTeam.size() < 6){
+                    tempTeam.add(Monsters.ZAMAZENTA);
+                    teamList.append("Zamazenta \n");
+                    teamList.updateUI();
+                } else if(!tempTeam.contains(Monsters.ZAMAZENTA) && tempTeam.size() == 6){
+                    JOptionPane.showMessageDialog(dexFrame, "Your team can only have 6 Pokemon!", "Team Limit", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
         
 
         
@@ -439,7 +607,7 @@ public class PokeGui extends JComponent implements Runnable {
         myTeamInfo.setVisible(true);
         myTeamInfo.setEditable(false);
 
-        JTextArea enemyTeamInfo = new JTextArea(enemyTeam.get(0).getName() + "\nHP: " + enemyTeam.get(0).getBattleHP() + "/" + enemyTeam.get(0).getTotalHP());
+        enemyTeamInfo = new JTextArea(enemyTeam.get(0).getName() + "\nHP: " + enemyTeam.get(0).getBattleHP() + "/" + enemyTeam.get(0).getTotalHP());
         enemyTeamInfo.setBounds(800, 60, 400, 70);
         enemyTeamInfo.setFont(new Font("inhalt", Font.PLAIN, fontSize));
         fightFrame.getContentPane().add(enemyTeamInfo);
@@ -532,6 +700,69 @@ public class PokeGui extends JComponent implements Runnable {
         fightFrame.getContentPane().add(atk4Button);
         atk4Button.setVisible(false);
 
+        ImageIcon paralyze = new ImageIcon(getClass().getResource("/poke/images/paralyze.png"));
+        JLabel paralyzelbl = new JLabel(paralyze);
+        paralyzelbl.setBounds(0, 100, 50, 50);
+        paralyze.setImage(paralyze.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+        paralyzelbl.setVisible(false);
+        fightFrame.getContentPane().add(paralyzelbl);
+        JLabel paralyzelblEnemy = new JLabel(paralyze);
+        paralyzelblEnemy.setBounds(1300, 100, 50, 50);
+       // paralyze.setImage(paralyze.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+        paralyzelblEnemy.setVisible(false);
+        fightFrame.getContentPane().add(paralyzelblEnemy);
+
+        ImageIcon burn = new ImageIcon(getClass().getResource("/poke/images/burn.png"));
+        JLabel burnlbl = new JLabel(burn);
+        burnlbl.setBounds(0, 150, 50, 50);
+        burn.setImage(burn.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+        burnlbl.setVisible(false);
+        fightFrame.getContentPane().add(burnlbl);
+        JLabel burnlblEnemy = new JLabel(burn);
+        burnlblEnemy.setBounds(1300, 150, 50, 50);
+        //burnEnemy.setImage(paralyze.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+        burnlblEnemy.setVisible(false);
+        fightFrame.getContentPane().add(burnlblEnemy);
+
+        ImageIcon poison = new ImageIcon(getClass().getResource("/poke/images/poison.png"));
+        JLabel poisonlbl = new JLabel(poison);
+        poisonlbl.setBounds(0, 200, 50, 50);
+        poison.setImage(poison.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+        poisonlbl.setVisible(false);
+        fightFrame.getContentPane().add(poisonlbl);
+        JLabel poisonlblEnemy = new JLabel(poison);
+        poisonlblEnemy.setBounds(1300, 200, 50, 50);
+        //burnEnemy.setImage(paralyze.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+        poisonlblEnemy.setVisible(false);
+        fightFrame.getContentPane().add(poisonlblEnemy);
+        
+        ImageIcon freeze = new ImageIcon(getClass().getResource("/poke/images/freeze.png"));
+        JLabel freezelbl = new JLabel(freeze);
+        freezelbl.setBounds(0, 250, 50, 50);
+        freeze.setImage(freeze.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+        freezelbl.setVisible(false);
+        fightFrame.getContentPane().add(freezelbl);
+        JLabel freezelblEnemy = new JLabel(freeze);
+        freezelblEnemy.setBounds(1300, 250, 50, 50);
+        //burnEnemy.setImage(paralyze.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+        freezelblEnemy.setVisible(false);
+        fightFrame.getContentPane().add(freezelblEnemy);
+
+        
+        ImageIcon sleep = new ImageIcon(getClass().getResource("/poke/images/sleep.png"));
+        JLabel sleeplbl = new JLabel(sleep);
+        sleeplbl.setBounds(0, 300, 50, 50);
+        sleep.setImage(sleep.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+        sleeplbl.setVisible(false);
+        fightFrame.getContentPane().add(sleeplbl);
+        JLabel sleeplblEnemy = new JLabel(sleep);
+        sleeplblEnemy.setBounds(1300, 300, 50, 50);
+        //burnEnemy.setImage(paralyze.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+        sleeplblEnemy.setVisible(false);
+        fightFrame.getContentPane().add(sleeplblEnemy);
+
+
+    
         myTeamPokelbl = new JLabel(myTeamPokemon);
         myTeamPokelbl.setBounds(100, 100, 400, 400);
         myTeamPokemon.setImage(myTeamPokemon.getImage().getScaledInstance(325, 325, Image.SCALE_DEFAULT));
@@ -587,18 +818,17 @@ public class PokeGui extends JComponent implements Runnable {
                 cancelButton.setVisible(true);
                 //continueButton.setVisible(true);
 
-                atk1Button.setText(myTeam.get(0).getATK1().getName());
+                atk1Button.setText(myTeam.get(0).getATK1().getName() + myTeam.get(0).checkPP(myTeam.get(0).getATK1()) + "/" + myTeam.get(0).getATK1().getTotalPP() + "("+myTeam.get(0).getATK1().getType()+")");
                 atk1Button.setVisible(true);
 
-                atk2Button.setText(myTeam.get(0).getATK2().getName());
+                atk2Button.setText(myTeam.get(0).getATK2().getName() + myTeam.get(0).checkPP(myTeam.get(0).getATK2()) + "/" + myTeam.get(0).getATK2().getTotalPP() + "("+myTeam.get(0).getATK2().getType()+")");
                 atk2Button.setVisible(true);
 
-                atk3Button.setText(myTeam.get(0).getATK3().getName());
+                atk3Button.setText(myTeam.get(0).getATK3().getName() + myTeam.get(0).checkPP(myTeam.get(0).getATK3()) + "/" + myTeam.get(0).getATK3().getTotalPP() + "("+myTeam.get(0).getATK3().getType()+")");
                 atk3Button.setVisible(true);
 
-                atk4Button.setText(myTeam.get(0).getATK4().getName());
+                atk4Button.setText(myTeam.get(0).getATK4().getName() + myTeam.get(0).checkPP(myTeam.get(0).getATK4()) + "/" + myTeam.get(0).getATK4().getTotalPP() + "("+myTeam.get(0).getATK4().getType()+")");
                 atk4Button.setVisible(true);
-
 
             }
         });
@@ -608,7 +838,7 @@ public class PokeGui extends JComponent implements Runnable {
             public void actionPerformed(ActionEvent click){
                 showBagScreen();
             }
-        })
+        });
 
         switchButton.addActionListener(new ActionListener(){
             @Override
@@ -631,6 +861,9 @@ public class PokeGui extends JComponent implements Runnable {
 
                 myTeamInfo.setText(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
                 myTeamInfo.updateUI();
+
+                enemyTeamInfo.setText(enemyTeam.get(0).getName() + "\nHP: " + enemyTeam.get(0).getBattleHP() + "/" + enemyTeam.get(0).getTotalHP());
+                enemyTeamInfo.updateUI();
 
                 //switchButton.setEnabled(false);
                 cancelButton.setEnabled(false);
@@ -657,6 +890,9 @@ public class PokeGui extends JComponent implements Runnable {
                 myTeamInfo.setText(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
                 myTeamInfo.updateUI();
 
+                enemyTeamInfo.setText(enemyTeam.get(0).getName() + "\nHP: " + enemyTeam.get(0).getBattleHP() + "/" + enemyTeam.get(0).getTotalHP());
+                enemyTeamInfo.updateUI();
+
                 //switchButton.setEnabled(false);
                 cancelButton.setEnabled(false);
                 atk1Button.setEnabled(false);
@@ -681,6 +917,9 @@ public class PokeGui extends JComponent implements Runnable {
 
                 myTeamInfo.setText(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
                 myTeamInfo.updateUI();
+
+                enemyTeamInfo.setText(enemyTeam.get(0).getName() + "\nHP: " + enemyTeam.get(0).getBattleHP() + "/" + enemyTeam.get(0).getTotalHP());
+                enemyTeamInfo.updateUI();
 
                 //switchButton.setEnabled(false);
                 cancelButton.setEnabled(false);
@@ -707,6 +946,9 @@ public class PokeGui extends JComponent implements Runnable {
                 myTeamInfo.setText(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
                 myTeamInfo.updateUI();
 
+                enemyTeamInfo.setText(enemyTeam.get(0).getName() + "\nHP: " + enemyTeam.get(0).getBattleHP() + "/" + enemyTeam.get(0).getTotalHP());
+                enemyTeamInfo.updateUI();
+
                 //switchButton.setEnabled(false);
                 cancelButton.setEnabled(false);
                 atk1Button.setEnabled(false);
@@ -720,22 +962,104 @@ public class PokeGui extends JComponent implements Runnable {
         continueButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent click){
-                if(attack){
                     //battleNarrationArea.setText(bm.trainerAI(myTeam.get(0), enemyTeam.get(0), enemyTeam));
                     //battleNarration.setText("Test");
                     //battleNarration.updateUI();
-                    if(myTeam.get(0).fainted() && myTeam.get(1).fainted() && myTeam.get(2).fainted() && myTeam.get(3).fainted() && myTeam.get(4).fainted() && myTeam.get(5).fainted()){
-                        fightFrame.dispose();
-                        showDefeatScreen();
-                    } else if (myTeam.get(0).fainted()){
-                        showSwitchScreen();
-                    }
+                if(myTeam.get(0).fainted() && myTeam.get(1).fainted() && myTeam.get(2).fainted() && myTeam.get(3).fainted() && myTeam.get(4).fainted() && myTeam.get(5).fainted()){
+                    fightFrame.dispose();
+                    showDefeatScreen();
+                } else if(enemyTeam.get(0).fainted() && enemyTeam.get(1).fainted() && enemyTeam.get(2).fainted() && enemyTeam.get(3).fainted() && enemyTeam.get(4).fainted() && enemyTeam.get(5).fainted()) {
+                    fightFrame.dispose();
+                    showVictoryScreen();
 
-                    attack = false;
+                } else if (myTeam.get(0).fainted()){
+                    showSwitchScreen();
+                    battleNarrationArea.setText("What will " + myTeam.get(0).getName() + " do?");
+                    battleNarrationArea.updateUI();
+
+                } else if(enemyTeam.get(0).fainted()){
+                    
+                    for(Pokemon poke : enemyTeam){
+                        if(!poke.fainted()){
+                            battleNarrationArea.setText("Enemy trainer swapped " + enemyTeam.get(0).getName() + " for " + poke.getName());
+                            battleNarrationArea.updateUI();
+
+                            Collections.swap(enemyTeam, 0, enemyTeam.indexOf(poke));
+                            
+                            ImageIcon image = new ImageIcon(getClass().getResource("/poke/images/" + enemyTeam.get(0).getPokePictureName()));
+                            enemyTeamPokelbl.setIcon(image);
+
+                            enemyTeamInfo.setText(enemyTeam.get(0).getName() + "\nHP: " + enemyTeam.get(0).getBattleHP() + "/" + enemyTeam.get(0).getTotalHP());
+                            enemyTeamInfo.updateUI();
+                        }
+                    }
                 } else {
                     battleNarrationArea.setText("What will " + myTeam.get(0).getName() + " do?");
                     battleNarrationArea.updateUI();
                 }
+
+                if(myTeam.get(0).getStatus()[0]){
+                    poisonlbl.setVisible(true);
+                }
+                if(myTeam.get(0).getStatus()[1]){
+                    paralyzelbl.setVisible(true);
+                }
+                if(myTeam.get(0).getStatus()[2]){
+                    burnlbl.setVisible(true);
+                }
+                if(myTeam.get(0).getStatus()[3]){
+                    freezelbl.setVisible(true);
+                } 
+                if(myTeam.get(0).getStatus()[4]){
+                    sleeplbl.setVisible(true);
+                }
+                if(!myTeam.get(0).getStatus()[0]){
+                    poisonlbl.setVisible(false);
+                }
+                if(!myTeam.get(0).getStatus()[1]){
+                    paralyzelbl.setVisible(false);
+                }
+                if(!myTeam.get(0).getStatus()[2]){
+                    burnlbl.setVisible(false);
+                }
+                if(!myTeam.get(0).getStatus()[3]){
+                    freezelbl.setVisible(false);
+                } 
+                if(!myTeam.get(0).getStatus()[4]){
+                    sleeplbl.setVisible(false);
+                }
+
+                if(enemyTeam.get(0).getStatus()[0]){
+                    poisonlblEnemy.setVisible(true);
+                }
+                if(enemyTeam.get(0).getStatus()[1]){
+                    paralyzelblEnemy.setVisible(true);
+                }
+                if(enemyTeam.get(0).getStatus()[2]){
+                    burnlblEnemy.setVisible(true);
+                }
+                if(enemyTeam.get(0).getStatus()[3]){
+                    freezelblEnemy.setVisible(true);
+                } 
+                if(enemyTeam.get(0).getStatus()[4]){
+                    sleeplblEnemy.setVisible(true);
+                }
+                if(!enemyTeam.get(0).getStatus()[0]){
+                    poisonlblEnemy.setVisible(false);
+                }
+                if(!enemyTeam.get(0).getStatus()[1]){
+                    paralyzelblEnemy.setVisible(false);
+                }
+                if(!enemyTeam.get(0).getStatus()[2]){
+                    burnlblEnemy.setVisible(false);
+                }
+                if(!enemyTeam.get(0).getStatus()[3]){
+                    freezelblEnemy.setVisible(false);
+                } 
+                if(!enemyTeam.get(0).getStatus()[4]){
+                    sleeplblEnemy.setVisible(false);
+                }
+
 
                 cancelButton.setEnabled(true);
                 atk1Button.setEnabled(true);
@@ -777,30 +1101,424 @@ public class PokeGui extends JComponent implements Runnable {
         loseFrame.setVisible(true);
     }
 
+    private void showVictoryScreen(){
+        JFrame winFrame = new JFrame("You have defeated the enemy trainer!");
+        winFrame.setBounds(1266, 868, width, height);
+        winFrame.setLocationRelativeTo(null);
+        winFrame.getContentPane().setLayout(null);
+        winFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        winFrame.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+
+        ImageIcon winScreen = new ImageIcon(getClass().getResource("/poke/images/victory.jpg"));
+
+        JLabel winlbl = new JLabel(winScreen);
+        winlbl.setBounds(0,0,width, height);
+        winScreen.setImage(winScreen.getImage().getScaledInstance(1366, 768, Image.SCALE_DEFAULT));
+        winFrame.getContentPane().add(winlbl);
+
+        winFrame.setVisible(true);
+
+    }
+
     private void showBagScreen(){
-        JFrame bagFrame = new bagFrame("You have been defeated!");
+        JFrame bagFrame = new JFrame("Inventory");
         bagFrame.setBounds(1266, 868, 800, 800);
         bagFrame.setLocationRelativeTo(null);
-        bagframe.getContentPane().setLayout(null);
+        bagFrame.getContentPane().setLayout(null);
         bagFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         bagFrame.setFont(new Font("inhalt", Font.PLAIN, fontSize));
 
         JButton healPotionButton = new JButton();
-        ImageIcon healPotionIcon = new ImageIcon(getClass.getResource("/poke/images/heal.png"));
+        ImageIcon healPotionIcon = new ImageIcon(getClass().getResource("/poke/images/heal.png"));
         healPotionButton.setIcon(healPotionIcon);
-        healPotionButton.setBounds(100, 100, 250, 250);
+        healPotionButton.setBounds(100, 100, 100, 100);
         healPotionButton.setVisible(true);
+        bagFrame.getContentPane().add(healPotionButton);
+
+        JTextArea healPotionCounter = new JTextArea("x" + bm.getHealPotionCount());
+        healPotionCounter.setBounds(200, 150, 50, 50);
+        healPotionCounter.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        healPotionCounter.setVisible(true);
+        bagFrame.getContentPane().add(healPotionCounter);
+
+        JButton ppRestoreButton = new JButton();
+        ImageIcon ppRestoreIcon = new ImageIcon(getClass().getResource("/poke/images/pprestore.png"));
+        ppRestoreButton.setIcon(ppRestoreIcon);
+        ppRestoreButton.setBounds(100, 300, 100, 100);
+        ppRestoreButton.setVisible(true);
+        bagFrame.getContentPane().add(ppRestoreButton);
+
+        JTextArea ppRestoreCounter = new JTextArea("x" + bm.getPPRestoreCount());
+        ppRestoreCounter.setBounds(200, 350, 50, 50);
+        ppRestoreCounter.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        ppRestoreCounter.setVisible(true);
+        bagFrame.getContentPane().add(ppRestoreCounter);       
+        
+        //button commands
+        healPotionButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                showHealScreen();
+                //item = true
+                bagFrame.dispose();
+            }
+        });
+
+        ppRestoreButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                showRestoreScreen();
+                bagFrame.dispose();
+            }
+        });
+
+
+        bagFrame.setVisible(true);
+    }
+
+    private void showRestoreScreen(){
+        JFrame restoreFrame = new JFrame("Select a Move to restore PP");
+        restoreFrame.setBounds(1266, 868, 800, 800);
+        restoreFrame.setLocationRelativeTo(null);
+        restoreFrame.getContentPane().setLayout(null);
+        restoreFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        restoreFrame.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+
+        JButton firstMove = new JButton(myTeam.get(0).getATK1().getName() + " " + myTeam.get(0).checkPP(myTeam.get(0).getATK1()) + "/" + myTeam.get(0).getATK1().getTotalPP());
+        firstMove.setBounds(100, 100, 300, 100);
+        firstMove.setHorizontalAlignment(SwingConstants.CENTER);
+        firstMove.setFont(new Font("inhalt", Font.PLAIN, fontSize-5));
+        restoreFrame.getContentPane().add(firstMove);
+        firstMove.setVisible(true);
+
+        JButton secondMove = new JButton(myTeam.get(0).getATK2().getName() + " " + myTeam.get(0).checkPP(myTeam.get(0).getATK2()) + "/" + myTeam.get(0).getATK2().getTotalPP());
+        secondMove.setBounds(400, 200, 300, 100);
+        secondMove.setHorizontalAlignment(SwingConstants.CENTER);
+        secondMove.setFont(new Font("inhalt", Font.PLAIN, fontSize-5));
+        restoreFrame.getContentPane().add(secondMove);
+        secondMove.setVisible(true);
+
+        JButton thirdMove = new JButton(myTeam.get(0).getATK3().getName() + " " + myTeam.get(0).checkPP(myTeam.get(0).getATK3()) + "/" + myTeam.get(0).getATK3().getTotalPP());
+        thirdMove.setBounds(100, 300, 300, 100);
+        thirdMove.setHorizontalAlignment(SwingConstants.CENTER);
+        thirdMove.setFont(new Font("inhalt", Font.PLAIN, fontSize-5));
+        restoreFrame.getContentPane().add(thirdMove);
+        thirdMove.setVisible(true);
+
+        JButton fourMove = new JButton(myTeam.get(0).getATK4().getName() + " " + myTeam.get(0).checkPP(myTeam.get(0).getATK4()) + "/" + myTeam.get(0).getATK4().getTotalPP());
+        fourMove.setBounds(400, 400, 300, 100);
+        fourMove.setHorizontalAlignment(SwingConstants.CENTER);
+        fourMove.setFont(new Font("inhalt", Font.PLAIN, fontSize-5));
+        restoreFrame.getContentPane().add(fourMove);
+        fourMove.setVisible(true);
+
+        firstMove.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                if(Integer.valueOf(bm.getPPRestoreCount()) == 0){
+                    JOptionPane.showMessageDialog(restoreFrame, "You ran out of Ethers!", "No Ethers", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    myTeam.get(0).addPP(myTeam.get(0).getATK1(), 10);
+                    battleNarrationArea.setText(displayBattle(null));
+                    restoreFrame.dispose();
+                }
+            }
+        });
+
+        secondMove.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                if(Integer.valueOf(bm.getPPRestoreCount()) == 0){
+                    JOptionPane.showMessageDialog(restoreFrame, "You ran out of Ethers!", "No Ethers", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    myTeam.get(0).addPP(myTeam.get(0).getATK2(), 10);
+                    battleNarrationArea.setText(displayBattle(null));
+                    restoreFrame.dispose();
+                }
+            }
+        });
+
+        thirdMove.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                if(Integer.valueOf(bm.getPPRestoreCount()) == 0){
+                    JOptionPane.showMessageDialog(restoreFrame, "You ran out of Ethers!", "No Ethers", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    myTeam.get(0).addPP(myTeam.get(0).getATK3(), 10);
+                    battleNarrationArea.setText(displayBattle(null));
+                    restoreFrame.dispose();
+                }
+            }
+        });
+
+        fourMove.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                if(Integer.valueOf(bm.getPPRestoreCount()) == 0){
+                    JOptionPane.showMessageDialog(restoreFrame, "You ran out of Ethers!", "No Ethers", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    myTeam.get(0).addPP(myTeam.get(0).getATK4(), 10);
+                    battleNarrationArea.setText(displayBattle(null));
+                    restoreFrame.dispose();
+                }
+            }
+        });
+
+        restoreFrame.setVisible(true);
+    }
+
+    private void showHealScreen(){
+        JFrame healFrame = new JFrame("Select a Pokemon to Heal");
+        healFrame.setBounds(1266, 868, 800, 800);
+        healFrame.setLocationRelativeTo(null);
+        healFrame.getContentPane().setLayout(null);
+        healFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        healFrame.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+
+        JButton firstPokemon = new JButton(myTeam.get(1).getName() + " HP:" + myTeam.get(1).getBattleHP() + "/" + myTeam.get(1).getTotalHP());
+        firstPokemon.setBounds(100, 100, 300, 100);
+        firstPokemon.setHorizontalAlignment(SwingConstants.CENTER);
+        firstPokemon.setFont(new Font("inhalt", Font.PLAIN, fontSize-5));
+        healFrame.getContentPane().add(firstPokemon);
+        firstPokemon.setVisible(true);
+
+        JButton secondPokemon = new JButton(myTeam.get(2).getName() + " HP:" + myTeam.get(2).getBattleHP() + "/" + myTeam.get(2).getTotalHP());
+        secondPokemon.setBounds(400, 200, 300, 100);
+        secondPokemon.setHorizontalAlignment(SwingConstants.CENTER);
+        secondPokemon.setFont(new Font("inhalt", Font.PLAIN, fontSize-5));
+        healFrame.getContentPane().add(secondPokemon);
+        secondPokemon.setVisible(true);
+
+        JButton thirdPokemon = new JButton(myTeam.get(3).getName() + " HP:" + myTeam.get(3).getBattleHP() + "/" + myTeam.get(3).getTotalHP());
+        thirdPokemon.setBounds(100, 300, 300, 100);
+        thirdPokemon.setHorizontalAlignment(SwingConstants.CENTER);
+        thirdPokemon.setFont(new Font("inhalt", Font.PLAIN, fontSize-5));
+        healFrame.getContentPane().add(thirdPokemon);
+        thirdPokemon.setVisible(true);
+
+        JButton fourthPokemon = new JButton(myTeam.get(4).getName() + " HP:" + myTeam.get(4).getBattleHP() + "/" + myTeam.get(4).getTotalHP());
+        fourthPokemon.setBounds(400, 400, 300, 100);
+        fourthPokemon.setHorizontalAlignment(SwingConstants.CENTER);
+        fourthPokemon.setFont(new Font("inhalt", Font.PLAIN, fontSize-5));
+        healFrame.getContentPane().add(fourthPokemon);
+        fourthPokemon.setVisible(true);
+
+        JButton fifthPokemon = new JButton(myTeam.get(5).getName() + " HP:" + myTeam.get(5).getBattleHP() + "/" + myTeam.get(5).getTotalHP());
+        fifthPokemon.setBounds(100, 500, 300, 100);
+        fifthPokemon.setHorizontalAlignment(SwingConstants.CENTER);
+        fifthPokemon.setFont(new Font("inhalt", Font.PLAIN, fontSize-5));
+        healFrame.getContentPane().add(fifthPokemon);
+        fifthPokemon.setVisible(true);
+
+        JButton sixthPokemon = new JButton(myTeam.get(0).getName() + " HP:" + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
+        sixthPokemon.setBounds(400, 600, 300, 100);
+        sixthPokemon.setHorizontalAlignment(SwingConstants.CENTER);
+        sixthPokemon.setFont(new Font("inhalt", Font.PLAIN, fontSize-5));
+        healFrame.getContentPane().add(sixthPokemon);
+        sixthPokemon.setVisible(true);
+
+        healFrame.setVisible(true);
+
+        firstPokemon.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                if(myTeam.get(1).fainted()){
+                    JOptionPane.showMessageDialog(healFrame, "You can't heal this Pokemon!", "Pokemon Fainted!", JOptionPane.WARNING_MESSAGE);
+                
+                } else if(Integer.valueOf(bm.getHealPotionCount()) == 0){
+                    JOptionPane.showMessageDialog(healFrame, "You ran out of potions!", "Not enough potions", JOptionPane.WARNING_MESSAGE);
+
+                } else {
+                    battleNarrationArea.setText("You healed " + myTeam.get(1).getName());
+                    battleNarrationArea.updateUI();
+
+                    myTeam.get(1).gainHP();
+                    bm.lowerHealPotion();
+
+                    if(myTeam.get(1).getBattleHP() > myTeam.get(1).getTotalHP()){
+                        myTeam.get(1).resetHP();
+                    }
+                    
+                    myTeamInfo.setText(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
+                    myTeamInfo.updateUI();
+
+                    battleNarrationArea.setText(displayBattle(null));
+
+                    healFrame.dispose();
+                }
+            }
+        });
+
+        secondPokemon.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                if(myTeam.get(2).fainted()){
+                    JOptionPane.showMessageDialog(healFrame, "You can't heal this Pokemon!", "Pokemon Fainted!", JOptionPane.WARNING_MESSAGE);
+
+                } else if(Integer.valueOf(bm.getHealPotionCount()) == 0){
+                    JOptionPane.showMessageDialog(healFrame, "You ran out of potions!", "Not enough potions", JOptionPane.WARNING_MESSAGE);
+
+                } else {
+                    battleNarrationArea.setText("You healed " + myTeam.get(2).getName());
+                    battleNarrationArea.updateUI();
+
+                    myTeam.get(2).gainHP();
+                    bm.lowerHealPotion();
+
+                    if(myTeam.get(2).getBattleHP() > myTeam.get(2).getTotalHP()){
+                        myTeam.get(2).resetHP();
+                    }
+                    
+                    myTeamInfo.setText(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
+                    myTeamInfo.updateUI();
+
+                    battleNarrationArea.setText(displayBattle(null));
+
+                    healFrame.dispose();
+
+                }
+            }
+        });
+
+        thirdPokemon.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                if(myTeam.get(3).fainted()){
+                    JOptionPane.showMessageDialog(healFrame, "You can't heal this Pokemon!", "Pokemon Fainted!", JOptionPane.WARNING_MESSAGE);
+
+                } else if(Integer.valueOf(bm.getHealPotionCount()) == 0){
+                    JOptionPane.showMessageDialog(healFrame, "You ran out of potions!", "Not enough potions", JOptionPane.WARNING_MESSAGE);
+
+                } else {
+                    battleNarrationArea.setText("You healed " + myTeam.get(3).getName());
+                    battleNarrationArea.updateUI();
+
+                    myTeam.get(3).gainHP();
+                    bm.lowerHealPotion();
+
+                    if(myTeam.get(3).getBattleHP() > myTeam.get(3).getTotalHP()){
+                        myTeam.get(3).resetHP();
+                    }
+                    
+                    myTeamInfo.setText(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
+                    myTeamInfo.updateUI();
+
+                    battleNarrationArea.setText(displayBattle(null));
+
+                    healFrame.dispose();
+                }
+            }
+        });
+
+        fourthPokemon.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                if(myTeam.get(4).fainted()){
+                    JOptionPane.showMessageDialog(healFrame, "You can't heal this Pokemon!", "Pokemon Fainted!", JOptionPane.WARNING_MESSAGE);
+
+                } else if(Integer.valueOf(bm.getHealPotionCount()) == 0){
+                    JOptionPane.showMessageDialog(healFrame, "You ran out of potions!", "Not enough potions", JOptionPane.WARNING_MESSAGE);
+
+                } else {
+                    battleNarrationArea.setText("You healed " + myTeam.get(4).getName());
+                    battleNarrationArea.updateUI();
+
+                    myTeam.get(4).gainHP();
+                    bm.lowerHealPotion();
+
+                    if(myTeam.get(4).getBattleHP() > myTeam.get(4).getTotalHP()){
+                        myTeam.get(4).resetHP();
+                    }
+                    
+                    myTeamInfo.setText(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
+                    myTeamInfo.updateUI();
+
+                    battleNarrationArea.setText(displayBattle(null));
+
+                    healFrame.dispose();
+                }
+            }
+        });
+        
+        fifthPokemon.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                if(myTeam.get(5).fainted()){
+                    JOptionPane.showMessageDialog(healFrame, "You can't heal this Pokemon!", "Pokemon Fainted!", JOptionPane.WARNING_MESSAGE);
+
+                } else if(Integer.valueOf(bm.getHealPotionCount()) == 0){
+                    JOptionPane.showMessageDialog(healFrame, "You ran out of potions!", "Not enough potions", JOptionPane.WARNING_MESSAGE);
+
+                } else {
+                    battleNarrationArea.setText("You healed " + myTeam.get(5).getName());
+                    battleNarrationArea.updateUI();
+
+                    myTeam.get(5).gainHP();
+                    bm.lowerHealPotion();
+
+                    if(myTeam.get(5).getBattleHP() > myTeam.get(5).getTotalHP()){
+                        myTeam.get(5).resetHP();
+                    }
+                    
+                    myTeamInfo.setText(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
+                    myTeamInfo.updateUI();
+
+                    battleNarrationArea.setText(displayBattle(null));
+
+                    healFrame.dispose();
+                }
+            }
+        });
+
+        sixthPokemon.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent click){
+                if(myTeam.get(0).fainted()){
+                    JOptionPane.showMessageDialog(healFrame, "You can't heal this Pokemon!", "Pokemon Fainted!", JOptionPane.WARNING_MESSAGE);
+
+                } else if(Integer.valueOf(bm.getHealPotionCount()) == 0){
+                    JOptionPane.showMessageDialog(healFrame, "You ran out of potions!", "Not enough potions", JOptionPane.WARNING_MESSAGE);
+
+                } else {
+                    battleNarrationArea.setText("You healed " + myTeam.get(0).getName());
+                    battleNarrationArea.updateUI();
+
+                    myTeam.get(0).gainHP();
+                    bm.lowerHealPotion();
+
+                    if(myTeam.get(0).getBattleHP() > myTeam.get(0).getTotalHP()){
+                        myTeam.get(0).resetHP();
+                    }
+                    
+                    myTeamInfo.setText(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
+                    myTeamInfo.updateUI();
+
+                    battleNarrationArea.setText(displayBattle(null));
+
+                    healFrame.dispose();
+                }
+            }
+        });
+
     }
 
     private String displayBattle(AttackMove atk){
         String result = "";
         String enemyAction = bm.trainerAI(myTeam.get(0), enemyTeam.get(0), enemyTeam);
+
+        System.out.println(enemyAction);
         
         switch (enemyAction.substring(0, 4)){
             case "heal":
-                result += "\nEnemy trainer healed " + enemyTeam.get(0);
-                result += bm.oneSidedFight(myTeam.get(0), enemyTeam.get(0), atk);
+                result += "\nEnemy trainer healed " + enemyTeam.get(0).getName();
 
+                enemyTeamInfo.setText(enemyTeam.get(0).getName() + "\nHP: " + enemyTeam.get(0).getBattleHP() + "/" + enemyTeam.get(0).getTotalHP());
+                enemyTeamInfo.updateUI();
+
+                if(atk != null){
+                    result += bm.oneSidedFight(myTeam.get(0), enemyTeam.get(0), atk);
+                }
+            
                 break;
             case "swap":
                 String pokeSwap = enemyAction.substring(4);
@@ -813,7 +1531,9 @@ public class PokeGui extends JComponent implements Runnable {
                         ImageIcon image = new ImageIcon(getClass().getResource("/poke/images/" + poke.getPokePictureName()));
                         enemyTeamPokelbl.setIcon(image);
 
-                        result += bm.oneSidedFight(myTeam.get(0), enemyTeam.get(0), atk);
+                        if(atk != null){
+                            result += bm.oneSidedFight(myTeam.get(0), enemyTeam.get(0), atk);
+                        }
                     }
                 }
 
@@ -827,11 +1547,15 @@ public class PokeGui extends JComponent implements Runnable {
                         break;
                     }
                 }
-
-                if(myTeam.get(0).getBattleSPD() >= enemyTeam.get(0).getBattleSPD()){
-                    result += bm.battleOrder(myTeam.get(0), atk, enemyTeam.get(0), enemyAttack);
-                } else if (myTeam.get(0).getBattleSPD() < enemyTeam.get(0).getBattleSPD()){
-                    result += bm.battleOrder(enemyTeam.get(0), enemyAttack, myTeam.get(0), atk);
+                
+                if(atk != null){
+                    if(myTeam.get(0).getBattleSPD() >= enemyTeam.get(0).getBattleSPD()){
+                        result += bm.battleOrder(myTeam.get(0), atk, enemyTeam.get(0), enemyAttack);
+                    } else if (myTeam.get(0).getBattleSPD() < enemyTeam.get(0).getBattleSPD()){
+                        result += bm.battleOrder(enemyTeam.get(0), enemyAttack, myTeam.get(0), atk);
+                    }
+                } else {
+                    result += bm.oneSidedFight(enemyTeam.get(0), myTeam.get(0), enemyAttack);
                 }
 
                 break;
@@ -848,38 +1572,38 @@ public class PokeGui extends JComponent implements Runnable {
         switchFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         switchFrame.setFont(new Font("inhalt", Font.PLAIN, fontSize));
 
-        JButton firstPokemon = new JButton(myTeam.get(1).getName());
+        JButton firstPokemon = new JButton(myTeam.get(1).getName() + " HP:" + myTeam.get(1).getBattleHP() + "/" + myTeam.get(1).getTotalHP());
         firstPokemon.setBounds(100, 100, 300, 100);
         firstPokemon.setHorizontalAlignment(SwingConstants.CENTER);
-        firstPokemon.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        firstPokemon.setFont(new Font("inhalt", Font.PLAIN, fontSize-5));
         switchFrame.getContentPane().add(firstPokemon);
         firstPokemon.setVisible(true);
 
-        JButton secondPokemon = new JButton(myTeam.get(2).getName());
+        JButton secondPokemon = new JButton(myTeam.get(2).getName() + " HP:" + myTeam.get(2).getBattleHP() + "/" + myTeam.get(2).getTotalHP());
         secondPokemon.setBounds(400, 200, 300, 100);
         secondPokemon.setHorizontalAlignment(SwingConstants.CENTER);
-        secondPokemon.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        secondPokemon.setFont(new Font("inhalt", Font.PLAIN, fontSize-5));
         switchFrame.getContentPane().add(secondPokemon);
         secondPokemon.setVisible(true);
 
-        JButton thirdPokemon = new JButton(myTeam.get(3).getName());
+        JButton thirdPokemon = new JButton(myTeam.get(3).getName() + " HP:" + myTeam.get(3).getBattleHP() + "/" + myTeam.get(3).getTotalHP());
         thirdPokemon.setBounds(100, 300, 300, 100);
         thirdPokemon.setHorizontalAlignment(SwingConstants.CENTER);
-        thirdPokemon.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        thirdPokemon.setFont(new Font("inhalt", Font.PLAIN, fontSize-5));
         switchFrame.getContentPane().add(thirdPokemon);
         thirdPokemon.setVisible(true);
 
-        JButton fourthPokemon = new JButton(myTeam.get(4).getName());
+        JButton fourthPokemon = new JButton(myTeam.get(4).getName() + " HP:" + myTeam.get(4).getBattleHP() + "/" + myTeam.get(4).getTotalHP());
         fourthPokemon.setBounds(400, 400, 300, 100);
         fourthPokemon.setHorizontalAlignment(SwingConstants.CENTER);
-        fourthPokemon.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        fourthPokemon.setFont(new Font("inhalt", Font.PLAIN, fontSize-5));
         switchFrame.getContentPane().add(fourthPokemon);
         fourthPokemon.setVisible(true);
 
-        JButton fifthPokemon = new JButton(myTeam.get(5).getName());
+        JButton fifthPokemon = new JButton(myTeam.get(5).getName() + " HP:" + myTeam.get(5).getBattleHP() + "/" + myTeam.get(5).getTotalHP());
         fifthPokemon.setBounds(100, 500, 300, 100);
         fifthPokemon.setHorizontalAlignment(SwingConstants.CENTER);
-        fifthPokemon.setFont(new Font("inhalt", Font.PLAIN, fontSize));
+        fifthPokemon.setFont(new Font("inhalt", Font.PLAIN, fontSize-5));
         switchFrame.getContentPane().add(fifthPokemon);
         fifthPokemon.setVisible(true);
 
@@ -890,7 +1614,7 @@ public class PokeGui extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent click){
                 if(myTeam.get(1).fainted()){
-                    JOptionPane.showMessageDialog(dexFrame, "You can't switch to this Pokemon!", "Pokemon Fainted!", JOptionPane.WARNING_MESSAGE); 
+                    JOptionPane.showMessageDialog(switchFrame, "You can't switch to this Pokemon!", "Pokemon Fainted!", JOptionPane.WARNING_MESSAGE); 
                 } else {
                     battleNarrationArea.setText("You swapped " + myTeam.get(0).getName() + " for " + myTeam.get(1).getName());
                     Collections.swap(myTeam, 0, 1);
@@ -901,6 +1625,8 @@ public class PokeGui extends JComponent implements Runnable {
                     myTeamInfo.setText(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
                     myTeamInfo.updateUI();
 
+                    battleNarrationArea.setText(displayBattle(null));
+
                     switchFrame.dispose();
                 } 
             }
@@ -910,7 +1636,7 @@ public class PokeGui extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent click){
                 if(myTeam.get(2).fainted()){
-                    JOptionPane.showMessageDialog(dexFrame, "You can't switch to this Pokemon!", "Pokemon Fainted!", JOptionPane.WARNING_MESSAGE); 
+                    JOptionPane.showMessageDialog(switchFrame, "You can't switch to this Pokemon!", "Pokemon Fainted!", JOptionPane.WARNING_MESSAGE); 
                 } else {
                     battleNarrationArea.setText("You swapped " + myTeam.get(0).getName() + " for " + myTeam.get(2).getName());
                     Collections.swap(myTeam, 0, 2);
@@ -921,6 +1647,8 @@ public class PokeGui extends JComponent implements Runnable {
                     myTeamInfo.setText(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
                     myTeamInfo.updateUI();
 
+                    battleNarrationArea.setText(displayBattle(null));
+
                     switchFrame.dispose();
                 } 
             }
@@ -930,7 +1658,7 @@ public class PokeGui extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent click){
                 if(myTeam.get(3).fainted()){
-                    JOptionPane.showMessageDialog(dexFrame, "You can't switch to this Pokemon!", "Pokemon Fainted!", JOptionPane.WARNING_MESSAGE); 
+                    JOptionPane.showMessageDialog(switchFrame, "You can't switch to this Pokemon!", "Pokemon Fainted!", JOptionPane.WARNING_MESSAGE); 
                 } else {
                     battleNarrationArea.setText("You swapped " + myTeam.get(0).getName() + " for " + myTeam.get(3).getName());
                     Collections.swap(myTeam, 0, 3);
@@ -941,6 +1669,8 @@ public class PokeGui extends JComponent implements Runnable {
                     myTeamInfo.setText(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
                     myTeamInfo.updateUI();
 
+                    battleNarrationArea.setText(displayBattle(null));
+
                     switchFrame.dispose();
                 } 
             }
@@ -950,7 +1680,7 @@ public class PokeGui extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent click){
                 if(myTeam.get(4).fainted()){
-                    JOptionPane.showMessageDialog(dexFrame, "You can't switch to this Pokemon!", "Pokemon Fainted!", JOptionPane.WARNING_MESSAGE); 
+                    JOptionPane.showMessageDialog(switchFrame, "You can't switch to this Pokemon!", "Pokemon Fainted!", JOptionPane.WARNING_MESSAGE); 
                 } else {
                     battleNarrationArea.setText("You swapped " + myTeam.get(0).getName() + " for " + myTeam.get(4).getName());
                     Collections.swap(myTeam, 0, 4);
@@ -961,6 +1691,8 @@ public class PokeGui extends JComponent implements Runnable {
                     myTeamInfo.setText(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
                     myTeamInfo.updateUI();
 
+                    battleNarrationArea.setText(displayBattle(null));
+
                     switchFrame.dispose();
                 } 
             }
@@ -970,7 +1702,7 @@ public class PokeGui extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent click){
                 if(myTeam.get(5).fainted()){
-                    JOptionPane.showMessageDialog(dexFrame, "You can't switch to this Pokemon!", "Pokemon Fainted!", JOptionPane.WARNING_MESSAGE); 
+                    JOptionPane.showMessageDialog(switchFrame, "You can't switch to this Pokemon!", "Pokemon Fainted!", JOptionPane.WARNING_MESSAGE); 
                 } else {
                     battleNarrationArea.setText("You swapped " + myTeam.get(0).getName() + " for " + myTeam.get(5).getName());
                     Collections.swap(myTeam, 0, 5);
@@ -980,6 +1712,8 @@ public class PokeGui extends JComponent implements Runnable {
 
                     myTeamInfo.setText(myTeam.get(0).getName() + "\nHP: " + myTeam.get(0).getBattleHP() + "/" + myTeam.get(0).getTotalHP());
                     myTeamInfo.updateUI();
+
+                    battleNarrationArea.setText(displayBattle(null));
 
                     switchFrame.dispose();
                 } 

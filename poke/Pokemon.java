@@ -60,6 +60,10 @@ public class Pokemon {
         
     }
 
+    public void resetHP(){
+        battleHP = HP;
+    }
+
     public void takeDamage(double damage){
         battleHP -= damage;
     }
