@@ -49,10 +49,12 @@ public class PokeGui extends JComponent implements Runnable {
         menuFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         menuFrame.getContentPane().setLayout(null);
 
+        //start game button
         JButton startBtn = new JButton("Start Game");
         startBtn.setBounds(500,500, width/4, height/15);
         startBtn.setFont(new Font("inhalt", Font.PLAIN, fontSize+5));
 
+        //end game button
         JButton endBtn = new JButton("Quit Game");
         endBtn.setBounds(500, 600, width/4, height/15);
         endBtn.setFont(new Font("inhalt", Font.PLAIN, fontSize+5));
@@ -89,24 +91,28 @@ public class PokeGui extends JComponent implements Runnable {
         dexFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         dexFrame.getContentPane().setLayout(null);
 
+        //main menu button
         JButton backButton = new JButton("Main Menu");
         backButton.setBounds(900, 43, 250, 70);
         backButton.setFont(new Font("inhalt", Font.PLAIN, fontSize+2));
         dexFrame.getContentPane().add(backButton);
         backButton.setVisible(true);
 
+        //start fight button
         JButton startFight = new JButton("Start Battle");
         startFight.setBounds(900, 115, 250, 70);
         startFight.setFont(new Font("inhalt", Font.PLAIN, fontSize+2));
         dexFrame.getContentPane().add(startFight);
         startFight.setVisible(true);
 
+        //remove pokemon button
         JButton removePoke = new JButton("Remove Pokemon");
         removePoke.setBounds(900, 187, 250, 70);
         removePoke.setFont(new Font("inhalt", Font.PLAIN, fontSize-3));
         dexFrame.getContentPane().add(removePoke);
         removePoke.setVisible(true);
 
+        //displays pokemon info
         JTextArea info = new JTextArea("");
         info.setBounds(63, 43, 600, 230);
         info.setFont(new Font("inhalt", Font.PLAIN, fontSize));
@@ -175,23 +181,25 @@ public class PokeGui extends JComponent implements Runnable {
 
         dexFrame.setVisible(true);
 
+        //used to add all the pokemon buttons
         JRadioButton[] buttons = {rDelphox, rGardevoir, rLucario, rZapdos, rBlastoise, rAbsol,
                                   rBlaziken, rSerperior, rMagnezone, rGreninja, rXerneas, rPrimarina,
                                   rNinetales, rCharizard, rZamazenta};
 
         ButtonGroup group = new ButtonGroup();
 
-
         for(int i = 0; i < buttons.length; i++){
             dexFrame.getContentPane().add(buttons[i]);
             group.add(buttons[i]);
         }
 
+        //show pokemon picture
         JLabel pokePic = new JLabel(new ImageIcon(getClass().getResource("/poke/images/Gardevoir.png")));
         pokePic.setBounds(670, 43, 250, 250);
         dexFrame.getContentPane().add(pokePic);
         pokePic.setVisible(false);
 
+        //display pokemons within team
         JTextArea teamList = new JTextArea("");
         teamList.setBounds(1130, 300, 200, 200);
         teamList.setFont(new Font("inhalt", Font.PLAIN, fontSize));
@@ -199,6 +207,7 @@ public class PokeGui extends JComponent implements Runnable {
         teamList.setVisible(true);
         teamList.setEditable(false);
 
+        //this is useless
         JTextArea teamSizeWarning = new JTextArea("Your team can only have 6 pokemon!");
         teamSizeWarning.setBounds(1130, 270, 200, 30);
         teamSizeWarning.setFont(new Font("inhalt", Font.PLAIN, fontSize));
@@ -700,6 +709,7 @@ public class PokeGui extends JComponent implements Runnable {
         fightFrame.getContentPane().add(atk4Button);
         atk4Button.setVisible(false);
 
+        //status effect symbols
         ImageIcon paralyze = new ImageIcon(getClass().getResource("/poke/images/paralyze.png"));
         JLabel paralyzelbl = new JLabel(paralyze);
         paralyzelbl.setBounds(0, 100, 50, 50);
@@ -748,7 +758,6 @@ public class PokeGui extends JComponent implements Runnable {
         freezelblEnemy.setVisible(false);
         fightFrame.getContentPane().add(freezelblEnemy);
 
-        
         ImageIcon sleep = new ImageIcon(getClass().getResource("/poke/images/sleep.png"));
         JLabel sleeplbl = new JLabel(sleep);
         sleeplbl.setBounds(0, 300, 50, 50);
@@ -762,7 +771,7 @@ public class PokeGui extends JComponent implements Runnable {
         fightFrame.getContentPane().add(sleeplblEnemy);
 
 
-    
+        //show pokemon pictures in fight
         myTeamPokelbl = new JLabel(myTeamPokemon);
         myTeamPokelbl.setBounds(100, 100, 400, 400);
         myTeamPokemon.setImage(myTeamPokemon.getImage().getScaledInstance(325, 325, Image.SCALE_DEFAULT));
@@ -866,6 +875,7 @@ public class PokeGui extends JComponent implements Runnable {
                 enemyTeamInfo.updateUI();
 
                 //switchButton.setEnabled(false);
+                //make it so user can only press continue button
                 cancelButton.setEnabled(false);
                 atk1Button.setEnabled(false);
                 atk2Button.setEnabled(false);
@@ -875,6 +885,7 @@ public class PokeGui extends JComponent implements Runnable {
             }
         });
 
+        //basically a clone of first attack button
         atk2Button.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent click){
