@@ -15,7 +15,7 @@ public enum Monsters {
     GRENINJA("Greninja", "Greninja.png", (int)348, (int)427, (int)256,(int)377, new AttackMove[]{AttackMove.EXTRASENSORY, AttackMove.HYDROPUMP, AttackMove.ICEBEAM, AttackMove.DARKPULSE}, Type.WATER, Type.DARK),
     XERNEAS("Xerneas", "Xerneas.png", (int)456, (int)397, (int)317, (int)326, new AttackMove[]{AttackMove.GIGAIMPACT, AttackMove.MOONBLAST, AttackMove.MEGAHORN, AttackMove.OUTRAGE}, Type.FAIRY, Type.NULLTYPE),
     PRIMARINA("Primarina", "Primarina.png", (int)364, (int)271, (int)271, (int)240, new AttackMove[]{AttackMove.HYDROPUMP, AttackMove.MOONBLAST, AttackMove.SPARKLINGARIA, AttackMove.ICEBEAM}, Type.FAIRY, Type.WATER),
-    ALOLANNINETALES("Alolan Ninetales", "Alolan Ninetales,png", (int)350, (int)256, (int)273, (int)348, new AttackMove[]{AttackMove.BLIZZARD, AttackMove.ICEBEAM, AttackMove.DAZZLINGGLEAM, AttackMove.EXTRASENSORY}, Type.ICE, Type.FAIRY),
+    ALOLANNINETALES("Alolan Ninetales", "Ninetales.png", (int)350, (int)256, (int)273, (int)348, new AttackMove[]{AttackMove.BLIZZARD, AttackMove.ICEBEAM, AttackMove.DAZZLINGGLEAM, AttackMove.EXTRASENSORY}, Type.ICE, Type.FAIRY),
     CHARIZARD("Charizard", "Charizard.png", (int)360, (int)293, (int)280, (int)328, new AttackMove[]{AttackMove.FLAREBLITZ, AttackMove.INFERNO, AttackMove.DRAGONBREATH, AttackMove.AIRSLASH}, Type.FIRE, Type.FLYING),
     ZAMAZENTA("Zamazenta", "Zamazenta.png", (int)388, (int)394, (int)427, (int)390, new AttackMove[]{AttackMove.GIGAIMPACT, AttackMove.CLOSECOMBAT, AttackMove.IRONHEAD, AttackMove.CRUNCH}, Type.FIGHTING, Type.NULLTYPE), 
     //ADD: MEWTWO, TURTWIG, EXCADRILL, EMOLGA, zekrom, raikou

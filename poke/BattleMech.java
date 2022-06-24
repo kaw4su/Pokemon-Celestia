@@ -443,6 +443,7 @@ public class BattleMech {
         return str + "\n";
     }
 
+    //used for when one pokemon is not fighting (healing/swapping)
     public final String oneSidedFight(Pokemon attacker, Pokemon defender, AttackMove used){
         String str = "\n" + attacker.getName() + " used " + used.getName();
         double damage = calculateAttack(attacker, defender, used);
@@ -498,6 +499,7 @@ public class BattleMech {
         return str;
     }
 
+    //print status effects that affect how pokemon fights
     private final String battleStatusPrint(Pokemon user){
         String str ="";
         //paralyze
@@ -534,6 +536,7 @@ public class BattleMech {
         return str;
     }
 
+    //print status effects that do damage to pokemon
     private final String damageStatusPrint(Pokemon user){
         String str = "";
         //multiple if statements because the effects can stack
